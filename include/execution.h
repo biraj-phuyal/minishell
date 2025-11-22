@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 13:48:46 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/22 19:36:25 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/11/22 19:46:57 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
-int	main(int args, char **argv, char **envp)
-{
-	init_env(envp);
-}
+# include "minishell.h"
+
+typedef struct	s_env {
+	char			*key;
+	char			*value;
+	int				exported;
+	struct s_env	next;
+}	t_env;
+
+t_env	init_env(char **environ);
+
+#endif

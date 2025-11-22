@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 13:48:46 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/22 19:36:25 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/22 19:32:15 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/11/22 21:39:38 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/execution.h"
 
-int	main(int args, char **argv, char **envp)
+t_env	*init_env(char **envp)
 {
-	init_env(envp);
+	t_env	*head;
+	char	*value;
+	char	*temp;
+	int		len;
+	char	*ep;
+	int		i;
+
+	i = 0;
+	head = NULL;
+	while (envp && envp[i])
+	{
+		ep = strchr(envp[i], '=')
+		if (ep)
+		{
+			len = strlen(ep) - strlen(envp[i])
+			value = stbstr(envp[i], 0, len);
+			temp = strdup(ep);
+		}
+	}
 }
