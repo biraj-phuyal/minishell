@@ -6,9 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:48:46 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/22 13:50:09 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/22 13:52:08 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../include/minishell.h"
 
 int	main(int args, char **argv, char **env)
 {
