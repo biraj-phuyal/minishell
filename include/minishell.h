@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:47:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/23 18:48:21 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/23 21:10:04 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define MINISHELL_H
 
 # include <strings.h>
+# include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>

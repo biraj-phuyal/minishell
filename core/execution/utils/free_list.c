@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.h                                        :+:      :+:    :+:   */
+/*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/23 21:25:53 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/23 21:04:26 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/11/23 21:24:28 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTION_H
-# define EXECUTION_H
+#include "../../../include/execution.h"
 
-# include "minishell.h"
+void	free_list(t_env *env, char *message)
+{
+	t_env	*head;
+	t_env	*next;
 
-typedef struct	s_env {
-	char			*key;
-	char			*value;
-	int				exported;
-	struct s_env	*next;
-}	t_env;
-
-t_env	init_env(char **environ);
-char	*get_key(char *envp);
-char	*get_value(char *envp);
-char	*destroy_and_copy(char *dest, char *src);
-void	free_list(t_env *env, char *message);
-char	*destroy_and_copy(char *dest, char *src);
-
-#endif
+	head = env;
+	while (head != NULL)
+	{
+		next = head->next;
+		if (head->key)
+			free(head->key);
+		if (head->value)
+			free(head->value);
+		free(head);
+		head = next;
+	}
+	if (message)
+		printf("%s", message);
+	exit(EXIT_FAILURE);
+}

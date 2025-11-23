@@ -6,11 +6,21 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 18:46:07 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/23 18:47:35 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/23 21:17:50 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/execution.h"
+
+int	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -25,20 +35,28 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-int	ft_strlen(char *s)
+char	*destroy_and_copy(char *dest, char *src)
 {
-	int	i;
+	char	*new;
+	int		i;
 
 	i = 0;
-	while (s[i])
+	new = malloc(ft_strlen(src) + 1);
+	if (!new)
+		return (NULL);
+	while (src[i])
+	{
+		new[i] = src[i];
 		i++;
-	return (i);
+	}
+	new[i] = '\0';
+	return (free(dest), new);
 }
 
-char	*ft_substr(char const *s, unsigned int start, int len)
+char	*ft_substr(char *s, unsigned int start, int len)
 {
-	int	j;
-	int	str_len;
+	int		j;
+	int		str_len;
 	char	*string;
 
 	if (!s)
