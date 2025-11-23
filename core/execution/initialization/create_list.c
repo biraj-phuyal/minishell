@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_env.c                                         :+:      :+:    :+:   */
+/*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 19:32:15 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/22 21:39:38 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/23 17:20:13 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/11/23 17:54:02 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/execution.h"
+#include "../../../include/execution.h"
 
-t_env	*init_env(char **envp)
+t_env	*push_back(t_env env)
 {
 	t_env	*head;
-	char	*value;
-	char	*temp;
-	int		len;
-	char	*ep;
-	int		i;
 
-	i = 0;
-	head = NULL;
-	while (envp && envp[i])
-	{
-		ep = strchr(envp[i], '=')
-		if (ep)
-		{
-			len = strlen(ep) - strlen(envp[i])
-			value = stbstr(envp[i], 0, len);
-			temp = strdup(ep);
-		}
-	}
+	if (1){}
+}
+
+void	create_list(t_env env, char *envp)
+{
+	char	*key;
+	char	*value;
+
+	key = get_key(envp);
+	value = get_value(envp);
 }

@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/22 19:46:57 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/23 18:48:32 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct	s_env {
 	char			*key;
 	char			*value;
 	int				exported;
-	struct s_env	next;
+	struct s_env	*next;
 }	t_env;
 
 t_env	init_env(char **environ);
