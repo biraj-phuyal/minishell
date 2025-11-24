@@ -6,11 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 18:46:07 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/23 21:17:50 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:59:12 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/execution.h"
+#include "../../../includes/execution.h"
 
 int	ft_strlen(char *s)
 {

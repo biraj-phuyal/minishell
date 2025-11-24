@@ -6,11 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 17:20:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 20:24:36 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:59:12 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/execution.h"
+#include "../../../includes/execution.h"
 
 t_env	*get_first_node(char *key, char *value)
 {
