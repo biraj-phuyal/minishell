@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   get_key_and_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 21:15:06 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/24 21:32:13 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/11/24 21:32:37 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/execution.h"
-
-bool	repeated(t_env *env, char *key)
-{
-	t_env	*head;
-
-	head = env;
-	while (head != NULL)
-	{
-		if (ft_strcmp(head->key, key) == 0)
-			return (true);
-		head = head->next;
-	}
-	return (false);
-}
 
 char	*get_key(char *envp)
 {

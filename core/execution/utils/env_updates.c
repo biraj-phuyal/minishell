@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   updates_utils.c                                    :+:      :+:    :+:   */
+/*   env_updates.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 19:41:38 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 21:15:12 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:34:20 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	overwrite(t_env *env, char *key, char *value)
 		head = head->next;
 	}
 }
-
 char	*destroy_and_copy(char *dest, char *src)
 {
 	char	*new;
