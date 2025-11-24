@@ -6,13 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 17:20:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 19:22:20 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:21:33 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/execution.h"
 
-t_env	*get_the_first_node(t_env *env, char *key, char *value)
+t_env	*get_the_first_node(char *key, char *value)
 {
 	t_env	*head;
 
@@ -21,9 +21,9 @@ t_env	*get_the_first_node(t_env *env, char *key, char *value)
 		exit(printf("Allocation failure"));
 	head->key = key;
 	head->value = value;
+	head->exported = 1;
 	head->next = NULL;
-	env = head;
-	return (env);
+	return (head);
 }
 
 void	push_back(t_env *env, char *key, char *value)
@@ -39,6 +39,7 @@ void	push_back(t_env *env, char *key, char *value)
 			exit(printf("Allocation failure"));
 		head->key = key;
 		head->value = value;
+		head->exported = 1;
 		head->next = NULL;
 		env->next = head;
 		return ;
@@ -57,7 +58,7 @@ t_env	*create_list(t_env *env, char *envp)
 	if (!value)
 		free_list(env, "Allocation failure");
 	if (!env)
-		env = get_the_first_node(env, key, value);
+		env = get_the_first_node(key, value);
 	if (repeated(env, key))
 	{
 		overwrite_value(env, key, value);
