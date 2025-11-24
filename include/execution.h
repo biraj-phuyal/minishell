@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/23 21:25:53 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:26:26 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ typedef struct	s_env {
 	struct s_env	*next;
 }	t_env;
 
-t_env	init_env(char **environ);
 char	*get_key(char *envp);
 char	*get_value(char *envp);
-char	*destroy_and_copy(char *dest, char *src);
+t_env	init_env(char **environ);
+bool	repeated(t_env *env, char *key);
 void	free_list(t_env *env, char *message);
+t_env	*create_list(t_env *env, char *envp);
 char	*destroy_and_copy(char *dest, char *src);
 
 #endif
