@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_key_and_value.c                                :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/23 17:54:56 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 20:59:12 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/11/24 21:15:06 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/execution.h"
+
+bool	repeated(t_env *env, char *key)
+{
+	t_env	*head;
+
+	head = env;
+	while (head != NULL)
+	{
+		if (ft_strcmp(head->key, key) == 0)
+			return (true);
+		head = head->next;
+	}
+	return (false);
+}
 
 char	*get_key(char *envp)
 {
@@ -25,6 +39,7 @@ char	*get_key(char *envp)
 	key = ft_substr(envp, 0, len);
 	return (key);
 }
+
 char	*get_value(char *envp)
 {
 	char	*temp;
@@ -38,13 +53,13 @@ char	*get_value(char *envp)
 	value = malloc(ft_strlen(temp) + 1);
 	if (!value)
 		return (NULL);
-	while(temp[i])
+	while (temp[i])
 	{
 		if (temp[0] == '=')
 			i++;
 		value[j] = temp[i];
 		j++;
-		i++; 	
+		i++;
 	}
 	value[j] = '\0';
 	return (value);

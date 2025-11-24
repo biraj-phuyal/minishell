@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:47:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/23 21:10:04 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:15:47 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@
 char	*ft_strchr(const char *s, int c);
 int		ft_strlen(char *s);
 char	*ft_substr(char const *s, unsigned int start, int len);
-
 
 #endif

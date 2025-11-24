@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_funtions.c                                  :+:      :+:    :+:   */
+/*   string_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 18:46:07 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 20:59:12 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:12:10 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,6 @@ char	*ft_strchr(const char *s, int c)
 	if ((char)c == '\0')
 		return ((char *)s);
 	return (NULL);
-}
-
-char	*destroy_and_copy(char *dest, char *src)
-{
-	char	*new;
-	int		i;
-
-	i = 0;
-	new = malloc(ft_strlen(src) + 1);
-	if (!new)
-		return (NULL);
-	while (src[i])
-	{
-		new[i] = src[i];
-		i++;
-	}
-	new[i] = '\0';
-	return (free(dest), new);
 }
 
 char	*ft_substr(char *s, unsigned int start, int len)

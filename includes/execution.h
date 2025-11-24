@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 20:26:26 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:17:21 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include "minishell.h"
 
-typedef struct	s_env {
+typedef struct s_env
+{
 	char			*key;
 	char			*value;
 	int				exported;
