@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 21:17:21 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/24 23:54:17 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ typedef struct s_env
 char	*get_key(char *envp);
 char	*get_value(char *envp);
 t_env	init_env(char **environ);
+t_env	*free_head_node(t_env *env);
 bool	repeated(t_env *env, char *key);
-void	free_list(t_env *env, char *message);
+void	free_exit(t_env *env, char *message);
 t_env	*create_list(t_env *env, char *envp);
 char	*destroy_and_copy(char *dest, char *src);
 

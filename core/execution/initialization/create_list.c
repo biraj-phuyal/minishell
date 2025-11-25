@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 17:20:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 21:14:18 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/24 23:02:59 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ t_env	*create_list(t_env *env, char *envp)
 
 	key = get_key(envp);
 	if (!key)
-		free_list(env, "Allocation failure");
+		free_exit(env, "Allocation failure");
 	value = get_value(envp);
 	if (!value)
-		free_list(env, "Allocation failure");
+		free_exit(env, "Allocation failure");
 	if (!env)
 		env = get_first_node(key, value);
 	if (repeated(env, key))
