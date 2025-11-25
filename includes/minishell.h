@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:47:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 21:15:47 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/25 01:37:47 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <strings.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <unistd.h>
 # include <stdbool.h>
 # include <fcntl.h>
@@ -25,8 +26,9 @@
 # include <readline/history.h>
 # include "execution.h"
 
-char	*ft_strchr(const char *s, int c);
 int		ft_strlen(char *s);
-char	*ft_substr(char const *s, unsigned int start, int len);
+int		ft_strcmp(char *s1, char *s2);
+char	*ft_strchr(const char *s, int c);
+char	*ft_substr(char *s, unsigned int start, ssize_t len);
 
 #endif

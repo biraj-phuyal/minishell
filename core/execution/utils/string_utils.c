@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 18:46:07 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 21:36:52 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/25 01:37:16 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@ int	ft_strlen(char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+int	ft_strcmp(char *s1, char *s2)
+{
+	while (*s1 == *s2 && *s1 && *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -35,10 +44,28 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_substr(char *s, unsigned int start, int len)
+char	*ft_strdup(char *s)
 {
-	int		j;
-	int		str_len;
+	char	*new;
+	int		i;
+
+	i = 0;
+	new = malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (new == NULL)
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		new[i] = s[i];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
+}
+
+char	*ft_substr(char *s, unsigned int start, ssize_t len)
+{
+	ssize_t	j;
+	ssize_t	str_len;
 	char	*string;
 
 	if (!s)

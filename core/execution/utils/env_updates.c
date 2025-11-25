@@ -6,13 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 19:41:38 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/25 01:16:16 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/11/25 01:33:06 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/execution.h"
 
-void	overwrite(t_env *env, char *key, char *value)
+void	overwrite_value(t_env *env, char *key, char *value)
 {
 	t_env	*head;
 
@@ -50,7 +50,7 @@ char	*return_value(t_env *env, char *key)
 	t_env	*head;
 
 	if (!env || !key)
-		return (env);
+		return (NULL);
 	head = env;
 	while (head != NULL)
 	{
