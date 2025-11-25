@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   initialize_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 13:47:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/22 13:52:34 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/22 19:32:15 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/11/24 21:15:14 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "../../../includes/execution.h"
 
-#include <strings.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <signal.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+t_env	*init_env(char **envp)
+{
+	t_env	*head;
+	int		i;
 
-#endif
+	i = 0;
+	head = NULL;
+	while (envp && envp[i])
+	{
+		head = create_list(head, envp[i]);
+		i++;
+	}
+	return (head);
+}
