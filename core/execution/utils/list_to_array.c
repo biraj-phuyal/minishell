@@ -1,41 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_checks.c                                       :+:      :+:    :+:   */
+/*   list_to_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/01 16:46:31 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/25 01:59:17 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/01 17:11:20 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/execution.h"
 
-bool	repeated(t_env *env, char *key)
+char	**list_to_array(t_env *env)
 {
-	t_env	*head;
+	char	**envp;
+	int		total_length;
 
-	head = env;
-	while (head != NULL)
-	{
-		if (ft_strcmp(head->key, key) == 0)
-			return (true);
-		head = head->next;
-	}
-	return (false);
-}
-
-int	full_length_of_list(t_env *env)
-{
-	t_env	*head;
-	int		i;
-
-	head = env;
-	while (head != NULL)
-	{
-		i++;
-		head = head->next;
-	}
-	return (i);
+	total_length = full_length_of_list(env);
+	envp = (char **)malloc((total_length + 1 ) * sizeof(char *));
+	if (!envp)
+		return (NULL);
 }

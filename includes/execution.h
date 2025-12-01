@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/25 01:32:32 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:07:43 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_env	*init_env(char **envp);
 char	*get_value(char *envp);
 t_env	*free_head_node(t_env *env);
 bool	repeated(t_env *env, char *key);
+int		full_length_of_list(t_env *env);
 void	free_exit(t_env *env, char *message);
 t_env	*create_list(t_env *env, char *envp);
 t_env	*get_first_node(char *key, char *value);
