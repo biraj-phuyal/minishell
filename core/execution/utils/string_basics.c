@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_utils.c                                     :+:      :+:    :+:   */
+/*   string_basics.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 18:46:07 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/25 01:37:16 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/03 13:45:20 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ft_strdup(char *s)
 
 char	*ft_substr(char *s, unsigned int start, ssize_t len)
 {
-	ssize_t	j;
+	ssize_t	i;
 	ssize_t	str_len;
 	char	*string;
 
@@ -78,12 +78,12 @@ char	*ft_substr(char *s, unsigned int start, ssize_t len)
 	string = (char *)malloc(len + 1);
 	if (!string)
 		return (NULL);
-	j = 0;
-	while (j < len && s[start + j])
+	i = 0;
+	while (i < len && s[start + i])
 	{
-		string[j] = s[start + j];
-		j++;
+		string[i] = s[start + i];
+		i++;
 	}
-	string[j] = '\0';
+	string[i] = '\0';
 	return (string);
 }
