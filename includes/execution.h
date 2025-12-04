@@ -6,14 +6,24 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/25 01:32:32 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/04 20:02:05 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
-# include "minishell.h"
+# include <strings.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdbool.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_env
 {
@@ -24,14 +34,15 @@ typedef struct s_env
 }	t_env;
 
 char	*get_key(char *envp);
-t_env	*init_env(char **envp);
+void	free_list(t_env *env);
 char	*get_value(char *envp);
+t_env	*init_env(char **envp);
 t_env	*free_head_node(t_env *env);
+void	free_envp(char **envp, int i);
 bool	repeated(t_env *env, char *key);
-void	free_exit(t_env *env, char *message);
-t_env	*create_list(t_env *env, char *envp);
-t_env	*get_first_node(char *key, char *value);
+int		full_length_of_list(t_env *env);
+char	*join_key_value(char *key, char *value);
 char	*destroy_and_copy(char *dest, char *src);
-void	overwrite_value(t_env *env, char *key, char *value);
+t_env	*overwrite_value(t_env *env, char *key, char *value);
 
 #endif

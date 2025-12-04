@@ -1,55 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize_env.c                                   :+:      :+:    :+:   */
+/*   string_searcher.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 19:32:15 by biphuyal          #+#    #+#             */
+/*   Created: 2025/12/04 17:05:23 by biphuyal          #+#    #+#             */
 /*   Updated: 2025/12/04 19:53:30 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	push_back(t_env **head, t_env *new)
+char	*ft_strchr(const char *s, int c)
 {
-	t_env	*temp;
-
-	if (!head || !new)
-		return ;
-	if (!*head)
+	while (*s)
 	{
-		*head = new;
-		return ;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
-	temp = *head;
-	while (temp->next != NULL)
-		temp = temp->next;
-	temp->next = new;
-}
-
-t_env	*init_env(char **envp)
-{
-	t_env	*head;
-	t_env	*new;
-	char	*key;
-	int		i;
-
-	i = 0;
-	head = NULL;
-	while (envp && envp[i])
-	{
-		key = get_key(envp[i]);
-		if (!key)
-			return (free_list(head), NULL);
-		new = ft_calloc(1, sizeof(t_env));
-		if (!new)
-			return (free_list(head), NULL);
-		new->key = key;
-		new->value = get_value(envp[i]);
-		push_back(&head, new);
-		i++;
-	}
-	return (head);
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (NULL);
 }

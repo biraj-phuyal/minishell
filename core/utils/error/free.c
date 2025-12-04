@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_checks.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/25 01:14:27 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/23 21:04:26 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/04 19:53:30 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/execution.h"
+#include "../../../includes/minishell.h"
 
-bool	repeated(t_env *env, char *key)
+t_env	*free_head_node(t_env *env)
 {
-	t_env	*head;
+	t_env	*first;
 
-	head = env;
-	while (head != NULL)
-	{
-		if (ft_strcmp(head->key, key) == 0)
-			return (true);
-		head = head->next;
-	}
-	return (false);
+	if (!env)
+		return (NULL);
+	first = env->next;
+	if (env->key)
+		free(env->key);
+	if (env->value)
+		free(env->value);
+	free(env);
+	return (first);
 }

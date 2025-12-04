@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 21:04:26 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/25 01:15:36 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/04 19:53:30 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/execution.h"
+#include "../../../includes/minishell.h"
 
-void	free_exit(t_env *env, char *message)
+void	free_list(t_env *env)
 {
 	t_env	*head;
 	t_env	*next;
@@ -31,22 +31,11 @@ void	free_exit(t_env *env, char *message)
 			head = next;
 		}
 	}
-	if (message)
-		printf("%s", message);
-	exit(EXIT_FAILURE);
 }
 
-t_env	*free_head_node(t_env *env)
+void	free_envp(char **envp, int i)
 {
-	t_env	*first;
-
-	if (!env)
-		return (NULL);
-	first = env->next;
-	if (env->key)
-		free(env->key);
-	if (env->value)
-		free(env->value);
-	free(env);
-	return (first);
+	while (i--)
+		free(envp[i]);
+	free(envp);
 }

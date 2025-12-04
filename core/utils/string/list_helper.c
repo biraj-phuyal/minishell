@@ -1,52 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_key_and_value.c                                :+:      :+:    :+:   */
+/*   list_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 21:32:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 21:32:37 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/04 21:07:51 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/execution.h"
+#include "../../../includes/minishell.h"
 
 char	*get_key(char *envp)
 {
-	char	*key;
-	char	*temp;
-	int		len;
+	char		*key;
+	char		*temp;
+	ssize_t		len;
 
 	temp = ft_strchr(envp, '=');
 	if (!temp)
 		return (NULL);
-	len = ft_strlen(temp);
+	len = ft_strlen(envp) - ft_strlen(temp);
 	key = ft_substr(envp, 0, len);
 	return (key);
 }
 
 char	*get_value(char *envp)
 {
-	char	*temp;
-	char	*value;
-	int		i;
-	int		j;
+	char	*equals;
 
-	i = 0;
-	j = 0;
-	temp = ft_strchr(envp, '=');
-	value = malloc(ft_strlen(temp) + 1);
-	if (!value)
+	equals = ft_strchr(envp, '=');
+	if (!equals)
 		return (NULL);
-	while (temp[i])
-	{
-		if (temp[0] == '=')
-			i++;
-		value[j] = temp[i];
-		j++;
-		i++;
-	}
-	value[j] = '\0';
-	return (value);
+	return (ft_strdup(equals + 1));
 }
