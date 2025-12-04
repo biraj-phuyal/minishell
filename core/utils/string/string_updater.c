@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 17:05:23 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 20:47:13 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/04 21:08:15 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-void *ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
 	size_t	total_size;
 	void	*ptr;

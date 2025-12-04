@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 01:59:17 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 19:53:30 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/04 21:09:09 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**list_to_array(t_env *env)
 	{
 		envp[i] = join_key_value(env->key, env->value);
 		if (!envp[i])
-			return(free_envp(envp, i), NULL);
+			return (free_envp(envp, i), NULL);
 		i++;
 		env = env->next;
 	}

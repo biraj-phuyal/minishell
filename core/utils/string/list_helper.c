@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 21:32:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 20:09:21 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/04 21:07:51 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_key(char *envp)
 
 char	*get_value(char *envp)
 {
-	char *equals;
+	char	*equals;
 
 	equals = ft_strchr(envp, '=');
 	if (!equals)
