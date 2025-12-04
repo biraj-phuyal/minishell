@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 13:48:46 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/25 01:24:13 by biphuyal         ###   ########.fr       */
+/*   Created: 2024/06/17 20:53:04 by gude-and          #+#    #+#             */
+/*   Updated: 2024/06/17 20:53:31 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int args, char **argv, char **envp)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	((void)args, (void)argv);
-	init_env(envp);
+	unsigned int	i;
+
+	i = 0;
+	if (!s || !f)
+		return ;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }

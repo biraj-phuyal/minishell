@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 13:48:46 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/25 01:24:13 by biphuyal         ###   ########.fr       */
+/*   Created: 2024/05/03 16:12:11 by gude-and          #+#    #+#             */
+/*   Updated: 2024/05/03 16:16:22 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int args, char **argv, char **envp)
+int	ft_isascii(int c)
 {
-	((void)args, (void)argv);
-	init_env(envp);
+	return ((c >= 0 && c <= 127));
 }

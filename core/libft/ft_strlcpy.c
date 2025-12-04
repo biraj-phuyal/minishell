@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 13:48:46 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/25 01:24:13 by biphuyal         ###   ########.fr       */
+/*   Created: 2024/05/03 17:52:49 by gude-and          #+#    #+#             */
+/*   Updated: 2024/06/19 02:09:55 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int args, char **argv, char **envp)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	((void)args, (void)argv);
-	init_env(envp);
+	const char	*s;
+
+	s = src;
+	if (dst == NULL || !size)
+		return (ft_strlen(src));
+	while (*s && --size)
+		*dst++ = *s++;
+	*dst = '\0';
+	return (ft_strlen(src));
 }

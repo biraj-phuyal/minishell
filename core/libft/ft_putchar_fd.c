@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 13:48:46 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/25 01:24:13 by biphuyal         ###   ########.fr       */
+/*   Created: 2024/06/17 20:55:05 by gude-and          #+#    #+#             */
+/*   Updated: 2024/06/19 01:31:23 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int args, char **argv, char **envp)
+void	ft_putchar_fd(char c, int fd)
 {
-	((void)args, (void)argv);
-	init_env(envp);
+	write(fd, &c, 1);
 }
