@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 19:41:38 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/03 18:45:47 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/04 17:00:24 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ char	*append_string(char *key, char *value)
 	int		j;
 	char	*string;
 
-
 	i = 0;
 	j = 0;
 	string = malloc(ft_strlen(key) + ft_strlen(value) + 2);
@@ -109,7 +108,7 @@ char	*append_string(char *key, char *value)
 	}
 	string[i] = '=';
 	i++;
-	while (value[j])
+	while (value && value[j])
 	{
 		string[i] = value[j];
 		i++;

@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 18:46:07 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/03 13:45:20 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/04 16:58:26 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_strlen(char *s)
 		i++;
 	return (i);
 }
+
 int	ft_strcmp(char *s1, char *s2)
 {
 	while (*s1 == *s2 && *s1 && *s2)

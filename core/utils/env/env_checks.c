@@ -1,52 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_key_and_value.c                                :+:      :+:    :+:   */
+/*   env_checks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 21:32:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/11/24 21:32:37 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/04 17:00:25 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/execution.h"
 
-char	*get_key(char *envp)
+bool	repeated(t_env *env, char *key)
 {
-	char	*key;
-	char	*temp;
-	int		len;
+	t_env	*head;
 
-	temp = ft_strchr(envp, '=');
-	if (!temp)
-		return (NULL);
-	len = ft_strlen(temp);
-	key = ft_substr(envp, 0, len);
-	return (key);
+	head = env;
+	while (head != NULL)
+	{
+		if (ft_strcmp(head->key, key) == 0)
+			return (true);
+		head = head->next;
+	}
+	return (false);
 }
 
-char	*get_value(char *envp)
+int	full_length_of_list(t_env *env)
 {
-	char	*temp;
-	char	*value;
+	t_env	*head;
 	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
-	temp = ft_strchr(envp, '=');
-	value = malloc(ft_strlen(temp) + 1);
-	if (!value)
-		return (NULL);
-	while (temp[i])
+	head = env;
+	while (head != NULL)
 	{
-		if (temp[0] == '=')
-			i++;
-		value[j] = temp[i];
-		j++;
 		i++;
+		head = head->next;
 	}
-	value[j] = '\0';
-	return (value);
+	return (i);
 }

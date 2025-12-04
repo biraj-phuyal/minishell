@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_to_array.c                                    :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 01:59:17 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/03 18:46:34 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/23 21:04:26 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/04 16:58:01 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/execution.h"
 
-char	**list_to_array(t_env *env)
+t_env	*free_head_node(t_env *env)
 {
-	char	**envp;
-	t_env	*head;
-	int		total_length;
-	int		i;
+	t_env	*first;
 
-	total_length = full_length_of_list(env);
-	envp = (char **)malloc((total_length + 1 ) * sizeof(char *));
-	if (!envp)
+	if (!env)
 		return (NULL);
-	i = 0;
-	head = env;
-	while (i < total_length && head != NULL)
-	{
-		envp[i] = append_string(head->key, head->value);
-		if (!envp[i])
-			free_exit(env, "Allocation Failure");
-		i++;
-		head = head->next;
-	}
-	envp[i] = NULL;
-	return (envp);
+	first = env->next;
+	if (env->key)
+		free(env->key);
+	if (env->value)
+		free(env->value);
+	free(env);
+	return (first);
 }

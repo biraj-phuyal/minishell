@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_checks.c                                       :+:      :+:    :+:   */
+/*   list_to_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/01 16:46:31 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/25 01:59:17 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/04 17:00:18 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/execution.h"
 
-bool	repeated(t_env *env, char *key)
+char	**list_to_array(t_env *env)
 {
+	char	**envp;
 	t_env	*head;
-
-	head = env;
-	while (head != NULL)
-	{
-		if (ft_strcmp(head->key, key) == 0)
-			return (true);
-		head = head->next;
-	}
-	return (false);
-}
-
-int	full_length_of_list(t_env *env)
-{
-	t_env	*head;
+	int		total_length;
 	int		i;
 
+	total_length = full_length_of_list(env);
+	envp = (char **)malloc((total_length + 1) * sizeof(char *));
+	if (!envp)
+		return (NULL);
+	i = 0;
 	head = env;
-	while (head != NULL)
+	while (i < total_length && head != NULL)
 	{
+		envp[i] = append_string(head->key, head->value);
+		if (!envp[i])
+			fatal_envp_build(env, envp, i, "Allocation Failure");
 		i++;
 		head = head->next;
 	}
-	return (i);
+	envp[i] = NULL;
+	return (envp);
 }
