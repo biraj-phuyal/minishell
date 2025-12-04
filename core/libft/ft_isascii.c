@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   emptyline.c                                        :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 20:56:39 by gude-and          #+#    #+#             */
-/*   Updated: 2025/11/22 21:22:38 by gude-and         ###   ########.fr       */
+/*   Created: 2024/05/03 16:12:11 by gude-and          #+#    #+#             */
+/*   Updated: 2024/05/03 16:16:22 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parse.h>
+#include "libft.h"
 
-int emptyline(const char *line)
+int	ft_isascii(int c)
 {
-    if(line[0] == '\0')
-        return 1;
-    int i  = 0;
-    while(line[i])
-    {
-        if(line[i] != ' ' && line[i] != '\t')
-            return 0;
-        i++;
-    }
-    return 1;
+	return ((c >= 0 && c <= 127));
 }
