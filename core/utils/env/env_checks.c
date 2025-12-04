@@ -6,11 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 17:00:25 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/04 20:46:32 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/execution.h"
+#include "../../../includes/minishell.h"
 
 bool	repeated(t_env *env, char *key)
 {
@@ -32,6 +32,7 @@ int	full_length_of_list(t_env *env)
 	int		i;
 
 	head = env;
+	i = 0;
 	while (head != NULL)
 	{
 		i++;

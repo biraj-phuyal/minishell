@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   string_searcher.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/23 21:04:26 by biphuyal          #+#    #+#             */
+/*   Created: 2025/12/04 17:05:23 by biphuyal          #+#    #+#             */
 /*   Updated: 2025/12/04 19:53:30 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-t_env	*free_head_node(t_env *env)
+char	*ft_strchr(const char *s, int c)
 {
-	t_env	*first;
-
-	if (!env)
-		return (NULL);
-	first = env->next;
-	if (env->key)
-		free(env->key);
-	if (env->value)
-		free(env->value);
-	free(env);
-	return (first);
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (NULL);
 }

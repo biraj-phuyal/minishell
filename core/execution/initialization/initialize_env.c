@@ -6,78 +6,49 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:15 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 17:00:14 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/04 19:53:30 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/execution.h"
+#include "../../../includes/minishell.h"
 
-t_env	*get_first_node(char *key, char *value)
+void	push_back(t_env **head, t_env *new)
 {
-	t_env	*head;
+	t_env	*temp;
 
-	head = malloc(sizeof(t_env));
-	if (!head)
-		exit(printf("Allocation failure"));
-	head->key = key;
-	head->value = value;
-	head->exported = 1;
-	head->next = NULL;
-	return (head);
-}
-
-void	push_back(t_env *env, char *key, char *value)
-{
-	t_env	*head;
-
-	while (env->next != NULL)
-		env = env->next;
-	if (env->next == NULL)
+	if (!head || !new)
+		return ;
+	if (!*head)
 	{
-		head = malloc(sizeof(t_env));
-		if (!head)
-			exit(printf("Allocation failure"));
-		head->key = key;
-		head->value = value;
-		head->exported = 1;
-		head->next = NULL;
-		env->next = head;
+		*head = new;
 		return ;
 	}
-}
-
-t_env	*create_list(t_env *env, char *envp)
-{
-	char	*key;
-	char	*value;
-
-	key = get_key(envp);
-	if (!key)
-		free_exit(env, "Allocation failure");
-	value = get_value(envp);
-	if (!value)
-		free_exit(env, "Allocation failure");
-	if (!env)
-		env = get_first_node(key, value);
-	if (repeated(env, key))
-	{
-		overwrite_value(env, key, value);
-		return (env);
-	}
-	push_back(env, key, value);
-	return (env);
+	temp = *head;
+	while (temp->next != NULL)
+		temp = temp->next;
+	temp->next = new;
 }
 
 t_env	*init_env(char **envp)
 {
 	t_env	*head;
+	t_env	*new;
+	char	*key;
 	int		i;
 
 	i = 0;
 	head = NULL;
 	while (envp && envp[i])
 	{
-		head = create_list(head, envp[i]);
+		key = get_key(envp[i]);
+		if (!key)
+			return (free_list(head), NULL);
+		new = ft_calloc(1, sizeof(t_env));
+		if (!new)
+			return (free_list(head), NULL);
+		new->key = key;
+		new->value = get_value(envp[i]);
+		push_back(&head, new);
 		i++;
 	}
 	return (head);

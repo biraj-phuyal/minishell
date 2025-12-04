@@ -6,33 +6,28 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 01:59:17 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 17:00:18 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/04 19:53:30 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/execution.h"
+#include "../../../includes/minishell.h"
 
 char	**list_to_array(t_env *env)
 {
 	char	**envp;
-	t_env	*head;
-	int		total_length;
-	int		i;
+	size_t	i;
 
-	total_length = full_length_of_list(env);
-	envp = (char **)malloc((total_length + 1) * sizeof(char *));
+	envp = ft_calloc(full_length_of_list(env) + 1, sizeof(char *));
 	if (!envp)
 		return (NULL);
 	i = 0;
-	head = env;
-	while (i < total_length && head != NULL)
+	while (env != NULL)
 	{
-		envp[i] = append_string(head->key, head->value);
+		envp[i] = join_key_value(env->key, env->value);
 		if (!envp[i])
-			fatal_envp_build(env, envp, i, "Allocation Failure");
+			return(free_envp(envp, i), NULL);
 		i++;
-		head = head->next;
+		env = env->next;
 	}
-	envp[i] = NULL;
 	return (envp);
 }

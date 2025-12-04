@@ -3,13 +3,17 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I headers -I /opt/homebrew/opt/readline/include
 SRCS = core/main.c \
-	   core/execution/initialization/create_list.c \
+	   core/utils/error/error.c \
+	   core/utils/error/free.c \
+	   core/utils/env/env_checks.c \
+	   core/utils/env/env_updates.c \
+	   core/utils/string/list_helper.c \
+	   core/utils/string/string_basics.c \
+	   core/utils/string/string_updater.c \
+	   core/utils/string/string_searcher.c \
+	   core/execution/initialization/list_to_array.c \
 	   core/execution/initialization/initialize_env.c \
-	   core/execution/utils/env_checks.c \
-	   core/execution/utils/env_updates.c \
-	   core/execution/utils/free.c \
-	   core/execution/utils/get_key_and_value.c \
-	   core/execution/utils/string_utils.c
+
 OBJ_DIR = .obj/
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 READLINE_FLAGS = -L /opt/homebrew/opt/readline/lib -lreadline -lncurses

@@ -6,13 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 19:41:38 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 17:00:24 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/04 19:53:30 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/execution.h"
+#include "../../../includes/minishell.h"
 
-void	overwrite_value(t_env *env, char *key, char *value)
+t_env	*overwrite_value(t_env *env, char *key, char *value)
 {
 	t_env	*head;
 
@@ -22,15 +22,19 @@ void	overwrite_value(t_env *env, char *key, char *value)
 		if (ft_strcmp(head->key, key) == 0)
 			head->value = destroy_and_copy(head->value, value);
 		if (!head->value)
-			free_exit(head, "Allocation failure");
+		{
+			free_list(head);
+			return (NULL);
+		}
 		head = head->next;
 	}
+	return (env);
 }
 
 char	*destroy_and_copy(char *dest, char *src)
 {
-	char	*new;
-	int		i;
+	char		*new;
+	ssize_t		i;
 
 	i = 0;
 	new = malloc(ft_strlen(src) + 1);
@@ -90,30 +94,23 @@ t_env	*unset_node(t_env *env, char *key)
 	return (env);
 }
 
-char	*append_string(char *key, char *value)
+char	*join_key_value(char *key, char *value)
 {
-	int		i;
-	int		j;
-	char	*string;
+	size_t		i;
+	size_t		size;
+	char		*string;
 
-	i = 0;
-	j = 0;
-	string = malloc(ft_strlen(key) + ft_strlen(value) + 2);
+	if (!key)
+		return (NULL);
+	size = ft_strlen(key);
+	i = size;
+	if (value)
+		size += ft_strlen(value);
+	string = ft_calloc(size + 2, sizeof(char));
 	if (!string)
 		return (NULL);
-	while (key[i])
-	{
-		string[i] = key[i];
-		i++;
-	}
-	string[i] = '=';
-	i++;
-	while (value && value[j])
-	{
-		string[i] = value[j];
-		i++;
-		j++;
-	}
-	string[i] = '\0';
+	ft_strcpy(string, key);
+	string[i++] = '=';
+	ft_strcpy(&string[i], value);
 	return (string);
 }
