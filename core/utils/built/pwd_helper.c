@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   pwd_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/04 21:15:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/05 17:58:33 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/05 16:57:02 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/05 17:08:41 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	change_dir(t_env *env, char	*new_dir)
+char	*get_pwd(void)
 {
-	char	*old_pwd;
+	char	buffer[9999];
 
-	old_pwd = get_pwd();
-	
+	return(ft_strdup(getcwd(buffer, 9999)));
 }

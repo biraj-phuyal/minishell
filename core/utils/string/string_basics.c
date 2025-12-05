@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 18:46:07 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 19:53:30 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/05 17:14:03 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ ssize_t	ft_strlen(char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+void	ft_putstr(char *s)
+{
+	ssize_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
 }
 
 int	ft_strcmp(char *s1, char *s2)
