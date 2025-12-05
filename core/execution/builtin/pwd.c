@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 15:09:08 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/05 18:08:54 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/05 19:30:09 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,33 +37,36 @@ void	update_pwd(t_env *env)
 	}
 }
 
-void	update_old_and_new_pwd(t_env *env, char *old_pwd)
+t_env	*new_pwd(t_env *env, char *old_pwd)
 {
 	t_env	*head;
 	char	*pwd;
 
 	if (!env)
 		return (NULL);
+	pwd = get_pwd();
+	if (!pwd)
+		return (NULL);
 	head = env;
-	update_old_pwd(env, old_pwd);
+	curent_old_pwd(env, old_pwd);
 	while (head != NULL)
 	{
 		if (ft_strcmp(head->key, "PWD") == 0)
 		{
-			pwd = get_pwd();
-			head->value = destroy_and_copy(head->value, pwd);
-			if (!head->value)
-			{
-				free(pwd);
-				return (NULL);
-			}
-			ft_putstr(head->value);
+			env = update_new_pwd(head, pwd);
+			return (env);
+		}
+		if (head->next == NULL)
+		{
+			env = create_new_pwd(head, pwd);
+			return (env);
 		}
 		head = head->next;
 	}
+	return (env);
 }
 
-void	update_old_pwd(t_env *env, char *old_pwd)
+t_env	*curent_old_pwd(t_env *env, char *old_pwd)
 {
 	t_env	*head;
 
@@ -72,15 +75,17 @@ void	update_old_pwd(t_env *env, char *old_pwd)
 	head = env;
 	while (head != NULL)
 	{
-		if (ft_strcmp(head->key, "OLD_PWD") == 0)
+		if (ft_strcmp(head->key, "OLDPWD") == 0)
 		{
-			head->value = destroy_and_copy(head->value, old_pwd);
-			if (!head->value)
-			{
-				free(old_pwd);
-				return (NULL);
-			}
+			env = update_old_pwd(head, old_pwd);
+			return (env);
+		}
+		if (head->next == NULL)
+		{
+			env = create_new_pwd(head, old_pwd);
+			return (env);
 		}
 		head = head->next;
 	}
+	return (env);
 }
