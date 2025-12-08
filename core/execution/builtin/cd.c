@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 21:15:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/05 19:30:49 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/07 18:13:02 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ void	change_dir(t_env *env, char	*new_dir)
 	old_pwd = get_pwd();
 	if (!old_pwd)
 		return ;
-	if (new_dir[0] == '.' && new_dir[1] != '/')
-		return ;
-	if ((ft_strcmp(new_dir, "..")) == 0)
+	if ((ft_strcmp(new_dir, "..") == 0))
 	{
-		chdir("..");
+		if (chdir("..") == -1)
+			return ;
 		new_pwd(env, old_pwd);
 		free(old_pwd);
 		return ;
@@ -32,7 +31,8 @@ void	change_dir(t_env *env, char	*new_dir)
 	if (new_dir[0] == '\0')
 	{
 		relative_path = return_value(env, "HOME");
-		chdir(relative_path);
+		if (chdir(relative_path) == -1)
+			return ;
 		new_pwd(env, old_pwd);
 		free(old_pwd);
 		return ;
