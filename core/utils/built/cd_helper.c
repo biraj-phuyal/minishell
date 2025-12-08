@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   cd_helper.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/04 21:15:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/08 14:49:15 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/08 14:46:25 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/08 14:49:02 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	change_dir(t_env *env, char	*new_dir)
+void	help_double_dot(t_env *env, char *old_pwd)
 {
-	char	*old_pwd;
-
-	old_pwd = get_pwd();
-	if (!old_pwd)
-		return ;
-	if ((ft_strcmp(new_dir, "..") == 0))
-	{
-		help_double_dot(env, old_pwd);
-		return ;
-	}
-	if (new_dir[0] == '\0')
-	{
-		help_relative_path(env, old_pwd, new_dir);
-		return ;
-	}
-	if (chdir(new_dir) == -1)
+	if (chdir("..") == -1)
 		return ;
 	new_pwd(env, old_pwd);
+	free(old_pwd);
+}
+
+void	help_relative_path(t_env *env, char *old_pwd, char *new_dir)
+{
+	char	*relative_path;
+
+	if (new_dir[0] == '\0')
+	{
+		relative_path = return_value(env, "HOME");
+		if (chdir(relative_path) == -1)
+			return ;
+		new_pwd(env, old_pwd);
+		free(old_pwd);
+		return ;
+	}
 }
