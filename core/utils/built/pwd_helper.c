@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:57:02 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/09 00:07:08 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/09 00:16:34 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,40 @@ t_env	*update_old_pwd(t_env *env, char *og_pwd)
 	}
 	free(og_pwd);
 	return (env);
+}
+
+t_env	*create_new_pwd(t_env *env)
+{
+	char	*pwd;
+	t_env	*new;
+	char	*key;
+	t_env	*head;
+	char	*value;
+
+	pwd = get_pwd();
+	if (!pwd)
+		return (NULL);
+	new = ft_calloc(1, sizeof(t_env));
+	if (!new)
+		return (free_list(head), NULL);
+	new->key = "PWD";
+	new->value = pwd;
+	push_back(&head, new);
+	return (head);
+}
+
+t_env	*create_old_pwd(t_env *env, char *og_pwd)
+{
+	t_env	*new;
+	char	*key;
+	t_env	*head;
+	char	*value;
+
+	new = ft_calloc(1, sizeof(t_env));
+	if (!new)
+		return (free_list(head), NULL);
+	new->key = "OLDPWD";
+	new->value = og_pwd;
+	push_back(&head, new);
+	return (head);
 }

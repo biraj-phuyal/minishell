@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 15:09:08 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/09 00:06:34 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/09 00:10:31 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_env	*old_pwd(t_env *env, char *og_pwd)
 		}
 		if (head->next == NULL)
 		{
-			head = create_new_pwd(head, og_pwd);
+			head = create_old_pwd(head, og_pwd);
 			if (!head)
 				return (NULL);
 			return (env);
