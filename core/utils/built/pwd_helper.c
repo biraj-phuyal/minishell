@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:57:02 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/09 00:00:02 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/09 00:07:08 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ char	*get_pwd(void)
 	return(ft_strdup(getcwd(buffer, 9999)));
 }
 
-t_env	*update_new_pwd(t_env *env, char *pwd)
+t_env	*update_new_pwd(t_env *env)
 {
+	char	*pwd;
+
 	pwd = get_pwd();
 	if (!pwd)
 		return (NULL);
