@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 15:09:08 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/07 18:05:58 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/08 23:58:48 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,25 @@ void	update_pwd(t_env *env)
 t_env	*new_pwd(t_env *env, char *og_pwd)
 {
 	t_env	*head;
-	char	*pwd;
 
 	if (!env)
 		return (NULL);
-	pwd = get_pwd();
-	if (!pwd)
-		return (NULL);
-	old_pwd(env, og_pwd);
+	env = old_pwd(env, og_pwd);
 	head = env;
 	while (head != NULL)
 	{
 		if (ft_strcmp(head->key, "PWD") == 0)
 		{
-			env = update_new_pwd(head, pwd);
+			head = update_new_pwd(head);
+			if (!head)
+				return (NULL);
 			return (env);
 		}
 		if (head->next == NULL)
 		{
-			env = create_new_pwd(head, pwd);
+			head = create_new_pwd(head);
+			if (!head)
+				return (NULL);
 			return (env);
 		}
 		head = head->next;
