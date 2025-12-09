@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 21:15:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/08 14:49:15 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/09 14:04:55 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@ void	change_dir(t_env *env, char	*new_dir)
 		return ;
 	if ((ft_strcmp(new_dir, "..") == 0))
 	{
-		help_double_dot(env, old_pwd);
+		move_back(env, old_pwd);
 		return ;
 	}
 	if (new_dir[0] == '\0')
 	{
-		help_relative_path(env, old_pwd, new_dir);
+		move_to_relative_path(env, old_pwd, new_dir);
+		return ;
+	}
+	if (new_dir[0] == '-')
+	{
+		move_to_previous_dir(env, old_pwd);
 		return ;
 	}
 	if (chdir(new_dir) == -1)

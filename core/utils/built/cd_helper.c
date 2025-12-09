@@ -6,13 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:46:25 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/08 14:49:02 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/09 14:07:27 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	help_double_dot(t_env *env, char *old_pwd)
+void	move_back(t_env *env, char *old_pwd)
 {
 	if (chdir("..") == -1)
 		return ;
@@ -20,17 +20,23 @@ void	help_double_dot(t_env *env, char *old_pwd)
 	free(old_pwd);
 }
 
-void	help_relative_path(t_env *env, char *old_pwd, char *new_dir)
+void	move_to_relative_path(t_env *env, char *old_pwd, char *new_dir)
 {
 	char	*relative_path;
 
-	if (new_dir[0] == '\0')
-	{
-		relative_path = return_value(env, "HOME");
-		if (chdir(relative_path) == -1)
-			return ;
-		new_pwd(env, old_pwd);
-		free(old_pwd);
+	relative_path = return_value(env, "HOME");
+	if (chdir(relative_path) == -1)
 		return ;
-	}
+	new_pwd(env, old_pwd);
+	free(old_pwd);
+	return ;
+}
+
+void	move_to_previous_dir(t_env *env, char *old_pwd)
+{
+	if (chdir(old_pwd) == -1)
+		return ;
+	new_pwd(env, old_pwd);
+	free(old_pwd);
+	return ;
 }

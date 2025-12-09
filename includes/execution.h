@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/09 00:17:21 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/09 14:07:34 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ bool	repeated(t_env *env, char *key);
 int		full_length_of_list(t_env *env);
 t_env	*new_pwd(t_env *env, char *old_pwd);
 t_env	*old_pwd(t_env *env, char *old_pwd);
+void	move_back(t_env *env, char *old_pwd);
 char	*return_value(t_env *env, char *key);
 char	*join_key_value(char *key, char *value);
 char	*destroy_and_copy(char *dest, char *src);
 t_env	*update_old_pwd(t_env *env, char *og_pwd);
 t_env	*create_old_pwd(t_env *env, char *og_pwd);
-void	help_double_dot(t_env *env, char *old_pwd);
+void	move_to_previous_dir(t_env *env, char *old_pwd);
 t_env	*overwrite_value(t_env *env, char *key, char *value);
-void	help_relative_path(t_env *env, char *old_pwd, char *new_dir);
+void	move_to_relative_path(t_env *env, char *old_pwd, char *new_dir);
 
 #endif
