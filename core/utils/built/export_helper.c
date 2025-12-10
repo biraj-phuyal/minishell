@@ -1,45 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   export_helper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/10 15:02:41 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/10 17:52:04 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/10 17:51:12 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/10 17:54:11 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	export(t_env *env, char *args)
+char	**format_env(char **env)
 {
-	t_env	*head;
+	char	*key;
+	int		i;
 
-	head = env;
-	if (!args)
+	while (env[i] != NULL)
 	{
-		export_with_no_arguments(head);
-		return ;
+		key = get_key(env[i]);
+		
 	}
 	
-}
-
-void	export_with_no_arguments(t_env *env)
-{
-	int		i;
-	char	**formated_env;
-
-	i = 0;
-	formated_env = format_env(list_to_array(env));
-	if (!formated_env)
-	{
-		free(formated_env);
-		return ;
-	}
-	while (formated_env[i])
-	{
-		ft_putstr(formated_env[i]);
-		i++;
-	}
 }
