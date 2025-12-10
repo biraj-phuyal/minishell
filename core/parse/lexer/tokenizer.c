@@ -6,11 +6,11 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 00:00:00 by                   #+#    #+#             */
-/*   Updated: 2025/12/04 15:09:53 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/10 21:54:29 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include "../../includes/lexer.h"
 
 /*
 ** Cria um novo token

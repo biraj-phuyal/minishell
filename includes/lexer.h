@@ -6,7 +6,7 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:52:55 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/04 15:09:03 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/06 22:09:33 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <stdbool.h>
-# include "../core/libft/libft.h"
+# include "libft.h"
 
 /*
 ** Tipos de tokens suportados pelo minishell
