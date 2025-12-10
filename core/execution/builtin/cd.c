@@ -6,13 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 21:15:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/09 14:04:55 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/10 14:19:10 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	change_dir(t_env *env, char	*new_dir)
+t_env	*change_dir(t_env *env, char *new_dir)
 {
 	char	*old_pwd;
 
@@ -36,5 +36,5 @@ void	change_dir(t_env *env, char	*new_dir)
 	}
 	if (chdir(new_dir) == -1)
 		return ;
-	new_pwd(env, old_pwd);
+	return (new_pwd(env, old_pwd));
 }

@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 14:16:51 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/09 14:17:25 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/10 14:19:35 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,4 @@
 
 void	print_all_env(t_env *env)
 {
-	
 }
