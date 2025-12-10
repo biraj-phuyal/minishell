@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 18:46:07 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/10 14:33:59 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/10 18:35:31 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(char *s)
 
 void	ft_putstr(char *s)
 {
-	ssize_t	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i])
@@ -33,16 +33,15 @@ void	ft_putstr(char *s)
 		i++;
 	}
 }
-
-int	ft_strcmp(char *s1, char *s2)
+size_t	strlen_double_array(char **env)
 {
-	while (*s1 == *s2 && *s1 && *s2)
-	{
-		s1++;
-		s2++;
-	}
-	return (*s1 - *s2);
-}
+	size_t	len;
+
+	len = 0;
+	while (env[len] != NULL)
+        len++;
+	return (len);
+}	
 
 char	*ft_strdup(char *s)
 {
