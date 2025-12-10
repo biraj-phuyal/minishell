@@ -6,13 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 15:09:08 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/10 14:28:11 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/10 14:57:40 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	update_pwd(t_env *env)
+void	print_pwd(t_env *env)
 {
 	t_env	*head;
 	char	*pwd;

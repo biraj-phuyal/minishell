@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/09 14:07:34 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/10 15:46:56 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ typedef struct s_env
 char	*get_pwd(void);
 char	*get_key(char *envp);
 void	free_list(t_env *env);
+void	print_pwd(t_env *env);
 char	*get_value(char *envp);
-void	update_pwd(t_env *env);
 t_env	*init_env(char **envp);
+void	print_all_env(t_env *env);
 t_env	*update_new_pwd(t_env *env);
 t_env	*create_new_pwd(t_env *env);
 t_env	*free_head_node(t_env *env);
