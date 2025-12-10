@@ -6,15 +6,15 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 18:46:07 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/05 17:14:03 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/10 14:33:59 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-ssize_t	ft_strlen(char *s)
+size_t	ft_strlen(char *s)
 {
-	ssize_t	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i])

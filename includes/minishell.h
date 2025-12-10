@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:47:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 21:10:56 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/10 14:33:58 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # include <readline/history.h>
 # include "execution.h"
 
-ssize_t		ft_strlen(char *s);
+void		ft_putstr(char *s);
+size_t		ft_strlen(char *s);
 char		*ft_strdup(char *s);
 void		ft_bzero(void *s, size_t n);
 int			ft_strcmp(char *s1, char *s2);
