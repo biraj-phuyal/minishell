@@ -6,47 +6,44 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 19:41:38 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 19:53:30 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:29:05 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "minishell.h"
 
-t_env	*overwrite_value(t_env *env, char *key, char *value)
+void	set_value(t_env **env, const char *key, const char *value)
 {
-	t_env	*head;
+	t_env	*curr;
 
-	head = env;
-	while (head != NULL)
+	if (!env)
+		return ;
+	curr = *env;
+	while (curr)
 	{
-		if (ft_strcmp(head->key, key) == 0)
-			head->value = destroy_and_copy(head->value, value);
-		if (!head->value)
-		{
-			free_list(head);
-			return (NULL);
-		}
-		head = head->next;
+		if (ft_strcmp(curr->key, key) == 0)
+			return (destroy_and_copy(&curr->value, value));
+		curr = curr->next;
 	}
-	return (env);
+	curr = ft_calloc(1, sizeof(t_env));
+	if (!curr)
+		return ;
+	curr->key = ft_strdup(key);
+	if (!curr->key)
+		return (free(curr));
+	curr->value = value;
+	push_back(env, curr);
 }
 
-char	*destroy_and_copy(char *dest, char *src)
+void	destroy_and_copy(char **dest, const char *src)
 {
-	char		*new;
-	ssize_t		i;
+	char	*new;
 
-	i = 0;
-	new = malloc(ft_strlen(src) + 1);
-	if (!new)
-		return (NULL);
-	while (src[i])
-	{
-		new[i] = src[i];
-		i++;
-	}
-	new[i] = '\0';
-	return (free(dest), new);
+	if (!dest)
+		return ;
+	new = ft_strdup(src);
+	free(*dest);
+	*dest = new;
 }
 
 char	*return_value(t_env *env, char *key)
@@ -94,7 +91,7 @@ t_env	*unset_node(t_env *env, char *key)
 	return (env);
 }
 
-char	*join_key_value(char *key, char *value)
+char	*join_key_value(const char *key, const char *value)
 {
 	size_t		i;
 	size_t		size;

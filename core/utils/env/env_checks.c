@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 20:46:32 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/12 15:27:49 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	repeated(t_env *env, char *key)
 	return (false);
 }
 
-int	full_length_of_list(t_env *env)
+int	full_length_of_list(const t_env *env)
 {
 	t_env	*head;
 	int		i;

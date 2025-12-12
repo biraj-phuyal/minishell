@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/12 12:44:29 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:34:28 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ typedef struct s_env
 {
 	char			*key;
 	char			*value;
-	int				exported;
 	struct s_env	*next;
 }	t_env;
 
 char	*get_pwd(void);
-char	*get_key(char *envp);
+char	*get_key(const char *envp);
 void	free_list(t_env *env);
 void	print_pwd(t_env *env);
 char	*get_value(char *envp);
@@ -43,21 +42,23 @@ void	print_all_env(t_env *env);
 t_env	*update_new_pwd(t_env *env);
 t_env	*create_new_pwd(t_env *env);
 t_env	*free_head_node(t_env *env);
-char	**list_to_array(t_env *env);
+char	**list_to_array(const t_env *env);
 void	free_envp(char **envp, int i);
 bool	repeated(t_env *env, char *key);
-int		full_length_of_list(t_env *env);
+int		full_length_of_list(const t_env *env);
 t_env	*new_pwd(t_env *env, char *old_pwd);
 t_env	*old_pwd(t_env *env, char *old_pwd);
 void	push_back(t_env **head, t_env *new);
 void	move_back(t_env *env, char *old_pwd);
 char	*return_value(t_env *env, char *key);
-char	*join_key_value(char *key, char *value);
-char	*destroy_and_copy(char *dest, char *src);
+char	*join_key_value(const char *key, const char *value);
+void	destroy_and_copy(char **dest, const char *src);
 t_env	*update_old_pwd(t_env *env, char *og_pwd);
 t_env	*create_old_pwd(t_env *env, char *og_pwd);
 void	move_to_previous_dir(t_env *env, char *old_pwd);
-t_env	*overwrite_value(t_env *env, char *key, char *value);
+void	export_if_arguments(t_env **env, const char *args);
+void	set_value(t_env **env, const char *key, const char *value);
 void	move_to_relative_path(t_env *env, char *old_pwd, char *new_dir);
+void	order_env(char **env);
 
 #endif

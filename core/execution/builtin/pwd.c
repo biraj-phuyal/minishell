@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 15:09:08 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/10 14:57:40 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/12 16:50:36 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_pwd(t_env *env)
 		if (ft_strcmp(head->key, "PWD") == 0)
 		{
 			pwd = get_pwd();
-			head->value = destroy_and_copy(head->value, pwd);
+			destroy_and_copy(&head->value, pwd);
 			if (!head->value)
 				return (free(pwd), NULL);
 		}

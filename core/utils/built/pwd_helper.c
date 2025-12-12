@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:57:02 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/10 14:18:13 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/12 16:50:28 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_env	*update_new_pwd(t_env *env)
 	pwd = get_pwd();
 	if (!pwd)
 		return (NULL);
-	env->value = destroy_and_copy(env->value, pwd);
+	destroy_and_copy(&env->value, pwd);
 	if (!env->value)
 	{
 		free(pwd);
@@ -38,7 +38,7 @@ t_env	*update_new_pwd(t_env *env)
 
 t_env	*update_old_pwd(t_env *env, char *og_pwd)
 {
-	env->value = destroy_and_copy(env->value, og_pwd);
+	destroy_and_copy(&env->value, og_pwd);
 	if (!og_pwd)
 		return (NULL);
 	if (!env->value)
