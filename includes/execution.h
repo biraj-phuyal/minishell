@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/10 17:28:41 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/12 12:44:29 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ bool	repeated(t_env *env, char *key);
 int		full_length_of_list(t_env *env);
 t_env	*new_pwd(t_env *env, char *old_pwd);
 t_env	*old_pwd(t_env *env, char *old_pwd);
+void	push_back(t_env **head, t_env *new);
 void	move_back(t_env *env, char *old_pwd);
 char	*return_value(t_env *env, char *key);
 char	*join_key_value(char *key, char *value);
