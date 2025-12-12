@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 21:32:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 21:07:51 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/12 12:34:06 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,24 @@ char	*get_key(char *envp)
 
 	temp = ft_strchr(envp, '=');
 	if (!temp)
-		return (NULL);
+		return (free(temp), NULL);
 	len = ft_strlen(envp) - ft_strlen(temp);
 	key = ft_substr(envp, 0, len);
+	if (!key)
+		return (free(key), NULL);
 	return (key);
 }
 
 char	*get_value(char *envp)
 {
 	char	*equals;
+	char	*string;
 
 	equals = ft_strchr(envp, '=');
 	if (!equals)
-		return (NULL);
-	return (ft_strdup(equals + 1));
+		return (free(equals), NULL);
+	string = ft_strdup(equals + 1);
+	if (!string)
+		return (free(string), NULL);
+	return (string);
 }

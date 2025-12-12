@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_to_array.c                                    :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 01:59:17 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/09 14:20:08 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/09 14:16:51 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/10 17:48:06 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-char	**list_to_array(t_env *env)
+void	print_all_env(t_env *env)
 {
-	char	**envp;
-	size_t	i;
-
-	envp = ft_calloc(full_length_of_list(env) + 1, sizeof(char *));
-	if (!envp)
-		return (NULL);
-	i = 0;
-	while (env != NULL)
+	t_env	*head;
+	
+	head = env;
+	while(head != NULL)
 	{
-		envp[i] = join_key_value(env->key, env->value);
-		if (!envp[i])
-			return (free_envp(envp, i), NULL);
-		i++;
-		env->exported = 1;
-		env = env->next;
+		ft_putstr(env->key);
+		write(1, "=", 1);
+		ft_putstr(env->value);
+		head = head->next;
 	}
-	return (envp);
 }
