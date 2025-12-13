@@ -6,13 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 01:59:17 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/09 14:20:08 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/12 15:31:08 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-char	**list_to_array(t_env *env)
+char	**list_to_array(const t_env *env)
 {
 	char	**envp;
 	size_t	i;
@@ -27,7 +27,6 @@ char	**list_to_array(t_env *env)
 		if (!envp[i])
 			return (free_envp(envp, i), NULL);
 		i++;
-		env->exported = 1;
 		env = env->next;
 	}
 	return (envp);

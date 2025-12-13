@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:47:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/10 14:33:58 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/13 15:33:40 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <signal.h>
+#include <stdint.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "execution.h"
 
 void		ft_putstr(char *s);
-size_t		ft_strlen(char *s);
-char		*ft_strdup(char *s);
+size_t		ft_strlen(const char *s);
+char		*ft_strdup(const char *s);
 void		ft_bzero(void *s, size_t n);
-int			ft_strcmp(char *s1, char *s2);
+int			ft_strcmp(const char *s1, const char *s2);
 void		ft_strcpy(char *dest, char *src);
 char		*ft_strchr(const char *s, int c);
 void		*ft_calloc(size_t count, size_t size);
-char		*ft_substr(char *s, unsigned int start, ssize_t len);
+char		*ft_substr(const char *s, unsigned int start, ssize_t len);
 
 #endif

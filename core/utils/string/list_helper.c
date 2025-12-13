@@ -6,38 +6,38 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 21:32:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/12 12:34:06 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/13 15:33:58 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-char	*get_key(char *envp)
+char	*get_key(const char *envp)
 {
 	char		*key;
 	char		*temp;
-	ssize_t		len;
 
+	if (!envp)
+		return (NULL);
 	temp = ft_strchr(envp, '=');
 	if (!temp)
-		return (free(temp), NULL);
-	len = ft_strlen(envp) - ft_strlen(temp);
-	key = ft_substr(envp, 0, len);
+		return (NULL);
+	key = ft_substr(envp, 0, temp - envp);
 	if (!key)
-		return (free(key), NULL);
+		return (NULL);
 	return (key);
 }
 
-char	*get_value(char *envp)
+char	*get_value(const char *envp)
 {
 	char	*equals;
 	char	*string;
 
 	equals = ft_strchr(envp, '=');
 	if (!equals)
-		return (free(equals), NULL);
+		return (NULL);
 	string = ft_strdup(equals + 1);
 	if (!string)
-		return (free(string), NULL);
+		return (NULL);
 	return (string);
 }

@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 15:09:08 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/10 14:57:40 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/13 15:18:29 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,81 +18,72 @@ void	print_pwd(t_env *env)
 	char	*pwd;
 
 	if (!env)
-		return (NULL);
+		return ;
+	pwd = get_pwd();
+	if (!pwd)
+		return ;
 	head = env;
 	while (head != NULL)
 	{
 		if (ft_strcmp(head->key, "PWD") == 0)
 		{
-			pwd = get_pwd();
-			head->value = destroy_and_copy(head->value, pwd);
-			if (!head->value)
-				return (free(pwd), NULL);
+			destroy_and_copy(&head->value, pwd);
+			ft_putstr(head->value);
+			return ;
 		}
 		if (head->next == NULL)
 		{
-			head = create_new_pwd(head);
-			if (!head)
-				return (free(pwd), NULL);
+			create_new_pwd(head);
+			ft_putstr(head->value);
+			return ;
 		}
-		ft_putstr(head->value);
 		head = head->next;
 	}
 }
 
-t_env	*new_pwd(t_env *env, char *og_pwd)
+void	new_pwd(t_env **env, char *og_pwd)
 {
 	t_env	*head;
 
 	if (!env)
-		return (NULL);
-	env = old_pwd(env, og_pwd);
-	head = env;
+		return ;
+	old_pwd(env, og_pwd);
+	head = *env;
 	while (head != NULL)
 	{
 		if (ft_strcmp(head->key, "PWD") == 0)
 		{
-			head = update_new_pwd(head);
-			if (!head)
-				return (NULL);
-			return (env);
+			update_new_pwd(head);
+			return ;
 		}
 		if (head->next == NULL)
 		{
-			head = create_new_pwd(head);
-			if (!head)
-				return (NULL);
-			return (env);
+			create_new_pwd(head);
+			return ;
 		}
 		head = head->next;
 	}
-	return (env);
 }
 
-t_env	*old_pwd(t_env *env, char *og_pwd)
+void	old_pwd(t_env **env, char *og_pwd)
 {
 	t_env	*head;
 
 	if (!env)
-		return (NULL);
-	head = env;
+		return ;
+	head = *env;
 	while (head != NULL)
 	{
 		if (ft_strcmp(head->key, "OLDPWD") == 0)
 		{
-			head = update_old_pwd(head, og_pwd);
-			if (!head)
-				return (NULL);
-			return (env);
+			update_old_pwd(head, og_pwd);
+			return ;
 		}
 		if (head->next == NULL)
 		{
-			head = create_old_pwd(head, og_pwd);
-			if (!head)
-				return (NULL);
-			return (env);
+			create_old_pwd(head, og_pwd);
+			return ;
 		}
 		head = head->next;
 	}
-	return (env);
 }

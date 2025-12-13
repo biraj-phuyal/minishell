@@ -6,13 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 18:46:07 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/10 18:35:31 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/13 15:20:56 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
@@ -43,7 +43,7 @@ size_t	strlen_double_array(char **env)
 	return (len);
 }	
 
-char	*ft_strdup(char *s)
+char	*ft_strdup(const char *s)
 {
 	char	*new;
 	int		i;
