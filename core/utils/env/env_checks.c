@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/12 15:27:49 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/12 20:42:59 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	full_length_of_list(const t_env *env)
 	t_env	*head;
 	int		i;
 
-	head = env;
+	head = (t_env *)env;
 	i = 0;
 	while (head != NULL)
 	{

@@ -6,11 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 19:41:38 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/12 19:29:05 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/13 15:21:23 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../../includes/minishell.h"
 
 void	set_value(t_env **env, const char *key, const char *value)
 {
@@ -31,7 +31,7 @@ void	set_value(t_env **env, const char *key, const char *value)
 	curr->key = ft_strdup(key);
 	if (!curr->key)
 		return (free(curr));
-	curr->value = value;
+	curr->value = (char *)value;
 	push_back(env, curr);
 }
 
@@ -42,6 +42,8 @@ void	destroy_and_copy(char **dest, const char *src)
 	if (!dest)
 		return ;
 	new = ft_strdup(src);
+	if (!new)
+		return ;
 	free(*dest);
 	*dest = new;
 }

@@ -6,11 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 15:02:41 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/12 19:37:25 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/13 15:32:49 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../../includes/minishell.h"
 
 void	export_with_arguments(t_env **env, const char *args)
 {
@@ -45,11 +45,11 @@ void	export_with_no_arguments(const t_env *env)
 	}
 }
 
-void	export(t_env **env, const char *args)
+void	export(t_env *env, const char *args)
 {
 	if (!env)
 		return ;
 	if (args)
-		return (export_with_arguments(env, args));
-	return (export_with_no_arguments(env));
+		return (export_with_arguments(&env, args));
+	export_with_no_arguments(env);
 }

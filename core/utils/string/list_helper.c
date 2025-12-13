@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 21:32:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/12 16:14:29 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/13 15:33:58 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	*get_key(const char *envp)
 {
 	char		*key;
 	char		*temp;
-	size_t		len;
 
 	if (!envp)
 		return (NULL);
@@ -29,7 +28,7 @@ char	*get_key(const char *envp)
 	return (key);
 }
 
-char	*get_value(char *envp)
+char	*get_value(const char *envp)
 {
 	char	*equals;
 	char	*string;

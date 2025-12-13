@@ -6,28 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:51:12 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/12 16:50:54 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/13 15:35:46 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	order_env(char **env)
-{
-    int     len;
-    int     swapped;
-
-	len = strlen_double_array(env);
-	if (len <= 1)
-		return (env);
-    swapped = 1;
-    while (swapped)
-    {
-        swapped = 0;
-		format_helper(env, &swapped, len);
-    }
-    return (env);
-}
+#include "../../../includes/minishell.h"
 
 void	format_helper(char **env, int *swapped, int len)
 {
@@ -53,4 +36,20 @@ void	format_helper(char **env, int *swapped, int len)
 		free(key2);
 		i++;
 	}
+}
+
+void	order_env(char **env)
+{
+    int     len;
+    int     swapped;
+
+	len = strlen_double_array(env);
+	if (len <= 1)
+		return ;
+    swapped = 1;
+    while (swapped)
+    {
+        swapped = 0;
+		format_helper(env, &swapped, len);
+    }
 }

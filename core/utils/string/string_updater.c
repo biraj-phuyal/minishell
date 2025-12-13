@@ -6,13 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 17:05:23 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 21:08:15 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/13 15:33:32 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-char	*ft_substr(char *s, unsigned int start, ssize_t len)
+char	*ft_substr(const char *s, unsigned int start, ssize_t len)
 {
 	ssize_t	i;
 	ssize_t	str_len;
