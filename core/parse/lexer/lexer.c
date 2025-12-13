@@ -6,11 +6,11 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:53:48 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/04 15:32:47 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/10 21:54:22 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include "../../includes/lexer.h"
 
 /*
 ** Inicializa a estrutura do lexer com os valores iniciais
@@ -23,31 +23,6 @@ void	lexer_init(t_lexer *lex, const char *input)
 	lex->pos = 0;
 	lex->len = ft_strlen(input);
 	lex->tokens = NULL;
-}
-
-/*
-** Verifica se o caractere é um espaço em branco
-*/
-bool	is_whitespace(char c)
-{
-	return (c == ' ' || c == '\t' || c == '\n');
-}
-
-/*
-** Verifica se o caractere é um operador do shell
-*/
-bool	is_operator_char(char c)
-{
-	return (c == '|' || c == '<' || c == '>');
-}
-
-/*
-** Avança a posição do lexer, pulando espaços em branco
-*/
-void	skip_whitespace(t_lexer *lex)
-{
-	while (lex->pos < lex->len && is_whitespace(lex->input[lex->pos]))
-		lex->pos++;
 }
 
 /*
@@ -68,15 +43,6 @@ char	peek_char(t_lexer *lex)
 	if (lex->pos + 1 >= lex->len)
 		return ('\0');
 	return (lex->input[lex->pos + 1]);
-}
-
-/*
-** Avança uma posição no input
-*/
-void	advance(t_lexer *lex)
-{
-	if (lex->pos < lex->len)
-		lex->pos++;
 }
 
 /*
@@ -130,7 +96,7 @@ t_token	*lexer(const char *input)
 	eof_token = token_create(TOKEN_EOF, NULL);
 	if (!eof_token || !token_add(&lex, eof_token))
 	{
-		token_list_free(lex. tokens);
+		token_list_free(lex.tokens);
 		return (NULL);
 	}
 	return (lex.tokens);
