@@ -6,21 +6,21 @@ INCLUDES = -I headers -I /opt/homebrew/opt/readline/includes
 SRCS = core/main.c \
 	   core/utils/error/free.c \
 	   core/utils/error/error.c \
-	   core/execution/builtin/cd.c \
+	   core/executions/builtin/cd.c \
 	   core/utils/env/env_checks.c \
 	   core/utils/built/cd_helper.c \
-	   core/execution/builtin/env.c \
-	   core/execution/builtin/pwd.c \
+	   core/executions/builtin/env.c \
+	   core/executions/builtin/pwd.c \
 	   core/utils/env/env_updates.c \
 	   core/utils/built/pwd_helper.c \
-	   core/execution/builtin/export.c \
+	   core/executions/builtin/export.c \
 	   core/utils/string/list_helper.c \
 	   core/utils/built/export_helper.c \
 	   core/utils/string/string_basics.c \
 	   core/utils/string/string_updater.c \
 	   core/utils/string/string_searcher.c \
-	   core/execution/initialization/list_to_array.c \
-	   core/execution/initialization/initialize_env.c
+	   core/executions/initialization/list_to_array.c \
+	   core/executions/initialization/initialize_env.c
 OBJ_DIR = .obj/
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 READLINE_FLAGS = -L /opt/homebrew/opt/readline/lib -lreadline -lncurses
