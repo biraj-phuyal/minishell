@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 17:05:23 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/13 15:33:32 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/13 17:41:21 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-void	ft_strcpy(char *dest, char *src)
+void	ft_strcpy(char *dest, const char *src)
 {
 	size_t	i;
 

@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:15 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 19:53:30 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/13 17:48:52 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	push_back(t_env **head, t_env *new)
 {
 	t_env	*temp;
 
+	new->next = NULL;
 	if (!head || !new)
 		return ;
 	if (!*head)
@@ -24,9 +25,9 @@ void	push_back(t_env **head, t_env *new)
 		return ;
 	}
 	temp = *head;
-	while (temp->next != NULL)
+	while (temp != NULL)
 		temp = temp->next;
-	temp->next = new;
+	temp = new;
 }
 
 t_env	*init_env(char **envp)
