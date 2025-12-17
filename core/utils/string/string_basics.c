@@ -6,11 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 18:46:07 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/13 15:20:56 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:23:13 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include <utils.h>
 
 size_t	ft_strlen(const char *s)
 {
@@ -33,30 +33,28 @@ void	ft_putstr(char *s)
 		i++;
 	}
 }
-size_t	strlen_double_array(char **env)
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	len;
+	size_t	s_len;
+	size_t	d_len;
+	size_t	i;
 
-	len = 0;
-	while (env[len] != NULL)
-        len++;
-	return (len);
-}	
-
-char	*ft_strdup(const char *s)
-{
-	char	*new;
-	int		i;
-
+	s_len = ft_strlen(src);
 	i = 0;
-	new = malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (new == NULL)
-		return (NULL);
-	while (s[i] != '\0')
+	d_len = 0;
+	if (dst)
 	{
-		new[i] = s[i];
+		while (d_len < size && dst[d_len])
+			d_len++;
+	}
+	if (d_len >= size)
+		return (size + s_len);
+	while (d_len + i + 1 < size && src[i])
+	{
+		dst[d_len + i] = src[i];
 		i++;
 	}
-	new[i] = '\0';
-	return (new);
+	dst[d_len + i] = '\0';
+	return (s_len + d_len);
 }

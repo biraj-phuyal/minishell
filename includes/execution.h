@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/13 15:58:26 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/17 15:24:53 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <utils.h>
 
 typedef struct s_env
 {
@@ -32,6 +33,7 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+void	execute(void);
 char	*get_pwd(void);
 void	order_env(char **env);
 void	free_list(t_env *env);

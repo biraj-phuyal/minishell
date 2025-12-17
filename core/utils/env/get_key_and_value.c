@@ -1,33 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_to_array.c                                    :+:      :+:    :+:   */
+/*   get_key_and_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 01:59:17 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:49:57 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/11/24 21:32:13 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/17 15:24:11 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <execution.h>
 
-char	**list_to_array(const t_env *env)
+char	*get_key(const char *envp)
 {
-	char	**envp;
-	size_t	i;
+	char		*key;
+	char		*temp;
 
-	envp = ft_calloc(full_length_of_list(env) + 1, sizeof(char *));
 	if (!envp)
 		return (NULL);
-	i = 0;
-	while (env != NULL)
-	{
-		envp[i] = join_key_value(env->key, env->value);
-		if (!envp[i])
-			return (free_envp(envp, i), NULL);
-		i++;
-		env = env->next;
-	}
-	return (envp);
+	temp = ft_strchr(envp, '=');
+	if (!temp)
+		return (NULL);
+	key = ft_substr(envp, 0, temp - envp);
+	if (!key)
+		return (NULL);
+	return (key);
+}
+
+char	*get_value(const char *envp)
+{
+	char	*equals;
+	char	*string;
+
+	equals = ft_strchr(envp, '=');
+	if (!equals)
+		return (NULL);
+	string = ft_strdup(equals + 1);
+	if (!string)
+		return (NULL);
+	return (string);
 }

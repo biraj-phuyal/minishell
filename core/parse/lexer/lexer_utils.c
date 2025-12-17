@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/10 21:54:20 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/17 15:51:45 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
-
-/*
-** Verifica se o caractere é um espaço em branco
-*/
-bool	is_whitespace(char c)
-{
-	return (c == ' ' || c == '\t' || c == '\n');
-}
+#include <lexer.h>
 
 /*
 ** Verifica se o caractere é um operador do shell

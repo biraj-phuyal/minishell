@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:52:55 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/06 22:09:33 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/17 14:16:27 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# include <stdlib.h>
-# include <stdbool.h>
-# include "libft.h"
+# include <utils.h>
 
 /*
 ** Tipos de tokens suportados pelo minishell

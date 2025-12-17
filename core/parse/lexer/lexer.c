@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:53:48 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/10 21:54:22 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/17 13:54:52 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
+#include <lexer.h>
 
 /*
 ** Inicializa a estrutura do lexer com os valores iniciais

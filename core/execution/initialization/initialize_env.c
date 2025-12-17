@@ -6,11 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:15 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/13 17:48:52 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:49:57 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include <minishell.h>
 
 void	push_back(t_env **head, t_env *new)
 {

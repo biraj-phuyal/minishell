@@ -6,11 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 21:04:26 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/04 19:53:30 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:49:57 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include <minishell.h>
 
 t_env	*free_head_node(t_env *env)
 {

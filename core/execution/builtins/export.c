@@ -6,11 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 15:02:41 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/13 15:32:49 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:49:57 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include <minishell.h>
 
 void	export_with_arguments(t_env **env, const char *args)
 {

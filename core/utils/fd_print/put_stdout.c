@@ -1,42 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_checks.c                                       :+:      :+:    :+:   */
+/*   put_stdout.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:49:57 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/17 00:00:00 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/17 16:21:43 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <utils.h>
 
-bool	repeated(t_env *env, char *key)
+void	ft_putchar(char c)
 {
-	t_env	*head;
-
-	head = env;
-	while (head != NULL)
-	{
-		if (ft_strcmp(head->key, key) == 0)
-			return (true);
-		head = head->next;
-	}
-	return (false);
+	write(1, &c, 1);
 }
 
-int	full_length_of_list(const t_env *env)
+void	ft_putendl(char *s)
 {
-	t_env	*head;
-	int		i;
+	size_t	i;
 
-	head = (t_env *)env;
+	if (!s)
+		return ;
 	i = 0;
-	while (head != NULL)
+	while (s[i])
 	{
+		write(1, &s[i], 1);
 		i++;
-		head = head->next;
 	}
-	return (i);
+	write(1, "\n", 1);
+}
+
+void	ft_putnbr(int n)
+{
+	char	digits;
+
+	if (n == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n *= -1;
+	}
+	if (n >= 10)
+		ft_putnbr(n / 10);
+	digits = '0' + (n % 10);
+	write(1, &digits, 1);
 }

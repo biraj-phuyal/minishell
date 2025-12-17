@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/10 21:55:12 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/17 15:45:16 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/expander.h"
-
-/*
-** Verifica se um caractere é válido em nome de variável
-** @param c: caractere a verificar
-** @param first: true se é o primeiro caractere do nome
-*/
-bool	is_var_char(char c, bool first)
-{
-	if (first)
-		return (ft_isalpha(c) || c == '_');
-	return (ft_isalnum(c) || c == '_');
-}
+#include <expander.h>
 
 /*
 ** Adiciona um caractere ao final de uma string

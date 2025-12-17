@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:56:10 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/10 21:54:24 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/17 15:51:49 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
-
-/*
-** Verifica se o caractere é uma aspa (simples ou dupla)
-*/
-bool	is_quote(char c)
-{
-	return (c == '\'' || c == '"');
-}
+#include <lexer.h>
 
 /*
 ** Encontra a posição da aspa de fechamento correspondente

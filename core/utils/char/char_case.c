@@ -1,40 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_searcher.c                                  :+:      :+:    :+:   */
+/*   char_case.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/04 17:05:23 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:53:35 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/17 15:41:29 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/17 16:55:53 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <utils.h>
 
-char	*ft_strchr(const char *s, int c)
+char	ft_toupper(char c)
 {
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }
 
-char	*ft_strrchr(const char *s, int c)
+char	ft_tolower(char c)
 {
-	int	i;
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
+}
 
-	i = ft_strlen(s);
-	while (i >= 0)
-	{
-		if (s[i] == (const char)c)
-			return ((char *)&s[i]);
-		i--;
-	}
-	return (NULL);
+bool	is_var_char(char c, bool first)
+{
+	if (first)
+		return (ft_isalpha(c) || c == '_');
+	return (ft_isalnum(c) || c == '_');
+}
+
+bool	is_whitespace(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n');
+}
+
+bool	is_quote(char c)
+{
+	return (c == '\'' || c == '"');
 }

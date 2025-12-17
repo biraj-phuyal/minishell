@@ -6,11 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 21:15:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/13 15:01:25 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:49:57 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include <minishell.h>
 
 void	change_dir(t_env **env, char *new_dir)
 {
