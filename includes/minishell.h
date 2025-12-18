@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:47:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:52:42 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/18 12:26:01 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@
 # include <lexer.h>
 # include <utils.h>
 
-void	program_loop(void);
+void	program_loop(t_env *env);
 
 #endif

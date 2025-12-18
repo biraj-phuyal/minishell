@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 15:24:53 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/18 16:59:57 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,24 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <utils.h>
+# include <lexer.h>
+
+typedef enum e_identify
+{
+	REDIR_IN,
+	REDIR_OUT,
+	HEREDOC,
+	APPEND,
+}	t_identify;
+
+typedef struct	s_command
+{
+	bool				is_builtin;
+	int					status;
+	t_identify			identity;
+	char				*cmd;
+	struct s_command	*next;
+}	t_command;
 
 typedef struct s_env
 {
@@ -46,6 +64,7 @@ void	create_new_pwd(t_env *env);
 t_env	*free_head_node(t_env *env);
 char	*get_value(const char *envp);
 void	free_envp(char **envp, int i);
+void	free_list_and_exit(t_env *env);
 bool	repeated(t_env *env, char *key);
 size_t	strlen_double_array(char **env);
 char	**list_to_array(const t_env *env);

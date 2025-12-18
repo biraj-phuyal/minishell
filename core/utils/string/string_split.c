@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:02:29 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:02:54 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/18 12:06:37 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	count_words(char const *s, char c)
 	return (count);
 }
 
-static char	*extract_word(char const *s, char c, int *k)
+static char	*get_word(char const *s, char c, int *k)
 {
 	int		start;
 	int		len;
@@ -80,7 +80,7 @@ char	**ft_split(char const *s, char c)
 	{
 		while (s[i] == c)
 			i++;
-		result[word] = extract_word(s, c, &i);
+		result[word] = get_word(s, c, &i);
 		if (!result[word])
 			return (free_all(result, word));
 		word++;

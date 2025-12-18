@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:48:46 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:41:10 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/18 11:58:31 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	main(int args, char **argv, char **envp)
 {
+	t_env	*env;
+
 	((void)args, (void)argv);
-	init_env(envp);
-	program_loop();
+	env = init_env(envp);
+	program_loop(env);
 }

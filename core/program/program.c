@@ -6,19 +6,23 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 16:23:33 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:58:33 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/18 14:19:23 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	program_loop(void)
+void	program_loop(t_env *env)
 {
-	char	*line;
+	const char	*input;
+	t_command	*command;
 
 	while (1)
 	{
-		line = readline("minishell: ");
+		input = readline("minishell: ");
+		if (!input)
+			free_list_and_exit(env);
+		command = command_line(lexer(input));
 		execute();
 	}
 }
