@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/18 16:59:57 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/18 19:20:21 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@
 
 typedef enum e_identify
 {
-	REDIR_IN,
-	REDIR_OUT,
-	HEREDOC,
+	IN,
+	OUT,
 	APPEND,
+	HEREDOC,
 }	t_identify;
 
 typedef struct	s_command
