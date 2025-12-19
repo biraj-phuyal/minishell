@@ -6,21 +6,51 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:39:05 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/18 23:20:45 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/19 16:19:16 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_command	*command_line(t_token *token)
+void	push_cmd_back(t_command **head, t_command *new)
 {
-	t_command	*curr;
+	t_command	*temp;
 
-	curr = NULL;
-	while (token)
+	new->next = NULL;
+	if (!head || !new)
+		return ;
+	if (!*head)
 	{
-		push_back(&curr, token->value);
-		handel_operators(token, &curr);
+		*head = new;
+		return ;
+	}
+	temp = *head;
+	while (temp != NULL)
+		temp = temp->next;
+	temp = new;
+}
+
+void	save_redir(t_token *token, t_command **curr)
+{
+	if (token->type == TOKEN_REDIR_IN)
+	{
+		(*curr)->identity = IN;
+		return ;
+	}
+	else if (token->type == TOKEN_REDIR_OUT)
+	{
+		(*curr)->identity = OUT;
+		return ;
+	}
+	else if (token->type == TOKEN_APPEND)
+	{
+		(*curr)->identity = APPEND;
+		return ;
+	}
+	else if (token->type == TOKEN_HEREDOC)
+	{
+		(*curr)->identity = HEREDOC;
+		return ;
 	}
 }
 
@@ -39,26 +69,18 @@ void	handel_operators(t_token *token, t_command **curr)
 	}
 }
 
-void	save_redir(t_token *token, t_command *curr)
+t_command	*command_line(t_token *token)
 {
-	if (token->type == TOKEN_REDIR_IN)
+	t_command	*curr;
+	t_command	*new;
+
+	curr = NULL;
+	while (token)
 	{
-		curr->identity = IN;
-		return ;
+		new = ft_calloc(1, sizeof(t_command));
+		new->cmd = token->value;
+		push_cmd_back(&curr, new);
+		handel_operators(token, &curr);
 	}
-	else if (token->type == TOKEN_REDIR_OUT)
-	{
-		curr->identity = OUT;
-		return ;
-	}
-	else if (token->type == TOKEN_APPEND)
-	{
-		curr->identity = APPEND;
-		return ;
-	}
-	else if (token->type == TOKEN_HEREDOC)
-	{
-		curr->identity = HEREDOC;
-		return ;
-	}
+	return (curr);
 }
