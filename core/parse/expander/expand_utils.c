@@ -6,17 +6,12 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/10 21:55:12 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/20 19:26:01 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/expander.h"
+#include "../../../includes/expander.h"
 
-/*
-** Verifica se um caractere é válido em nome de variável
-** @param c: caractere a verificar
-** @param first: true se é o primeiro caractere do nome
-*/
 bool	is_var_char(char c, bool first)
 {
 	if (first)
@@ -24,12 +19,6 @@ bool	is_var_char(char c, bool first)
 	return (ft_isalnum(c) || c == '_');
 }
 
-/*
-** Adiciona um caractere ao final de uma string
-** @param str: string original (será liberada)
-** @param c: caractere a adicionar
-** @return: nova string ou NULL se erro
-*/
 char	*append_char(char *str, char c)
 {
 	char	*new_str;
@@ -58,12 +47,6 @@ char	*append_char(char *str, char c)
 	return (new_str);
 }
 
-/*
-** Concatena duas strings e libera a primeira
-** @param s1: primeira string (será liberada)
-** @param s2: segunda string (não será modificada)
-** @return: nova string concatenada ou NULL se erro
-*/
 char	*append_str(char *s1, const char *s2)
 {
 	char	*result;
@@ -77,11 +60,6 @@ char	*append_str(char *s1, const char *s2)
 	return (result);
 }
 
-/*
-** Atualiza o estado de aspas do expander
-** @param exp: estrutura do expander
-** @param c: caractere atual
-*/
 void	update_quote_state(t_expander *exp, char c)
 {
 	if (exp->state == STATE_NORMAL)
