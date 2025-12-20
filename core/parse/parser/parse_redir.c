@@ -6,19 +6,12 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:32:11 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/15 19:04:23 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/20 19:25:18 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parser.h"
+#include "../../../includes/parser.h"
 
-/*
-** Cria uma nova estrutura de redirecionamento
-** @param type: tipo de redirecionamento
-** @param file: nome do arquivo
-** @param quoted: indica se o delimitador tinha aspas (heredoc)
-** @return: novo redirecionamento ou NULL se erro
-*/
 t_redir	*redir_create(t_redir_type type, char *file, bool quoted)
 {
 	t_redir	*redir;
@@ -40,12 +33,6 @@ t_redir	*redir_create(t_redir_type type, char *file, bool quoted)
 	return (redir);
 }
 
-/*
-** Adiciona um redirecionamento à lista do comando
-** @param cmd: comando
-** @param redir: redirecionamento a adicionar
-** @return: true se sucesso, false se erro
-*/
 bool	redir_add(t_cmd *cmd, t_redir *redir)
 {
 	t_redir	*current;
@@ -64,10 +51,6 @@ bool	redir_add(t_cmd *cmd, t_redir *redir)
 	return (true);
 }
 
-/*
-** Libera a memória de um redirecionamento
-** @param redir: redirecionamento a liberar
-*/
 void	redir_free(t_redir *redir)
 {
 	t_redir	*current;
@@ -84,9 +67,6 @@ void	redir_free(t_redir *redir)
 	}
 }
 
-/*
-** Converte tipo de token para tipo de redirecionamento
-*/
 static t_redir_type	token_to_redir_type(t_token_type type)
 {
 	if (type == TOKEN_REDIR_IN)
@@ -98,12 +78,6 @@ static t_redir_type	token_to_redir_type(t_token_type type)
 	return (REDIR_HEREDOC);
 }
 
-/*
-** Parseia redirecionamentos do comando atual
-** @param p: estrutura do parser
-** @param cmd: comando ao qual adicionar os redirecionamentos
-** @return: true se sucesso, false se erro
-*/
 bool	parse_redirections(t_parser *p, t_cmd *cmd)
 {
 	t_redir_type	redir_type;

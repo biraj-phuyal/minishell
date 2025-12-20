@@ -6,15 +6,12 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:19:37 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/15 19:04:37 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/20 19:25:11 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parser.h"
+#include "../../../includes/parser.h"
 
-/*
-** Parseia o próximo comando do pipeline
-*/
 static t_ast_node	*parse_pipe_next(t_parser *p, t_ast_node *left)
 {
 	t_ast_node	*right;
@@ -35,11 +32,6 @@ static t_ast_node	*parse_pipe_next(t_parser *p, t_ast_node *left)
 	return (pipe);
 }
 
-/*
-** Parseia um pipeline (comandos separados por |)
-** @param p: estrutura do parser
-** @return: nó da AST do pipeline ou NULL se erro
-*/
 t_ast_node	*parse_pipeline(t_parser *p)
 {
 	t_ast_node	*left;

@@ -6,16 +6,12 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:14:14 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/15 19:04:53 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/20 19:25:06 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parser.h"
+#include "../../../includes/parser.h"
 
-/*
-** Cria uma nova estrutura de comando
-** @return: novo comando ou NULL se erro
-*/
 t_cmd	*cmd_create(void)
 {
 	t_cmd	*cmd;
@@ -29,12 +25,6 @@ t_cmd	*cmd_create(void)
 	return (cmd);
 }
 
-/*
-** Adiciona um argumento ao comando
-** @param cmd: comando
-** @param arg: argumento a adicionar
-** @return: true se sucesso, false se erro
-*/
 bool	cmd_add_arg(t_cmd *cmd, char *arg)
 {
 	char	**new_argv;
@@ -64,10 +54,6 @@ bool	cmd_add_arg(t_cmd *cmd, char *arg)
 	return (true);
 }
 
-/*
-** Libera a memória de um comando
-** @param cmd: comando a liberar
-*/
 void	cmd_free(t_cmd *cmd)
 {
 	int	i;
@@ -89,11 +75,6 @@ void	cmd_free(t_cmd *cmd)
 	free(cmd);
 }
 
-/*
-** Parseia um comando simples (palavras e redirecionamentos)
-** @param p: estrutura do parser
-** @return: nó da AST do comando ou NULL se erro
-*/
 t_ast_node	*parse_command(t_parser *p)
 {
 	t_cmd	*cmd;

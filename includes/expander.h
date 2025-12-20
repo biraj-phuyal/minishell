@@ -6,7 +6,7 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/06 22:09:26 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/20 19:19:15 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include "lexer.h"
 # include <stdbool.h>
 
-/*
-** Estados de expansão para rastreamento de aspas
-*/
 typedef enum e_expand_state
 {
 	STATE_NORMAL,
@@ -26,10 +23,6 @@ typedef enum e_expand_state
 	STATE_DOUBLE
 }	t_expand_state;
 
-/*
-** Estrutura do expander
-** Mantém o estado durante a expansão de variáveis
-*/
 typedef struct s_expander
 {
 	const char		*input;

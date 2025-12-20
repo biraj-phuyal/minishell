@@ -6,7 +6,7 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/15 19:00:35 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/20 19:19:35 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,12 @@
 # include "expander.h"
 # include <stdbool.h>
 
-/*
-** Tipos de nós da AST
-*/
 typedef enum e_node_type
 {
 	NODE_CMD,
 	NODE_PIPE
 }	t_node_type;
 
-/*
-** Tipos de redirecionamento
-*/
 typedef enum e_redir_type
 {
 	REDIR_IN,
@@ -37,9 +31,6 @@ typedef enum e_redir_type
 	REDIR_HEREDOC
 }	t_redir_type;
 
-/*
-** Estrutura de redirecionamento
-*/
 typedef struct s_redir
 {
 	t_redir_type	type;
@@ -48,9 +39,6 @@ typedef struct s_redir
 	struct s_redir	*next;
 }	t_redir;
 
-/*
-** Estrutura de comando
-*/
 typedef struct s_cmd
 {
 	char	**argv;
@@ -58,9 +46,6 @@ typedef struct s_cmd
 	t_redir	*redirs;
 }	t_cmd;
 
-/*
-** Estrutura de nó da AST
-*/
 typedef struct s_ast_node
 {
 	t_node_type			type;
@@ -69,9 +54,6 @@ typedef struct s_ast_node
 	struct s_ast_node	*right;
 }	t_ast_node;
 
-/*
-** Estrutura do parser
-*/
 typedef struct s_parser
 {
 	t_token	*tokens;

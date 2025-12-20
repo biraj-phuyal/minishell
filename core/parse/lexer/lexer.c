@@ -6,17 +6,12 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:53:48 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/10 21:54:22 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/20 19:25:31 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
+#include "../../../includes/lexer.h"
 
-/*
-** Inicializa a estrutura do lexer com os valores iniciais
-** @param lex: ponteiro para a estrutura do lexer
-** @param input: string de entrada a ser tokenizada
-*/
 void	lexer_init(t_lexer *lex, const char *input)
 {
 	lex->input = input;
@@ -25,9 +20,6 @@ void	lexer_init(t_lexer *lex, const char *input)
 	lex->tokens = NULL;
 }
 
-/*
-** Retorna o caractere atual sem avançar
-*/
 char	current_char(t_lexer *lex)
 {
 	if (lex->pos >= lex->len)
@@ -35,9 +27,6 @@ char	current_char(t_lexer *lex)
 	return (lex->input[lex->pos]);
 }
 
-/*
-** Retorna o próximo caractere sem avançar (lookahead)
-*/
 char	peek_char(t_lexer *lex)
 {
 	if (lex->pos + 1 >= lex->len)
@@ -45,11 +34,6 @@ char	peek_char(t_lexer *lex)
 	return (lex->input[lex->pos + 1]);
 }
 
-/*
-** Loop principal de tokenização
-** Processa todo o input e cria a lista de tokens
-** @return: true se sucesso, false se erro
-*/
 bool	lexer_tokenize(t_lexer *lex)
 {
 	char	c;
@@ -74,12 +58,6 @@ bool	lexer_tokenize(t_lexer *lex)
 	return (true);
 }
 
-/*
-** Função principal do lexer
-** Recebe uma string e retorna uma lista de tokens
-** @param input: string de comando a ser analisada
-** @return: lista ligada de tokens ou NULL se erro
-*/
 t_token	*lexer(const char *input)
 {
 	t_lexer	lex;
