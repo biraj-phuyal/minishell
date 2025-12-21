@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/17 14:04:36 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/20 19:26:31 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <expander.h>
+#include "../../../includes/expander.h"
 
-/*
-** Inicializa o expander
-*/
 static void	expander_init(t_expander *exp, const char *input,
 	int exit_status, char **env)
 {
@@ -26,9 +23,6 @@ static void	expander_init(t_expander *exp, const char *input,
 	exp->env = env;
 }
 
-/*
-** Processa expansão de variável
-*/
 static char	*process_expansion(t_expander *exp)
 {
 	char	*var_value;
@@ -42,13 +36,6 @@ static char	*process_expansion(t_expander *exp)
 	return (exp->result);
 }
 
-/*
-** Expande um token, processando variáveis de ambiente
-** @param token: token a expandir
-** @param exit_status: último exit status ($?)
-** @param env: variáveis de ambiente
-** @return: token expandido ou NULL se erro
-*/
 char	*expand_token(const char *token, int exit_status, char **env)
 {
 	t_expander	exp;
@@ -78,13 +65,6 @@ char	*expand_token(const char *token, int exit_status, char **env)
 	return (exp.result);
 }
 
-/*
-** Expande todos os tokens WORD da lista
-** @param tokens: lista de tokens
-** @param exit_status: último exit status
-** @param env: variáveis de ambiente
-** @return: true se sucesso, false se erro
-*/
 bool	expand_tokens(t_token *tokens, int exit_status, char **env)
 {
 	t_token	*current;

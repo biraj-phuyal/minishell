@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 00:00:00 by                   #+#    #+#             */
-/*   Updated: 2025/12/17 13:55:42 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/20 19:25:43 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lexer.h>
+#include "../../../includes/lexer.h"
 
-/*
-** Cria um novo token
-** @param type: tipo do token
-** @param value: valor do token (pode ser NULL para operadores)
-** @return: novo token alocado ou NULL se erro
-*/
 t_token	*token_create(t_token_type type, const char *value)
 {
 	t_token	*token;
@@ -40,12 +34,6 @@ t_token	*token_create(t_token_type type, const char *value)
 	return (token);
 }
 
-/*
-** Adiciona um token ao final da lista
-** @param lex: estrutura do lexer
-** @param new_token: token a ser adicionado
-** @return: true se sucesso, false se erro
-*/
 bool	token_add(t_lexer *lex, t_token *new_token)
 {
 	t_token	*last;
@@ -62,10 +50,6 @@ bool	token_add(t_lexer *lex, t_token *new_token)
 	return (true);
 }
 
-/*
-** Determina o tipo de operador e cria o token correspondente
-** Trata operadores simples e duplos (<, >, <<, >>, |)
-*/
 bool	tokenize_operator(t_lexer *lex)
 {
 	char			c;
@@ -94,10 +78,6 @@ bool	tokenize_operator(t_lexer *lex)
 	return (token_add(lex, token));
 }
 
-/*
-** Extrai uma palavra (incluindo conteúdo entre aspas)
-** Para quando encontra espaço ou operador fora de aspas
-*/
 static char	*extract_word(t_lexer *lex)
 {
 	size_t	start;
@@ -123,20 +103,11 @@ static char	*extract_word(t_lexer *lex)
 	return (word);
 }
 
-/*
-** Tokeniza uma palavra (comando, argumento, string com aspas)
-** @return: true se sucesso, false se erro
-*/
 bool	tokenize_word(t_lexer *lex)
 {
 	char	*word;
 	t_token	*token;
 
-	if (!quotes_are_closed(lex->input, lex->pos))
-	{
-		ft_putendl_fd("minishell: syntax error: unclosed quotes", 2);
-		return (false);
-	}
 	word = extract_word(lex);
 	if (! word)
 		return (false);

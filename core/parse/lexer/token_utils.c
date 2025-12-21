@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:55:47 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/17 13:55:16 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/20 19:25:39 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lexer.h>
+#include "../../../includes/lexer.h"
 
-/*
-** Libera a memória de um único token
-*/
 void	token_free(t_token *token)
 {
 	if (! token)
@@ -24,9 +21,6 @@ void	token_free(t_token *token)
 	free(token);
 }
 
-/*
-** Libera toda a lista de tokens
-*/
 void	token_list_free(t_token *tokens)
 {
 	t_token	*current;
@@ -41,9 +35,6 @@ void	token_list_free(t_token *tokens)
 	}
 }
 
-/*
-** Retorna o último token da lista
-*/
 t_token	*token_last(t_token *tokens)
 {
 	if (!tokens)
@@ -53,9 +44,6 @@ t_token	*token_last(t_token *tokens)
 	return (tokens);
 }
 
-/*
-** Conta o número de tokens na lista
-*/
 int	token_list_size(t_token *tokens)
 {
 	int	count;
@@ -69,10 +57,6 @@ int	token_list_size(t_token *tokens)
 	return (count);
 }
 
-/*
-** Retorna uma string representando o tipo do token
-** Útil para debugging e mensagens de erro
-*/
 const char	*token_type_str(t_token_type type)
 {
 	static const char	*type_names[] = {

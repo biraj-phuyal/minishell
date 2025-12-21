@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/17 14:02:35 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/20 19:26:14 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <expander.h>
+#include "../../../includes/expander.h"
 
-/*
-** Extrai o nome da variável a partir de uma posição
-** @param str: string de entrada
-** @param len: ponteiro para armazenar o comprimento do nome
-** @return: nome da variável alocado ou NULL se inválido
-*/
 char	*extract_var_name(const char *str, size_t *len)
 {
 	size_t	i;
@@ -38,12 +32,6 @@ char	*extract_var_name(const char *str, size_t *len)
 	return (name);
 }
 
-/*
-** Busca o valor de uma variável de ambiente
-** @param name: nome da variável
-** @param env: array de variáveis de ambiente
-** @return: valor da variável ou NULL se não encontrada
-*/
 char	*get_env_value(const char *name, char **env)
 {
 	size_t	i;
@@ -67,11 +55,6 @@ char	*get_env_value(const char *name, char **env)
 	return (ft_strdup(""));
 }
 
-/*
-** Expande uma variável ($ seguido de nome ou ?)
-** @param exp: estrutura do expander
-** @return: valor expandido ou NULL se erro
-*/
 char	*expand_variable(t_expander *exp)
 {
 	size_t	var_len;

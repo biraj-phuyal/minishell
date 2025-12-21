@@ -3,28 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:52:55 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/17 14:16:27 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/20 19:24:05 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# include <utils.h>
+# include <stdlib.h>
+# include <stdbool.h>
 
-/*
-** Tipos de tokens suportados pelo minishell
-** TOKEN_WORD: comandos, argumentos, strings
-** TOKEN_PIPE: operador pipe '|'
-** TOKEN_REDIR_IN: redirecionamento de entrada '<'
-** TOKEN_REDIR_OUT: redirecionamento de saída '>'
-** TOKEN_HEREDOC: here document '<<'
-** TOKEN_APPEND: append redirection '>>'
-** TOKEN_EOF: fim do input
-*/
 typedef enum e_token_type
 {
 	TOKEN_WORD,
@@ -36,12 +27,6 @@ typedef enum e_token_type
 	TOKEN_EOF
 }	t_token_type;
 
-/*
-** Estrutura de um token individual
-** type: tipo do token (enum acima)
-** value: valor/conteúdo do token (string alocada)
-** next: ponteiro para o próximo token (lista ligada)
-*/
 typedef struct s_token
 {
 	t_token_type	type;
@@ -49,13 +34,6 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-/*
-** Estrutura do estado do lexer
-** input: string de entrada original
-** pos: posição atual no input
-** len: tamanho total do input
-** tokens: lista de tokens gerados
-*/
 typedef struct s_lexer
 {
 	const char	*input;

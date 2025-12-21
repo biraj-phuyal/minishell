@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:39:05 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/19 16:19:16 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/20 18:48:03 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,11 @@ t_command	*command_line(t_token *token)
 	while (token)
 	{
 		new = ft_calloc(1, sizeof(t_command));
+		if (!new)
+			return (NULL);
 		new->cmd = token->value;
-		push_cmd_back(&curr, new);
+		if (token->type == TOKEN_WORD);
+			push_cmd_back(&curr, new);
 		handel_operators(token, &curr);
 	}
 	return (curr);
