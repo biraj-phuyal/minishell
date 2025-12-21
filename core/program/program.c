@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_checks.c                                       :+:      :+:    :+:   */
+/*   program.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:49:57 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/13 16:23:33 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/18 14:19:23 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-bool	repeated(t_env *env, char *key)
+void	program_loop(t_env *env)
 {
-	t_env	*head;
+	const char	*input;
+	t_command	*command;
 
-	head = env;
-	while (head != NULL)
+	while (1)
 	{
-		if (ft_strcmp(head->key, key) == 0)
-			return (true);
-		head = head->next;
+		input = readline("minishell: ");
+		if (!input)
+			free_list_and_exit(env);
+		command = command_line(lexer(input));
+		execute();
 	}
-	return (false);
-}
-
-int	full_length_of_list(const t_env *env)
-{
-	t_env	*head;
-	int		i;
-
-	head = (t_env *)env;
-	i = 0;
-	while (head != NULL)
-	{
-		i++;
-		head = head->next;
-	}
-	return (i);
 }

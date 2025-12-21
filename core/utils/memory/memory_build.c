@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_checks.c                                       :+:      :+:    :+:   */
+/*   memory_build.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:49:57 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/17 16:44:15 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/17 16:56:09 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <utils.h>
 
-bool	repeated(t_env *env, char *key)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	t_env	*head;
+	size_t			total_size;
+	void			*ptr;
+	unsigned char	*byte_ptr;
+	size_t			i;
 
-	head = env;
-	while (head != NULL)
-	{
-		if (ft_strcmp(head->key, key) == 0)
-			return (true);
-		head = head->next;
-	}
-	return (false);
-}
-
-int	full_length_of_list(const t_env *env)
-{
-	t_env	*head;
-	int		i;
-
-	head = (t_env *)env;
+	total_size = nmemb * size;
+	if (nmemb != 0 && size != total_size / nmemb)
+		return (NULL);
+	ptr = malloc(total_size);
+	if (!ptr)
+		return (NULL);
+	byte_ptr = (unsigned char *)ptr;
 	i = 0;
-	while (head != NULL)
+	while (i < total_size)
 	{
+		byte_ptr[i] = 0;
 		i++;
-		head = head->next;
 	}
-	return (i);
+	return (ptr);
 }

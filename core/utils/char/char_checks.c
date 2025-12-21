@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_checks.c                                       :+:      :+:    :+:   */
+/*   char_checks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 21:10:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:49:57 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/17 00:00:00 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/17 16:54:05 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <utils.h>
 
-bool	repeated(t_env *env, char *key)
+int	ft_isalpha(int c)
 {
-	t_env	*head;
-
-	head = env;
-	while (head != NULL)
-	{
-		if (ft_strcmp(head->key, key) == 0)
-			return (true);
-		head = head->next;
-	}
-	return (false);
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }
 
-int	full_length_of_list(const t_env *env)
+int	ft_isdigit(int c)
 {
-	t_env	*head;
-	int		i;
+	return (c >= '0' && c <= '9');
+}
 
-	head = (t_env *)env;
-	i = 0;
-	while (head != NULL)
-	{
-		i++;
-		head = head->next;
-	}
-	return (i);
+int	ft_isalnum(int c)
+{
+	return (ft_isalpha(c) || ft_isdigit(c));
+}
+
+int	ft_isascii(int c)
+{
+	return (c >= 0 && c <= 127);
+}
+
+int	ft_isprint(int c)
+{
+	return (c >= 32 && c <= 126);
 }
