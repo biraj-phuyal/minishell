@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_pipeline.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:19:37 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/20 19:25:11 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/21 20:45:39 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/parser.h"
+#include <parser.h>
 
 static t_ast_node	*parse_pipe_next(t_parser *p, t_ast_node *left)
 {

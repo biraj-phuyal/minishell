@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:14:14 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/20 19:25:06 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/21 20:45:39 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/parser.h"
+#include <parser.h>
 
 t_cmd	*cmd_create(void)
 {
