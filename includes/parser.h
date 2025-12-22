@@ -6,7 +6,7 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/22 22:21:56 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/22 23:05:14 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_parser
 	int		exit_status;
 	char	**env;
 	bool	error;
-	char	*error_msg;
 }	t_parser;
 
 t_cmd		*cmd_create(void);
