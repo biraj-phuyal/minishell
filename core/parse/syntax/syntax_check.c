@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 21:55:51 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:45:39 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/22 21:27:58 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ bool	check_redir_syntax(t_token *tokens)
 			}
 			if (current->next->type != TOKEN_WORD)
 			{
-				syntax_error(current->next->value);
+				const char *printable = current->next->value;
+				if (!printable)
+					printable = token_type_to_printable(current->next->type);
+				syntax_error(printable);
 				return (false);
 			}
 		}
