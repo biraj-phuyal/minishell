@@ -6,7 +6,7 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:32:11 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/22 22:01:01 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/22 22:16:22 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,13 @@ bool	parse_redirections(t_parser *p, t_cmd *cmd)
 	t_redir_type	redir_type;
 	t_redir			*redir;
 
-	while (p->current && (p->current->type == TOKEN_REDIR_IN
-			|| p->current->type == TOKEN_REDIR_OUT
-			|| p->current->type == TOKEN_HEREDOC
-			|| p->current->type == TOKEN_APPEND))
-	{
-		redir_type = token_to_redir_type(p->current->type);
-		if (!parser_advance(p))
-			return (false);
-		if (!p->current || p->current->type != TOKEN_WORD)
-		{
-			parser_error(p, "syntax error: expected filename");
-			return (false);
-		}
-		if (!parse_add_redir(cmd, redir_type, p->current->value))
-			return (false);
-		parser_advance(p);
-	}
-	return (true);
+			    while (p->current && (p->current->type == TOKEN_REDIR_IN
+				    || p->current->type == TOKEN_REDIR_OUT
+				    || p->current->type == TOKEN_HEREDOC
+				    || p->current->type == TOKEN_APPEND))
+			    {
+				if (!parse_redir_one(p, cmd))
+				    return false;
+			    }
+			    return true;
 }
