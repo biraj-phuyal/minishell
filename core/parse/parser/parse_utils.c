@@ -6,7 +6,7 @@
 /*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 21:57:14 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/22 22:18:07 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/22 22:35:56 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,23 @@ bool	parse_heredoc_redir(t_cmd *cmd, t_redir_type redir_type, char *value)
 	return (ok);
 }
 
-bool	parse_redir_one(t_parser *p, t_cmd *cmd)
+static bool	parse_redir_value(t_parser *p, t_cmd *cmd, t_redir_type redir_type)
+{
+	char	*unquoted;
+
+	if (redir_type == REDIR_HEREDOC)
+		return (parse_heredoc_redir(cmd, redir_type, p->current->value));
+	unquoted = remove_outer_quotes(p->current->value);
+	if (!unquoted || !parse_add_redir(cmd, redir_type, unquoted, false))
+	{
+		free(unquoted);
+		return (false);
+	}
+	free(unquoted);
+	return (true);
+}
+
+static bool	parse_redir_one(t_parser *p, t_cmd *cmd)
 {
 	t_redir_type	redir_type;
 
@@ -37,16 +53,8 @@ bool	parse_redir_one(t_parser *p, t_cmd *cmd)
 		parser_error(p, "syntax error: expected filename");
 		return (false);
 	}
-	if (redir_type == REDIR_HEREDOC)
-	{
-		if (!parse_heredoc_redir(cmd, redir_type, p->current->value))
-			return (false);
-	}
-	else
-	{
-		if (!parse_add_redir(cmd, redir_type, p->current->value, false))
-			return (false);
-	}
+	if (!parse_redir_value(p, cmd, redir_type))
+		return (false);
 	parser_advance(p);
 	return (true);
 }
