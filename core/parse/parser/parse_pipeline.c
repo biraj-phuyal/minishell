@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_pipeline.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:19:37 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:45:39 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/22 21:37:02 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ static t_ast_node	*parse_pipe_next(t_parser *p, t_ast_node *left)
 		ast_free(left);
 		return (NULL);
 	}
-	pipe = ast_new_pipe(left, right);
-	if (!pipe)
-	{
-		ast_free(right);
-		return (NULL);
-	}
-	return (pipe);
+	   pipe = ast_new_pipe(left, right);
+	   if (!pipe)
+	   {
+		   ast_free(left);
+		   ast_free(right);
+		   return (NULL);
+	   }
+	   return (pipe);
 }
 
 t_ast_node	*parse_pipeline(t_parser *p)
