@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 21:10:32 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/22 21:58:23 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ t_ast_node	*ast_new_pipe(t_ast_node *left, t_ast_node *right);
 t_ast_node	*parse(const char *input, int exit_status, char **env);
 t_redir		*redir_create(t_redir_type type, char *file, bool quoted);
 void		parser_init(t_parser *p, t_token *tokens, int exit, char **env);
+bool	parse_add_redir(t_cmd *cmd, t_redir_type type, char *value);
 
 #endif

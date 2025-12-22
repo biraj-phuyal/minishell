@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:32:11 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:45:39 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/22 22:01:01 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ bool	parse_redirections(t_parser *p, t_cmd *cmd)
 			parser_error(p, "syntax error: expected filename");
 			return (false);
 		}
-		redir = redir_create(redir_type, p->current->value, false);
-		if (!redir || !redir_add(cmd, redir))
+		if (!parse_add_redir(cmd, redir_type, p->current->value))
 			return (false);
 		parser_advance(p);
 	}
