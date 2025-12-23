@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 21:04:26 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/19 16:09:51 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 16:02:14 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,15 @@ void	free_list_and_exit(t_env *env)
 	exit(EXIT_FAILURE);
 }
 
-void	free_envp(char **envp, int i)
+void	free_envp(char **envp)
 {
-	while (i--)
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
 		free(envp[i]);
+		i++;
+	}
 	free(envp);
 }
