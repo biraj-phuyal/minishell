@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/23 16:35:20 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 17:23:59 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void		order_env(char **env);
 void		print_pwd(t_env *env);
 t_env		*init_env(char **envp);
 void		free_envp(char **envp);
+void		exit_program(t_env *env);
 void		print_all_env(t_env *env);
 char		*get_key(const char *envp);
 void		update_new_pwd(t_env *env);

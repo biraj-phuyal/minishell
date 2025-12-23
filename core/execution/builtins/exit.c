@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 14:09:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/23 20:26:53 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/23 17:21:51 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/23 20:26:23 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	execute(t_ast_node *ast, t_env **env, char **envp)
+void	exit_program(t_env *env)
 {
-	(void)ast;
-	(void)env;
-	(void)envp;
-	return (0);
+	free_env(env);
+	printf("exit\n");
+	exit(EXIT_SUCCESS);
 }
