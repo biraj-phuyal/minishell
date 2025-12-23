@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 00:00:00 by                   #+#    #+#             */
-/*   Updated: 2025/12/22 23:10:36 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:14:13 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,25 +87,11 @@ static char	*extract_word(t_lexer *lex)
 {
 	size_t	start;
 	size_t	end;
-	char	c;
 	char	*word;
 
 	start = lex->pos;
-	while (lex->pos < lex->len)
-	{
-		c = current_char(lex);
-		if (is_whitespace(c) || is_operator_char(c))
-			break ;
-		if (is_quote(c))
-		{
-			ssize_t new_pos = skip_quoted_section(lex->input, lex->pos);
-			if (new_pos == -1)
-				return (NULL);
-			lex->pos = new_pos;
-		}
-		else
-			advance(lex);
-	}
+	if (!advance_to_word_end(lex))
+		return (NULL);
 	end = lex->pos;
 	if (end == start)
 		return (NULL);

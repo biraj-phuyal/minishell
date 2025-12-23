@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_utils.c                                     :+:      :+:    :+:   */
+/*   expand_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:44:34 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:19:14 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <expander.h>
-
-bool	is_var_char(char c, bool first)
-{
-	if (first)
-		return (ft_isalpha(c) || c == '_');
-	return (ft_isalnum(c) || c == '_');
-}
 
 char	*append_char(char *str, char c)
 {

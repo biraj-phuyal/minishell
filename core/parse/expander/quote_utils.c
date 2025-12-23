@@ -6,18 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:30:37 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/23 15:03:34 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:08:34 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <expander.h>
-
-typedef struct s_quote_state
-{
-	char	in_quote;
-	size_t	i;
-	char	*result;
-}	t_quote_state;
 
 static void	init_quote_state(t_quote_state *qs)
 {

@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/22 21:26:37 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:11:05 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
-const char *token_type_to_printable(t_token_type type)
+const char	*token_type_to_printable(t_token_type type)
 {
 	if (type == TOKEN_PIPE)
-		return "|";
+		return ("|");
 	if (type == TOKEN_REDIR_IN)
-		return "<";
+		return ("<");
 	if (type == TOKEN_REDIR_OUT)
-		return ">";
+		return (">");
 	if (type == TOKEN_HEREDOC)
-		return "<<";
+		return ("<<");
 	if (type == TOKEN_APPEND)
-		return ">>";
+		return (">>");
 	if (type == TOKEN_EOF)
-		return "newline";
-	return NULL;
+		return ("newline");
+	return (NULL);
 }
 
 bool	is_whitespace(char c)

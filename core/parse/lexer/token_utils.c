@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:55:47 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:44:53 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:14:31 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,25 @@ int	token_list_size(t_token *tokens)
 	return (count);
 }
 
-const char	*token_type_str(t_token_type type)
+bool	advance_to_word_end(t_lexer *lex)
 {
-	static const char	*type_names[] = {
-		"WORD",
-		"PIPE",
-		"REDIR_IN",
-		"REDIR_OUT",
-		"HEREDOC",
-		"APPEND",
-		"EOF"
-	};
+	char	c;
+	ssize_t	new_pos;
 
-	if (type >= 0 && type <= TOKEN_EOF)
-		return (type_names[type]);
-	return ("UNKNOWN");
+	while (lex->pos < lex->len)
+	{
+		c = current_char(lex);
+		if (is_whitespace(c) || is_operator_char(c))
+			break ;
+		if (is_quote(c))
+		{
+			new_pos = skip_quoted_section(lex->input, lex->pos);
+			if (new_pos == -1)
+				return (false);
+			lex->pos = new_pos;
+		}
+		else
+			advance(lex);
+	}
+	return (true);
 }

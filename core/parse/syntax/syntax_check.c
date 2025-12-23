@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 21:55:51 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/22 21:27:58 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:16:41 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ bool	check_pipe_syntax(t_token *tokens)
 
 bool	check_redir_syntax(t_token *tokens)
 {
-	t_token	*current;
+	t_token		*current;
+	const char	*printable;
 
 	current = tokens;
 	while (current && current->type != TOKEN_EOF)
@@ -62,7 +63,7 @@ bool	check_redir_syntax(t_token *tokens)
 			}
 			if (current->next->type != TOKEN_WORD)
 			{
-				const char *printable = current->next->value;
+				printable = current->next->value;
 				if (!printable)
 					printable = token_type_to_printable(current->next->type);
 				syntax_error(printable);
