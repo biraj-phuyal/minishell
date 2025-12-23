@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 16:23:33 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/23 15:03:34 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/03 18:01:59 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,26 @@
 
 void	program_loop(t_env *env)
 {
-	const char	*input;
+	char	*input;
+	t_ast_node	*ast;
+	char		**envp;
+	int			last_status;
 
+	last_status = 0;
 	while (1)
 	{
 		input = readline("minishell: ");
 		if (!input)
 			free_list_and_exit(env);
-		command_line(lexer(input));
-		execute();
+		if (input)
+			add_history(input);
+		envp = list_to_array(env);
+		ast = parse(input, last_status, envp);
+		free(input);
+		if (!ast)
+			continue ;
+		last_status = execute(ast, &env, envp);
+		ast_free(ast);
+		free_envp(envp);
 	}
 }
