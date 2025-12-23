@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:53:48 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:44:53 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:50:12 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_token	*lexer(const char *input)
 		token_list_free(lex.tokens);
 		return (NULL);
 	}
-	eof_token = token_create(TOKEN_EOF, NULL);
+	eof_token = token_create(TOKEN_EOF, NULL, false);
 	if (!eof_token || !token_add(&lex, eof_token))
 	{
 		token_list_free(lex.tokens);

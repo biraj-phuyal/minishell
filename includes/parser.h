@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/22 23:05:14 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:03:34 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ bool		check_pipe_syntax(t_token *tokens);
 bool		check_redir_syntax(t_token *tokens);
 bool		redir_add(t_cmd *cmd, t_redir *redir);
 bool		parse_redir_one(t_parser *p, t_cmd *cmd);
+bool		parse_redir_one(t_parser *p, t_cmd *cmd);
 void		parser_error(t_parser *p, const char *msg);
+bool		parse_command_loop(t_parser *p, t_cmd *cmd);
 bool		parse_redirections(t_parser *p, t_cmd *cmd);
 bool		parser_expect(t_parser *p, t_token_type type);
 bool		strip_quotes_if_any(const char *str, char **out);
@@ -88,5 +90,6 @@ t_ast_node	*parse(const char *input, int exit_status, char **env);
 t_redir		*redir_create(t_redir_type type, char *file, bool quoted);
 void		parser_init(t_parser *p, t_token *tokens, int exit, char **env);
 bool		parse_add_redir(t_cmd *cmd, t_redir_type type, char *value, bool quoted);
+t_redir_type	token_to_redir_type(t_token_type type);
 
 #endif

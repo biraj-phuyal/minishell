@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:56:10 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/22 23:08:01 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:03:34 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ ssize_t	skip_quoted_section(const char *str, size_t pos)
 char	*extract_quoted_content(const char *str, size_t *pos)
 {
 	size_t	start;
-	size_t	end;
+	ssize_t	end;
 	char	*content;
 
 	if (!str || !pos || !is_quote(str[*pos]))
 		return (NULL);
 	start = *pos;
 	end = skip_quoted_section(str, start);
+	if (end == -1)
+		return (NULL);
 	content = ft_substr(str, start, end - start);
-	*pos = end;
+	*pos = (size_t)end;
 	return (content);
 }

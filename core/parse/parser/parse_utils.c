@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 21:57:14 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/22 22:35:56 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:50:36 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static bool	parse_redir_value(t_parser *p, t_cmd *cmd, t_redir_type redir_type)
 	return (true);
 }
 
-static bool	parse_redir_one(t_parser *p, t_cmd *cmd)
+bool	parse_redir_one(t_parser *p, t_cmd *cmd)
 {
 	t_redir_type	redir_type;
 

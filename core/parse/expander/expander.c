@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:44:34 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:03:34 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,26 @@ static char	*process_expansion(t_expander *exp)
 	return (exp->result);
 }
 
+static bool	is_quote_char(char c)
+{
+	return (c == '\'' || c == '"');
+}
+
+static void	handle_quote_toggle(t_expander *exp, char c)
+{
+	if (exp->state == STATE_NORMAL)
+	{
+		if (c == '\'')
+			exp->state = STATE_SINGLE;
+		else if (c == '"')
+			exp->state = STATE_DOUBLE;
+	}
+	else if (exp->state == STATE_SINGLE && c == '\'')
+		exp->state = STATE_NORMAL;
+	else if (exp->state == STATE_DOUBLE && c == '"')
+		exp->state = STATE_NORMAL;
+}
+
 char	*expand_token(const char *token, int exit_status, char **env)
 {
 	t_expander	exp;
@@ -47,8 +67,12 @@ char	*expand_token(const char *token, int exit_status, char **env)
 	while (token[exp.pos])
 	{
 		c = token[exp.pos];
-		update_quote_state(&exp, c);
-		if (c == '$' && exp.state != STATE_SINGLE
+		if (is_quote_char(c))
+		{
+			handle_quote_toggle(&exp, c);
+			exp.pos++;
+		}
+		else if (c == '$' && exp.state != STATE_SINGLE
 			&& token[exp.pos + 1] != '\0')
 		{
 			if (!process_expansion(&exp))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:32:11 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/22 22:16:22 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:03:34 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	redir_free(t_redir *redir)
 	}
 }
 
-static t_redir_type	token_to_redir_type(t_token_type type)
+t_redir_type	token_to_redir_type(t_token_type type)
 {
 	if (type == TOKEN_REDIR_IN)
 		return (REDIR_IN);
@@ -80,16 +80,13 @@ static t_redir_type	token_to_redir_type(t_token_type type)
 
 bool	parse_redirections(t_parser *p, t_cmd *cmd)
 {
-	t_redir_type	redir_type;
-	t_redir			*redir;
-
-			    while (p->current && (p->current->type == TOKEN_REDIR_IN
-				    || p->current->type == TOKEN_REDIR_OUT
-				    || p->current->type == TOKEN_HEREDOC
-				    || p->current->type == TOKEN_APPEND))
-			    {
-				if (!parse_redir_one(p, cmd))
-				    return false;
-			    }
-			    return true;
+	while (p->current && (p->current->type == TOKEN_REDIR_IN
+			|| p->current->type == TOKEN_REDIR_OUT
+			|| p->current->type == TOKEN_HEREDOC
+			|| p->current->type == TOKEN_APPEND))
+	{
+		if (!parse_redir_one(p, cmd))
+			return (false);
+	}
+	return (true);
 }

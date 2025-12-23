@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/22 22:44:07 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:53:35 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char	*expand_special_var(t_expander *exp, char *var_name, size_t var_len)
 	if (var_name[0] == '$' && var_len == 1)
 	{
 		exp->pos += 1;
-		return (ft_strdup("12345"));
+		return (ft_itoa(getpid()));
 	}
 	if (var_name[0] >= '0' && var_name[0] <= '9' && var_len == 1)
 	{

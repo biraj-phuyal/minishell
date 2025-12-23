@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:14:14 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/22 22:34:59 by gude-and         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:51:51 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_ast_node	*parse_command(t_parser *p)
 	return (ast_new_cmd(cmd));
 }
 
-static bool	parse_command_loop(t_parser *p, t_cmd *cmd)
+bool	parse_command_loop(t_parser *p, t_cmd *cmd)
 {
 	char	*unquoted;
 
