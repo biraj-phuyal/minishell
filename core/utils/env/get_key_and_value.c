@@ -6,11 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 21:32:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 15:24:11 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 16:59:08 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <execution.h>
+#include <minishell.h>
 
 char	*get_key(const char *envp)
 {
