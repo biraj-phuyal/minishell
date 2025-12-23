@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:15 by biphuyal          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/01/01 13:56:32 by gude-and         ###   ########.fr       */
-=======
-/*   Updated: 2025/12/23 16:43:24 by biphuyal         ###   ########.fr       */
->>>>>>> 9314bd1 (Valgrind fix)
+/*   Updated: 2026/01/03 18:08:22 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

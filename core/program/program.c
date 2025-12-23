@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 16:23:33 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/03 18:01:59 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/03 18:08:19 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	program_loop(t_env *env)
 {
-	char	*input;
+	char		*input;
 	t_ast_node	*ast;
 	char		**envp;
 	int			last_status;
@@ -35,5 +35,7 @@ void	program_loop(t_env *env)
 		last_status = execute(ast, &env, envp);
 		ast_free(ast);
 		free_envp(envp);
+		if (last_status == 1)
+			exit_program(env);
 	}
 }
