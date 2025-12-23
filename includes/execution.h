@@ -6,26 +6,14 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/23 16:01:28 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 16:35:20 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
-# include <strings.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdbool.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <utils.h>
-# include <lexer.h>
+# include <minishell.h>
 
 typedef struct s_env
 {
@@ -35,8 +23,8 @@ typedef struct s_env
 }	t_env;
 
 char		*get_pwd(void);
+void		free_env(t_env *env);
 void		order_env(char **env);
-void		free_list(t_env *env);
 void		print_pwd(t_env *env);
 t_env		*init_env(char **envp);
 void		free_envp(char **envp);

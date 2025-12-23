@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:15 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:49:57 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 16:43:24 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	push_back(t_env **head, t_env *new)
 		return ;
 	}
 	temp = *head;
-	while (temp != NULL)
+	while (temp->next != NULL)
 		temp = temp->next;
-	temp = new;
+	temp->next = new;
 }
 
 t_env	*init_env(char **envp)
@@ -43,10 +43,10 @@ t_env	*init_env(char **envp)
 	{
 		key = get_key(envp[i]);
 		if (!key)
-			return (free_list(head), NULL);
+			return (free_env(head), NULL);
 		new = ft_calloc(1, sizeof(t_env));
 		if (!new)
-			return (free_list(head), NULL);
+			return (free_env(head), NULL);
 		new->key = key;
 		new->value = get_value(envp[i]);
 		push_back(&head, new);
