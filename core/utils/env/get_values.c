@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_key_and_value.c                                :+:      :+:    :+:   */
+/*   get_values.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 21:32:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/23 16:59:08 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/26 17:43:56 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,32 @@ char	*get_value(const char *envp)
 	if (!string)
 		return (NULL);
 	return (string);
+}
+
+char	*get_new_dir(t_cmd *cmd)
+{
+	char	*new_dir;
+	int		i;
+
+	i = 0;
+	if (cmd->argc > 2)
+		return (NULL);
+	if (cmd->argv[1] == NULL)
+	{
+		new_dir = malloc(1);
+		if (!new_dir)
+			return (NULL);
+		new_dir[0] = '\0';
+		return (new_dir);
+	}
+	new_dir = malloc(ft_strlen(cmd->argv[1]) + 1);
+	if (!new_dir)
+		return (NULL);
+	while (cmd->argv[1][i])
+	{
+		new_dir[i] = cmd->argv[1][i];
+		i++;
+	}
+	new_dir[i] = '\0';
+	return (new_dir);
 }
