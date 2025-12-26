@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 16:02:53 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/26 17:08:24 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/26 17:49:12 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,25 @@ bool	is_builtin(t_cmd *cmd, int i)
 	else if ((ft_strcmp(cmd->argv[i], "pwd") == 0))
 		return (true);
 	return (false);
+}
+void	execute_cd(t_cmd *cmd, int i, t_env **env)
+{
+	char	*new_dir;
+
+	if (ft_strcmp(cmd->argv[i], "cd") == 0)
+	{
+		new_dir = get_new_dir(cmd);
+		if (!new_dir)
+		{
+			printf("minishell: cd: invalid arguments\n");
+			return ;
+		}
+		change_dir(env, new_dir);
+		free(new_dir);
+		return ;
+	}
+}
+int	execute_export(t_env *env, char **argv)
+{
+	
 }
