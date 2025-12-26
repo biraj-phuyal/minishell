@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 14:16:51 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:53:07 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/26 19:37:52 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ void	print_all_env(t_env *env)
 	head = env;
 	while (head != NULL)
 	{
-		ft_putstr(head->key);
+		ft_putstr_fd(head->key, 1);
 		write(1, "=", 1);
-		if (head->value)
-			ft_putstr(head->value);
+		ft_putstr_fd(head->value, 1);
 		write(1, "\n", 1);
 		head = head->next;
 	}

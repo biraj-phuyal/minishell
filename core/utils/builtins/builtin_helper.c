@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 16:02:53 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/26 17:49:12 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/26 19:53:07 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,4 @@ void	execute_cd(t_cmd *cmd, int i, t_env **env)
 		free(new_dir);
 		return ;
 	}
-}
-int	execute_export(t_env *env, char **argv)
-{
-	
 }

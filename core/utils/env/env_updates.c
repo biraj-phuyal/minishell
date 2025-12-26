@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 19:41:38 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/26 15:54:26 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/26 19:51:48 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	set_value(t_env **env, const char *key, const char *value)
 	curr->key = ft_strdup(key);
 	if (!curr->key)
 		return (free(curr));
-	curr->value = (char *)value;
+	curr->value = ft_strdup(value);
 	push_back(env, curr);
 }
 
