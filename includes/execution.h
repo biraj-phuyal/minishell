@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/26 16:03:38 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/26 16:58:09 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void		print_all_env(t_env *env);
 char		*get_key(const char *envp);
 void		update_new_pwd(t_env *env);
 void		create_new_pwd(t_env *env);
-void		execute_builtin(t_cmd *cmd);
 t_env		*free_head_node(t_env *env);
 char		*get_value(const char *envp);
 bool		is_builtin(t_cmd *cmd, int i);
@@ -45,15 +44,17 @@ void		new_pwd(t_env **env, char *old_pwd);
 void		old_pwd(t_env **env, char *old_pwd);
 void		push_back(t_env **head, t_env *new);
 char		*return_value(t_env *env, char *key);
-void		move_back(t_env **env, char *old_pwd);
 int			full_length_of_list(const t_env *env);
+void		change_dir(t_env **env, char *new_dir);
 void		update_old_pwd(t_env *env, char *og_pwd);
 void		create_old_pwd(t_env *env, char *og_pwd);
 void		destroy_and_copy(char **dest, const char *src);
-void		move_to_previous_dir(t_env **env, char *old_pwd);
+int			execute_builtin(t_cmd *cmd, int i, t_env **env);
 int			execute(t_ast_node *ast, t_env **env, char **envp);
 char		*join_key_value(const char *key, const char *value);
+void		move_back(t_env **env, char *old_pwd, char *new_dir);
 void		set_value(t_env **env, const char *key, const char *value);
+void		move_to_previous_dir(t_env **env, char *old_pwd, char *new_dir);
 void		move_to_relative_path(t_env **env, char *old_pwd, char *new_dir);
 
 #endif

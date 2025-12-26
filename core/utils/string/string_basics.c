@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 18:46:07 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:23:13 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/26 17:31:30 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_putstr(char *s)
 		write(1, &s[i], 1);
 		i++;
 	}
+	write(1, "\n", 1);
 }
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
