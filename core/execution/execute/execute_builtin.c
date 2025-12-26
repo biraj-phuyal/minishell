@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 14:09:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/26 16:02:31 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/26 16:00:47 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/26 16:01:32 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	execute(t_ast_node *ast, t_env **env, char **envp)
+void	execute_builtin(t_cmd *cmd)
 {
-	(void)env;
-	(void)envp;
-
-	if (ast->type == NODE_CMD)
-		execute_one_command(ast->cmd, env, envp);
 	
-}
-void	execute_one_command(t_cmd *cmd, t_env **env, char **envp)
-{
-	if (is_builtin(cmd, 0))
-		execute_builtin(cmd);
 }
