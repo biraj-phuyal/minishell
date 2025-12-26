@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/26 20:13:12 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/26 21:52:56 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_env
 }	t_env;
 
 char		*get_pwd(void);
+bool		flag(char *argv);
+void		echo(t_cmd *cmd);
 void		free_env(t_env *env);
 void		order_env(char **env);
 void		print_pwd(t_env *env);
