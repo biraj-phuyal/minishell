@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/23 17:23:59 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/26 16:03:38 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ void		print_all_env(t_env *env);
 char		*get_key(const char *envp);
 void		update_new_pwd(t_env *env);
 void		create_new_pwd(t_env *env);
+void		execute_builtin(t_cmd *cmd);
 t_env		*free_head_node(t_env *env);
 char		*get_value(const char *envp);
+bool		is_builtin(t_cmd *cmd, int i);
 void		free_list_and_exit(t_env *env);
 bool		repeated(t_env *env, char *key);
 size_t		strlen_double_array(char **env);

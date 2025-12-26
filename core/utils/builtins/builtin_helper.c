@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   builtin_helper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 14:09:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/26 16:02:31 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/26 16:02:53 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/26 16:03:16 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	execute(t_ast_node *ast, t_env **env, char **envp)
+bool	is_builtin(t_cmd *cmd, int i)
 {
-	(void)env;
-	(void)envp;
-
-	if (ast->type == NODE_CMD)
-		execute_one_command(ast->cmd, env, envp);
-	
-}
-void	execute_one_command(t_cmd *cmd, t_env **env, char **envp)
-{
-	if (is_builtin(cmd, 0))
-		execute_builtin(cmd);
+	if (cmd->argv[i] == "echo")
+		return (true);
+	else if (cmd->argv[i] == "export")
+		return (true);
+	else if (cmd->argv[i] == "unset")
+		return (true);
+	else if (cmd->argv[i] == "exit")
+		return (true);
+	else if (cmd->argv[i] == "cd")
+		return (true);
+	else if (cmd->argv[i] == "env")
+		return (true);
+	else if (cmd->argv[i] == "pwd")
+		return (true);
+	return (false);
 }
