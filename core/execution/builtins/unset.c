@@ -6,13 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 15:54:38 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/26 16:55:27 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/26 19:54:36 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_env	*unset_node(t_env *env, char *key)
+t_env	*unset(t_env *env, char *key)
 {
 	t_env	*prev;
 	t_env	*curr;
