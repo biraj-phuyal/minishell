@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:15 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:49:57 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/01 13:56:32 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	push_back(t_env **head, t_env *new)
 		return ;
 	}
 	temp = *head;
-	while (temp != NULL)
+	while (temp->next != NULL)
 		temp = temp->next;
-	temp = new;
+	temp->next = new;
 }
 
 t_env	*init_env(char **envp)

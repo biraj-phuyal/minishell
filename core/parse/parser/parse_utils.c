@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 21:57:14 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/23 14:50:36 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/01 14:02:00 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,19 @@ bool	parse_redir_one(t_parser *p, t_cmd *cmd)
 
 bool	strip_quotes_if_any(const char *str, char **out)
 {
-	size_t	len;
+	size_t	i;
+	bool	has_quotes;
 
-	len = ft_strlen(str);
-	if (len >= 2 && is_quote(str[0]) && str[len - 1] == str[0])
+	i = 0;
+	has_quotes = false;
+	while (str[i])
 	{
-		*out = ft_substr(str, 1, len - 2);
-		return (true);
+		if (str[i] == '\'' || str[i] == '"')
+			has_quotes = true;
+		i++;
 	}
-	*out = ft_strdup(str);
-	return (false);
+	*out = remove_outer_quotes(str);
+	return (has_quotes);
 }
 
 bool	parse_add_redir(t_cmd *cmd, t_redir_type type, char *value, bool quoted)

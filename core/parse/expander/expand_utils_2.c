@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 15:18:37 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/23 15:19:53 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/01 13:57:37 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ bool	process_char(t_expander *exp, char c)
 	{
 		handle_quote_toggle(exp, c);
 		exp->pos++;
+		return (true);
 	}
 	else if (c == '$' && exp->state != STATE_SINGLE
 		&& exp->input[exp->pos + 1] != '\0')

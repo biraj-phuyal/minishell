@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/23 15:18:09 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/01 13:58:22 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	expander_init(t_expander *exp, const char *input,
 	exp->env = env;
 }
 
-static char	*process_expansion(t_expander *exp)
+char	*process_expansion(t_expander *exp)
 {
 	char	*var_value;
 
@@ -36,7 +36,7 @@ static char	*process_expansion(t_expander *exp)
 	return (exp->result);
 }
 
-static void	handle_quote_toggle(t_expander *exp, char c)
+void	handle_quote_toggle(t_expander *exp, char c)
 {
 	if (exp->state == STATE_NORMAL)
 	{
@@ -69,19 +69,28 @@ char	*expand_token(const char *token, int exit_status, char **env)
 bool	expand_tokens(t_token *tokens, int exit_status, char **env)
 {
 	t_token	*current;
+	t_token	*prev;
 	char	*expanded;
 
 	current = tokens;
+	prev = NULL;
 	while (current)
 	{
 		if (current->type == TOKEN_WORD && current->value)
 		{
+			if (prev && prev->type == TOKEN_HEREDOC)
+			{
+				prev = current;
+				current = current->next;
+				continue ;
+			}
 			expanded = expand_token(current->value, exit_status, env);
 			if (!expanded)
 				return (false);
 			free(current->value);
 			current->value = expanded;
 		}
+		prev = current;
 		current = current->next;
 	}
 	return (true);
