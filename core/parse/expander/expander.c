@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:44:34 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/01 13:58:22 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	expander_init(t_expander *exp, const char *input,
 	exp->env = env;
 }
 
-static char	*process_expansion(t_expander *exp)
+char	*process_expansion(t_expander *exp)
 {
 	char	*var_value;
 
@@ -36,31 +36,32 @@ static char	*process_expansion(t_expander *exp)
 	return (exp->result);
 }
 
+void	handle_quote_toggle(t_expander *exp, char c)
+{
+	if (exp->state == STATE_NORMAL)
+	{
+		if (c == '\'')
+			exp->state = STATE_SINGLE;
+		else if (c == '"')
+			exp->state = STATE_DOUBLE;
+	}
+	else if (exp->state == STATE_SINGLE && c == '\'')
+		exp->state = STATE_NORMAL;
+	else if (exp->state == STATE_DOUBLE && c == '"')
+		exp->state = STATE_NORMAL;
+}
+
 char	*expand_token(const char *token, int exit_status, char **env)
 {
 	t_expander	exp;
-	char		c;
 
 	if (!token)
 		return (NULL);
 	expander_init(&exp, token, exit_status, env);
 	while (token[exp.pos])
 	{
-		c = token[exp.pos];
-		update_quote_state(&exp, c);
-		if (c == '$' && exp.state != STATE_SINGLE
-			&& token[exp.pos + 1] != '\0')
-		{
-			if (!process_expansion(&exp))
-				return (NULL);
-		}
-		else
-		{
-			exp.result = append_char(exp.result, c);
-			if (!exp.result)
-				return (NULL);
-			exp.pos++;
-		}
+		if (!process_char(&exp, token[exp.pos]))
+			return (NULL);
 	}
 	return (exp.result);
 }
@@ -68,19 +69,28 @@ char	*expand_token(const char *token, int exit_status, char **env)
 bool	expand_tokens(t_token *tokens, int exit_status, char **env)
 {
 	t_token	*current;
+	t_token	*prev;
 	char	*expanded;
 
 	current = tokens;
+	prev = NULL;
 	while (current)
 	{
 		if (current->type == TOKEN_WORD && current->value)
 		{
+			if (prev && prev->type == TOKEN_HEREDOC)
+			{
+				prev = current;
+				current = current->next;
+				continue ;
+			}
 			expanded = expand_token(current->value, exit_status, env);
 			if (!expanded)
 				return (false);
 			free(current->value);
 			current->value = expanded;
 		}
+		prev = current;
 		current = current->next;
 	}
 	return (true);

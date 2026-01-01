@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:14:14 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:45:39 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 14:51:51 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,23 +82,34 @@ t_ast_node	*parse_command(t_parser *p)
 	cmd = cmd_create();
 	if (!cmd)
 		return (NULL);
+	if (!parse_command_loop(p, cmd))
+	{
+		cmd_free(cmd);
+		return (NULL);
+	}
+	return (ast_new_cmd(cmd));
+}
+
+bool	parse_command_loop(t_parser *p, t_cmd *cmd)
+{
+	char	*unquoted;
+
 	while (p->current && p->current->type != TOKEN_PIPE
 		&& p->current->type != TOKEN_EOF)
 	{
 		if (p->current->type == TOKEN_WORD)
 		{
-			if (!cmd_add_arg(cmd, p->current->value))
+			unquoted = remove_outer_quotes(p->current->value);
+			if (!unquoted || !cmd_add_arg(cmd, unquoted))
 			{
-				cmd_free(cmd);
-				return (NULL);
+				free(unquoted);
+				return (false);
 			}
+			free(unquoted);
 			parser_advance(p);
 		}
 		else if (!parse_redirections(p, cmd))
-		{
-			cmd_free(cmd);
-			return (NULL);
-		}
+			return (false);
 	}
-	return (ast_new_cmd(cmd));
+	return (true);
 }

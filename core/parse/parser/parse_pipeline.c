@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:19:37 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:45:39 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:20:29 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static t_ast_node	*parse_pipe_next(t_parser *p, t_ast_node *left)
 	pipe = ast_new_pipe(left, right);
 	if (!pipe)
 	{
+		ast_free(left);
 		ast_free(right);
 		return (NULL);
 	}

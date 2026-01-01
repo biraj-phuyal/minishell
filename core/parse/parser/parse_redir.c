@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:32:11 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:45:39 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/01 14:01:25 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_redir	*redir_create(t_redir_type type, char *file, bool quoted)
 		return (NULL);
 	}
 	redir->quoted = quoted;
+	redir->heredoc_content = NULL;
 	redir->next = NULL;
 	return (redir);
 }
@@ -62,12 +63,14 @@ void	redir_free(t_redir *redir)
 		next = current->next;
 		if (current->file)
 			free(current->file);
+		if (current->heredoc_content)
+			free(current->heredoc_content);
 		free(current);
 		current = next;
 	}
 }
 
-static t_redir_type	token_to_redir_type(t_token_type type)
+t_redir_type	token_to_redir_type(t_token_type type)
 {
 	if (type == TOKEN_REDIR_IN)
 		return (REDIR_IN);
@@ -80,26 +83,13 @@ static t_redir_type	token_to_redir_type(t_token_type type)
 
 bool	parse_redirections(t_parser *p, t_cmd *cmd)
 {
-	t_redir_type	redir_type;
-	t_redir			*redir;
-
 	while (p->current && (p->current->type == TOKEN_REDIR_IN
 			|| p->current->type == TOKEN_REDIR_OUT
 			|| p->current->type == TOKEN_HEREDOC
 			|| p->current->type == TOKEN_APPEND))
 	{
-		redir_type = token_to_redir_type(p->current->type);
-		if (!parser_advance(p))
+		if (!parse_redir_one(p, cmd))
 			return (false);
-		if (!p->current || p->current->type != TOKEN_WORD)
-		{
-			parser_error(p, "syntax error: expected filename");
-			return (false);
-		}
-		redir = redir_create(redir_type, p->current->value, false);
-		if (!redir || !redir_add(cmd, redir))
-			return (false);
-		parser_advance(p);
 	}
 	return (true);
 }

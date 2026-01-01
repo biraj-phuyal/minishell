@@ -6,13 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 00:00:00 by                   #+#    #+#             */
-/*   Updated: 2025/12/21 20:44:53 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:14:13 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
-t_token	*token_create(t_token_type type, const char *value)
+t_token	*token_create(t_token_type type, const char *value, bool owned)
 {
 	t_token	*token;
 
@@ -24,11 +24,16 @@ t_token	*token_create(t_token_type type, const char *value)
 	token->next = NULL;
 	if (value)
 	{
-		token->value = ft_strdup(value);
-		if (! token->value)
+		if (owned)
+			token->value = (char *)value;
+		else
 		{
-			free(token);
-			return (NULL);
+			token->value = ft_strdup(value);
+			if (!token->value)
+			{
+				free(token);
+				return (NULL);
+			}
 		}
 	}
 	return (token);
@@ -52,10 +57,10 @@ bool	token_add(t_lexer *lex, t_token *new_token)
 
 bool	tokenize_operator(t_lexer *lex)
 {
+	t_token_type	type;
+	t_token			*token;
 	char			c;
 	char			next;
-	t_token			*token;
-	t_token_type	type;
 
 	c = current_char(lex);
 	next = peek_char(lex);
@@ -69,7 +74,7 @@ bool	tokenize_operator(t_lexer *lex)
 		type = TOKEN_REDIR_IN;
 	else
 		type = TOKEN_REDIR_OUT;
-	token = token_create(type, NULL);
+	token = token_create(type, NULL, false);
 	if (!token)
 		return (false);
 	advance(lex);
@@ -82,20 +87,11 @@ static char	*extract_word(t_lexer *lex)
 {
 	size_t	start;
 	size_t	end;
-	char	c;
 	char	*word;
 
 	start = lex->pos;
-	while (lex->pos < lex->len)
-	{
-		c = current_char(lex);
-		if (is_whitespace(c) || is_operator_char(c))
-			break ;
-		if (is_quote(c))
-			lex->pos = skip_quoted_section(lex->input, lex->pos);
-		else
-			advance(lex);
-	}
+	if (!advance_to_word_end(lex))
+		return (NULL);
 	end = lex->pos;
 	if (end == start)
 		return (NULL);
@@ -109,10 +105,9 @@ bool	tokenize_word(t_lexer *lex)
 	t_token	*token;
 
 	word = extract_word(lex);
-	if (! word)
+	if (!word)
 		return (false);
-	token = token_create(TOKEN_WORD, word);
-	free(word);
+	token = token_create(TOKEN_WORD, word, true);
 	if (!token)
 		return (false);
 	return (token_add(lex, token));

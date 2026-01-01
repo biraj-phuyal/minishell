@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 12:39:05 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/20 18:48:03 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/01 14:03:13 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	push_cmd_back(t_command **head, t_command *new)
 		return ;
 	}
 	temp = *head;
-	while (temp != NULL)
+	while (temp->next != NULL)
 		temp = temp->next;
-	temp = new;
+	temp->next = new;
 }
 
 void	save_redir(t_token *token, t_command **curr)
@@ -61,7 +61,7 @@ void	handel_operators(t_token *token, t_command **curr)
 		*curr = (*curr)->next;
 		return ;
 	}
-	if (token->type == TOKEN_REDIR_IN || token->type == TOKEN_REDIR_OUT || 
+	if (token->type == TOKEN_REDIR_IN || token->type == TOKEN_REDIR_OUT ||
 		token->type == TOKEN_APPEND || token->type == TOKEN_HEREDOC)
 	{
 		save_redir(token, curr);
@@ -81,9 +81,10 @@ t_command	*command_line(t_token *token)
 		if (!new)
 			return (NULL);
 		new->cmd = token->value;
-		if (token->type == TOKEN_WORD);
+		if (token->type == TOKEN_WORD)
 			push_cmd_back(&curr, new);
 		handel_operators(token, &curr);
+		token = token->next;
 	}
 	return (curr);
 }

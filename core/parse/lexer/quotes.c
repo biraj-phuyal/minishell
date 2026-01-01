@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:56:10 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:44:53 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:03:34 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	is_quote(char c)
 	return (c == '\'' || c == '"');
 }
 
-static size_t	find_closing_quote(const char *str, size_t pos)
+static ssize_t	find_closing_quote(const char *str, size_t pos)
 {
 	char	quote_char;
 	size_t	i;
@@ -30,10 +30,10 @@ static size_t	find_closing_quote(const char *str, size_t pos)
 			return (i + 1);
 		i++;
 	}
-	return (pos + 1);
+	return (-1);
 }
 
-size_t	skip_quoted_section(const char *str, size_t pos)
+ssize_t	skip_quoted_section(const char *str, size_t pos)
 {
 	if (! str || ! is_quote(str[pos]))
 		return (pos + 1);
@@ -43,14 +43,16 @@ size_t	skip_quoted_section(const char *str, size_t pos)
 char	*extract_quoted_content(const char *str, size_t *pos)
 {
 	size_t	start;
-	size_t	end;
+	ssize_t	end;
 	char	*content;
 
 	if (!str || !pos || !is_quote(str[*pos]))
 		return (NULL);
 	start = *pos;
 	end = skip_quoted_section(str, start);
+	if (end == -1)
+		return (NULL);
 	content = ft_substr(str, start, end - start);
-	*pos = end;
+	*pos = (size_t)end;
 	return (content);
 }

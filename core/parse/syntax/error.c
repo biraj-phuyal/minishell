@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 21:47:17 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:45:39 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/22 23:09:26 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,9 @@ void	syntax_error_newline(void)
 
 void	parser_error(t_parser *p, const char *msg)
 {
-	if (!p)
+	if (!p || !msg)
 		return ;
+	ft_putstr_fd((char *)"minishell: ", 2);
+	ft_putendl_fd((char *)msg, 2);
 	p->error = true;
-	if (p->error_msg)
-		free(p->error_msg);
-	if (msg)
-		p->error_msg = ft_strdup(msg);
-	else
-		p->error_msg = NULL;
 }

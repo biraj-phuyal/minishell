@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 20:47:02 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/21 20:45:39 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/01 14:02:32 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	parser_init(t_parser *p, t_token *tokens, int exit, char **env)
 	p->exit_status = exit;
 	p->env = env;
 	p->error = false;
-	p->error_msg = NULL;
 }
 
 bool	parser_advance(t_parser *p)
@@ -61,7 +60,10 @@ t_ast_node	*parse(const char *input, int exit_status, char **env)
 	parser_init(&parser, tokens, exit_status, env);
 	ast = parse_pipeline(&parser);
 	token_list_free(tokens);
-	if (parser.error_msg)
-		free(parser.error_msg);
+	if (ast && !process_heredocs(ast, exit_status, env))
+	{
+		ast_free(ast);
+		return (NULL);
+	}
 	return (ast);
 }
