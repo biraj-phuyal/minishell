@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:30:37 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/23 15:08:34 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/01 16:07:18 by gude-and         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,14 @@ static char	*process_quotes(const char *str)
 		}
 		qs.i++;
 	}
+	if (!qs.result)
+		return (ft_strdup(""));
 	return (qs.result);
 }
 
 char	*remove_outer_quotes(const char *str)
 {
-	char	*result;
-
 	if (!str)
 		return (NULL);
-	result = process_quotes(str);
-	if (!result)
-		return (ft_strdup(""));
-	return (result);
+	return (process_quotes(str));
 }
