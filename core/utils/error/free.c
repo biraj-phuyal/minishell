@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 21:04:26 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/23 20:14:51 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/02 16:48:19 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ void	free_env(t_env *env)
 	}
 }
 
-void	free_envp(char **envp)
+void	free_double_pointer(char **args)
 {
 	int	i;
 
 	i = 0;
-	while (envp[i])
+	while (args[i])
 	{
-		free(envp[i]);
+		free(args[i]);
 		i++;
 	}
-	free(envp);
+	free(args);
 }

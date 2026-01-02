@@ -6,11 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 16:23:33 by biphuyal          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/01/03 18:08:19 by biphuyal         ###   ########.fr       */
-=======
-/*   Updated: 2025/12/26 20:13:31 by biphuyal         ###   ########.fr       */
->>>>>>> e5eb1cc (exit is working)
+/*   Updated: 2026/01/03 18:09:24 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +22,18 @@ static int	process_input(char *input, int last_status, t_env **env)
 	ast = parse(input, last_status, envp);
 	if (!ast)
 	{
-		free_envp(envp);
+		free_double_pointer(envp);
 		return (last_status);
 	}
 	status = execute(ast, env, envp);
 	if (status == 1)
 	{
 		ast_free(ast);
-		free_envp(envp);
+		free_double_pointer(envp);
 		exit_program(*env);
 	}
 	ast_free(ast);
-	free_envp(envp);
+	free_double_pointer(envp);
 	return (status);
 }
 

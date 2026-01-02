@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 01:59:17 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/23 16:01:20 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/02 15:27:17 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**list_to_array(const t_env *env)
 	{
 		envp[i] = join_key_value(env->key, env->value);
 		if (!envp[i])
-			return (free_envp(envp), NULL);
+			return (free_double_pointer(envp), NULL);
 		i++;
 		env = env->next;
 	}
