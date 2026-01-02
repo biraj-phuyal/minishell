@@ -8,6 +8,7 @@
 /*   Created: 2025/12/17 14:09:11 by biphuyal          #+#    #+#             */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2026/01/03 10:15:27 by biphuyal         ###   ########.fr       */
 =======
 /*   Updated: 2025/12/31 20:43:11 by biphuyal         ###   ########.fr       */
@@ -15,8 +16,12 @@
 =======
 /*   Updated: 2026/01/02 17:03:19 by biphuyal         ###   ########.fr       */
 >>>>>>> 0688264 (path joining for execve is working)
+=======
+/*   Updated: 2026/01/03 10:31:26 by biphuyal         ###   ########.fr       */
+>>>>>>> 1c7036d (path joining for execve is working)
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <minishell.h>
 
@@ -82,6 +87,24 @@ int	execute_multiple_commands(t_ast_node *ast, t_env **env, char **envp)
 	if (ast->type == NODE_PIPE)
 		return (execute_multiple_commands(ast, env, envp));
 =======
+	int	i;
+	int	j;
+	int	pid;
+	int	fds[2];
+	char *cmd_path;
+	t_ast_node *node;
+
+	i = 0;
+	j = 0;
+	node = ast;
+	while (node == NODE_PIPE)
+	{
+		pipe(fds);
+		if (node->left == NODE_CMD)
+		{
+
+int	execute_multiple_commands(t_ast_node *ast, t_env **env, char **envp)
+{
 	int	i;
 	int	j;
 	int	pid;
