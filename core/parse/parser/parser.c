@@ -12,6 +12,26 @@
 
 #include <parser.h>
 
+static t_token	*prepare_tokens(const char *input, int exit_status, char **env)
+{
+	t_token	*tokens;
+
+	tokens = lexer(input);
+	if (!tokens)
+		return (NULL);
+	if (!syntax_check(tokens))
+	{
+		token_list_free(tokens);
+		return (NULL);
+	}
+	if (!expand_tokens(tokens, exit_status, env))
+	{
+		token_list_free(tokens);
+		return (NULL);
+	}
+	return (tokens);
+}
+
 void	parser_init(t_parser *p, t_token *tokens, int exit, char **env)
 {
 	p->tokens = tokens;
@@ -44,19 +64,9 @@ t_ast_node	*parse(const char *input, int exit_status, char **env)
 	t_parser	parser;
 	t_ast_node	*ast;
 
-	tokens = lexer(input);
+	tokens = prepare_tokens(input, exit_status, env);
 	if (!tokens)
 		return (NULL);
-	if (!syntax_check(tokens))
-	{
-		token_list_free(tokens);
-		return (NULL);
-	}
-	if (!expand_tokens(tokens, exit_status, env))
-	{
-		token_list_free(tokens);
-		return (NULL);
-	}
 	parser_init(&parser, tokens, exit_status, env);
 	ast = parse_pipeline(&parser);
 	token_list_free(tokens);

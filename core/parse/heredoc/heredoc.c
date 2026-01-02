@@ -12,12 +12,42 @@
 
 #include <parser.h>
 
-char	*read_heredoc(const char *delim, bool expand, int exit_status, char **env)
+static char	*append_line_to_content(char *content, char *expanded)
+{
+	char	*temp;
+
+	temp = ft_strjoin(content, expanded);
+	free(content);
+	free(expanded);
+	if (!temp)
+		return (NULL);
+	content = temp;
+	temp = ft_strjoin(content, "\n");
+	free(content);
+	return (temp);
+}
+
+static char	*process_heredoc_line(char *line, char *content, t_heredoc *hd)
+{
+	char	*expanded;
+
+	if (hd->expand)
+		expanded = expand_heredoc_line(line, &hd->ctx);
+	else
+		expanded = ft_strdup(line);
+	free(line);
+	if (!expanded)
+	{
+		free(content);
+		return (NULL);
+	}
+	return (append_line_to_content(content, expanded));
+}
+
+char	*read_heredoc(t_heredoc *hd)
 {
 	char	*line;
 	char	*content;
-	char	*expanded;
-	char	*temp;
 
 	content = ft_strdup("");
 	if (!content)
@@ -25,42 +55,21 @@ char	*read_heredoc(const char *delim, bool expand, int exit_status, char **env)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line)
-			break ;
-		if (ft_strcmp(line, delim) == 0)
+		if (!line || ft_strcmp(line, hd->delim) == 0)
 		{
 			free(line);
 			break ;
 		}
-		if (expand)
-			expanded = expand_heredoc_line(line, exit_status, env);
-		else
-			expanded = ft_strdup(line);
-		free(line);
-		if (!expanded)
-		{
-			free(content);
+		content = process_heredoc_line(line, content, hd);
+		if (!content)
 			return (NULL);
-		}
-		temp = ft_strjoin(content, expanded);
-		free(content);
-		free(expanded);
-		if (!temp)
-			return (NULL);
-		content = temp;
-		temp = ft_strjoin(content, "\n");
-		free(content);
-		if (!temp)
-			return (NULL);
-		content = temp;
 	}
 	return (content);
 }
 
-static bool	process_cmd_heredocs(t_cmd *cmd, int exit_status, char **env)
+static bool	process_cmd_heredocs(t_cmd *cmd, t_heredoc *hd)
 {
 	t_redir	*redir;
-	char	*content;
 
 	if (!cmd)
 		return (true);
@@ -69,28 +78,28 @@ static bool	process_cmd_heredocs(t_cmd *cmd, int exit_status, char **env)
 	{
 		if (redir->type == REDIR_HEREDOC)
 		{
-			content = read_heredoc(redir->file, !redir->quoted,
-					exit_status, env);
-			if (!content)
+			hd->delim = redir->file;
+			hd->expand = ! redir->quoted;
+			redir->heredoc_content = read_heredoc(hd);
+			if (!redir->heredoc_content)
 				return (false);
-			redir->heredoc_content = content;
 		}
 		redir = redir->next;
 	}
 	return (true);
 }
 
-bool	process_heredocs(t_ast_node *ast, int exit_status, char **env)
+bool	process_heredocs(t_ast_node *ast, t_heredoc *hd)
 {
-	if (!ast)
+	if (! ast)
 		return (true);
 	if (ast->type == NODE_CMD)
-		return (process_cmd_heredocs(ast->cmd, exit_status, env));
+		return (process_cmd_heredocs(ast->cmd, hd));
 	if (ast->type == NODE_PIPE)
 	{
-		if (!process_heredocs(ast->left, exit_status, env))
+		if (!process_heredocs(ast->left, hd))
 			return (false);
-		if (!process_heredocs(ast->right, exit_status, env))
+		if (!process_heredocs(ast->right, hd))
 			return (false);
 	}
 	return (true);

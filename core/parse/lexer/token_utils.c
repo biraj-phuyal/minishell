@@ -60,7 +60,6 @@ int	token_list_size(t_token *tokens)
 bool	advance_to_word_end(t_lexer *lex)
 {
 	char	c;
-	ssize_t	new_pos;
 
 	while (lex->pos < lex->len)
 	{
@@ -69,16 +68,8 @@ bool	advance_to_word_end(t_lexer *lex)
 			break ;
 		if (is_quote(c))
 		{
-			new_pos = skip_quoted_section(lex->input, lex->pos);
-			if (new_pos == -1)
-			{
-				ft_putstr_fd("minishell: unexpected EOF while looking for matching `", 2);
-				ft_putchar_fd(c, 2);
-				ft_putstr_fd("'", 2);
-				ft_putchar_fd('\n', 2);
+			if (!advance_quote(lex, c))
 				return (false);
-			}
-			lex->pos = new_pos;
 		}
 		else
 			advance(lex);

@@ -76,14 +76,9 @@ bool	expand_tokens(t_token *tokens, int exit_status, char **env)
 	prev = NULL;
 	while (current)
 	{
-		if (current->type == TOKEN_WORD && current->value)
+		if (current->type == TOKEN_WORD && current->value
+			&& (!prev || prev->type != TOKEN_HEREDOC))
 		{
-			if (prev && prev->type == TOKEN_HEREDOC)
-			{
-				prev = current;
-				current = current->next;
-				continue ;
-			}
 			expanded = expand_token(current->value, exit_status, env);
 			if (!expanded)
 				return (false);

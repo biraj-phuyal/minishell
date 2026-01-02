@@ -55,7 +55,7 @@ static void	copy_without_quotes(char *dst, const char *src)
 	{
 		toggle_quote(src[i], &state);
 		if (!((src[i] == '\'' || src[i] == '"')
-			&& (state == src[i] || state == 0)))
+				&& (state == src[i] || state == 0)))
 			dst[j++] = src[i];
 		i++;
 	}

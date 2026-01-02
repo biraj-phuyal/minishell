@@ -57,6 +57,7 @@ bool		tokenize_operator(t_lexer *lex);
 void		token_list_free(t_token *tokens);
 int			token_list_size(t_token *tokens);
 bool		advance_to_word_end(t_lexer *lex);
+bool	advance_quote(t_lexer *lex, char quote);
 bool		token_add(t_lexer *lex, t_token *new_token);
 void		lexer_init(t_lexer *lex, const char *input);
 const char	*token_type_to_printable(t_token_type type);

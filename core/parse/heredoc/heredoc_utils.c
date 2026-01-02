@@ -12,34 +12,47 @@
 
 #include <expander.h>
 
-char	*expand_heredoc_line(const char *line, int exit_status, char **env)
+static void	init_expander(t_expander *exp, const char *line)
+{
+	exp->input = line;
+	exp->result = NULL;
+	exp->pos = 0;
+	exp->state = STATE_NORMAL;
+}
+
+static char	*process_heredoc_char(t_expander *exp, const char *line)
+{
+	char	c;
+
+	c = line[exp->pos];
+	if (c == '$' && line[exp->pos + 1] != '\0')
+	{
+		if (! process_expansion(exp))
+			return (NULL);
+	}
+	else
+	{
+		exp->result = append_char(exp->result, c);
+		if (! exp->result)
+			return (NULL);
+		exp->pos++;
+	}
+	return (exp->result);
+}
+
+char	*expand_heredoc_line(const char *line, t_expander *ctx)
 {
 	t_expander	exp;
-	char		c;
 
 	if (!line)
 		return (NULL);
-	exp.input = line;
-	exp.result = NULL;
-	exp.pos = 0;
-	exp.state = STATE_NORMAL;
-	exp.exit_status = exit_status;
-	exp.env = env;
+	init_expander(&exp, line);
+	exp.exit_status = ctx->exit_status;
+	exp.env = ctx->env;
 	while (line[exp.pos])
 	{
-		c = line[exp.pos];
-		if (c == '$' && line[exp.pos + 1] != '\0')
-		{
-			if (!process_expansion(&exp))
-				return (NULL);
-		}
-		else
-		{
-			exp.result = append_char(exp.result, c);
-			if (!exp.result)
-				return (NULL);
-			exp.pos++;
-		}
+		if (! process_heredoc_char(&exp, line))
+			return (NULL);
 	}
 	return (exp.result);
 }

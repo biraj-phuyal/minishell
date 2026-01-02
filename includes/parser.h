@@ -66,6 +66,13 @@ typedef struct s_parser
 	bool	error;
 }	t_parser;
 
+typedef struct s_heredoc
+{
+	const char	*delim;
+	bool		expand;
+	t_expander	ctx;
+}	t_heredoc;
+
 t_cmd		*cmd_create(void);
 void		cmd_free(t_cmd *cmd);
 t_ast_node	*ast_new_cmd(t_cmd *cmd);
