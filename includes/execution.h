@@ -6,7 +6,11 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/01/03 10:14:48 by biphuyal         ###   ########.fr       */
+=======
+/*   Updated: 2026/01/02 15:28:08 by biphuyal         ###   ########.fr       */
+>>>>>>> 0688264 (path joining for execve is working)
 /*                                                                            */
 /* ************************************************************************** */
 

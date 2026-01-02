@@ -7,10 +7,14 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 14:09:11 by biphuyal          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2026/01/03 10:15:27 by biphuyal         ###   ########.fr       */
 =======
 /*   Updated: 2025/12/31 20:43:11 by biphuyal         ###   ########.fr       */
 >>>>>>> dc6fb4d (Happy new year)
+=======
+/*   Updated: 2026/01/02 17:03:19 by biphuyal         ###   ########.fr       */
+>>>>>>> 0688264 (path joining for execve is working)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +54,12 @@ int	execute_one_command(t_cmd *cmd, t_env **env, char **envp)
 	}
 	return (execute_external_command(cmd_path, cmd, envp));
 }
-int	execute_multiple_command(t_ast_node *ast, t_env *env, char **envp, int pid)
+int	execute_multiple_command(t_ast_node *ast, t_env **env, char **envp, int pid)
 {
 	int	fds[2];
 	char *main_path;
 	
-	main_path = path(env);
+	main_path = path(*env, ast->cmd->argv[1]);
 	if (ast->right != NULL)
 	{
 		pipe(fds);
@@ -70,7 +74,7 @@ int	execute_multiple_command(t_ast_node *ast, t_env *env, char **envp, int pid)
 	}
 }
 
-int	execute(t_ast_node *ast, t_env **env, char **envp)
+int	execute_multiple_commands(t_ast_node *ast, t_env **env, char **envp)
 {
 <<<<<<< HEAD
 	if (ast->type == NODE_CMD)
@@ -79,16 +83,56 @@ int	execute(t_ast_node *ast, t_env **env, char **envp)
 		return (execute_multiple_commands(ast, env, envp));
 =======
 	int	i;
+	int	j;
 	int	pid;
+	int	fds[2];
+	char *cmd_path;
+	t_ast_node *node;
 
-	if (ast->type == NODE_CMD)
-		return (execute_one_command(ast->cmd, env));
 	i = 0;
-	while (i < ast->cmd->argc)
+	j = 0;
+	node = ast;
+	while (node == NODE_PIPE)
 	{
-		execute_multiple_command(ast, *env, envp, pid);
-		i++;
+		pipe(fds);
+		if (node->left == NODE_CMD)
+		{
+			cmd_path = path(*env, node->cmd->argv[0]);
+			if (!cmd_path)
+				printf("%s: command not found", node->cmd->argv[0]);
+			pid = fork();
+			if (pid == 0)
+			{
+				dup2(fds[1], STDOUT_FILENO);
+
+				execve(cmd_path, node->cmd->argv, envp);
+			}
+		}
+		node = node->right;
+	}
+	if (node->right == NODE_CMD)
+	{
+		cmd_path = path(*env, node->cmd->argv[0]);
+		if (!cmd_path)
+			printf("%s: command not found", node->cmd->argv[0]);
+		pipe(fds);
+		pid = fork();
+		if (pid == 0)
+		{
+			dup2(fds[0], STDIN_FILENO);
+
+			execve(cmd_path, node->cmd->argv, envp);
+		}
 	}
 >>>>>>> dc6fb4d (Happy new year)
+	return (0);
+}
+
+int	execute(t_ast_node *ast, t_env **env, char **envp)
+{
+	if (ast->type == NODE_CMD)
+		return (execute_one_command(ast->cmd, env));
+	if (!(execute_multiple_commands(ast, env, envp)));
+		
 	return (0);
 }
