@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   program.c                                          :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 16:23:33 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/23 15:03:34 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/26 20:15:58 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/26 21:51:29 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	program_loop(t_env *env)
+void	echo(t_cmd *cmd)
 {
-	const char	*input;
+	int	i;
 
-	while (1)
+	i = 1;
+	while (cmd->argv[i] && flag(cmd->argv[i]))
+		i++;
+	while (cmd->argv[i])
 	{
-		input = readline("minishell: ");
-		if (!input)
-			free_list_and_exit(env);
-		command_line(lexer(input));
-		execute();
+		ft_putstr_fd(cmd->argv[i], 1);
+		if (cmd->argv[i + 1])
+			ft_putstr_fd(" ", 1);
+		i++;
 	}
+	if (!flag(cmd->argv[1]))
+		ft_putstr_fd("\n", 1);
 }

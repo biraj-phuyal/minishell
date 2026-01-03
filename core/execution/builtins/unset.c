@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/23 21:04:26 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/23 16:59:44 by biphuyal         ###   ########.fr       */
+/*   Created: 2025/12/26 15:54:38 by biphuyal          #+#    #+#             */
+/*   Updated: 2025/12/26 19:54:36 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	free_list_and_exit(t_env *env)
+t_env	*unset(t_env *env, char *key)
 {
-	t_env	*head;
-	t_env	*next;
+	t_env	*prev;
+	t_env	*curr;
 
-	if (env)
+	if (!env || !key)
+		return (env);
+	if (ft_strcmp(env->key, key) == 0)
+		return (free_head_node(env));
+	prev = env;
+	curr = env->next;
+	while (curr)
 	{
-		head = env;
-		while (head != NULL)
+		if (ft_strcmp(curr->key, key) == 0)
 		{
-			next = head->next;
-			if (head->key)
-				free(head->key);
-			if (head->value)
-				free(head->value);
-			free(head);
-			head = next;
+			prev->next = curr->next;
+			if (curr->key)
+				free(curr->key);
+			if (curr->value)
+				free(curr->value);
+			free(curr);
+			break ;
 		}
+		prev = curr;
+		curr = curr->next;
 	}
-	printf("exit\n");
-	exit(EXIT_FAILURE);
+	return (env);
 }

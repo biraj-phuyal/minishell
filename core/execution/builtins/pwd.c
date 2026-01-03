@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 15:09:08 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/17 16:49:57 by biphuyal         ###   ########.fr       */
+/*   Updated: 2025/12/26 17:31:03 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	print_pwd(t_env *env)
 		{
 			destroy_and_copy(&head->value, pwd);
 			ft_putstr(head->value);
-			return ;
+			return (free(pwd));
 		}
 		if (head->next == NULL)
 		{
 			create_new_pwd(head);
 			ft_putstr(head->value);
-			return ;
+			return (free(pwd));
 		}
 		head = head->next;
 	}

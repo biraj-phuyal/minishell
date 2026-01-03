@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:15 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/01 13:56:32 by gude-and         ###   ########.fr       */
+/*   Updated: 2026/01/03 18:08:22 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ t_env	*init_env(char **envp)
 	{
 		key = get_key(envp[i]);
 		if (!key)
-			return (free_list(head), NULL);
+			return (free_env(head), NULL);
 		new = ft_calloc(1, sizeof(t_env));
 		if (!new)
-			return (free_list(head), NULL);
+			return (free_env(head), NULL);
 		new->key = key;
 		new->value = get_value(envp[i]);
 		push_back(&head, new);
