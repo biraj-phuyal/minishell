@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/27 16:42:40 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/02 16:15:43 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/03 15:51:55 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ char	*path(t_env *env, char *cmd)
 {
 	char	*result;
 
-	result = check_absolute_path(cmd);
-	if (!result)
-		return (result);
 	if (!cmd || !cmd[0])
 		return (NULL);
+	result = check_absolute_path(cmd);
+	if (result)
+		return (result);
 	return (search_in_path(env, cmd));
 }

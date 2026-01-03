@@ -7,10 +7,14 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2026/01/03 10:14:48 by biphuyal         ###   ########.fr       */
 =======
 /*   Updated: 2026/01/02 15:28:08 by biphuyal         ###   ########.fr       */
 >>>>>>> 0688264 (path joining for execve is working)
+=======
+/*   Updated: 2026/01/03 17:22:25 by biphuyal         ###   ########.fr       */
+>>>>>>> 7def5be (Some refactor is neccessary but otherwise pipes are  working)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +29,21 @@ typedef struct s_env
 	char			*value;
 	struct s_env	*next;
 }	t_env;
+
+typedef struct s_exec_ctx
+{
+	t_env	**env;
+	char	**envp;
+	int		(*pipes)[2];
+	int		pipe_count;
+}	t_exec_ctx;
+
+typedef struct s_pipe_run
+{
+	t_cmd	**cmds;
+	pid_t	*pids;
+	int		count;
+}	t_pipe_run;
 
 char		*get_pwd(void);
 bool		flag(char *argv);
@@ -68,7 +87,15 @@ void		move_back(t_env **env, char *old_pwd, char *new_dir);
 void		set_value(t_env **env, const char *key, const char *value);
 void		move_to_previous_dir(t_env **env, char *old_pwd, char *new_dir);
 void		move_to_relative_path(t_env **env, char *old_pwd, char *new_dir);
-int			execute_external_command(char *cmd_path, t_cmd *cmd, char **envp);
-int			multiple_command_helper(t_ast_node *node, t_env *env, char **envp);
+int			get_exit_status(int status);
+int			pipe_cmd_count(t_ast_node *ast);
+int			pipe_fill_cmds(t_ast_node *ast, t_cmd **cmds, int count);
+int			create_all_pipes(t_exec_ctx *ctx);
+void		close_all_pipes(t_exec_ctx *ctx);
+int			execute_pipeline(t_ast_node *ast, t_env **env, char **envp);
+void		child_exec_cmd(t_exec_ctx *ctx, t_cmd *cmd, int in_fd, int out_fd);
+void	get_fds(t_exec_ctx *ctx, int i, int count, int fd[2]);
+
+
 
 #endif

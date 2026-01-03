@@ -6,56 +6,52 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 10:13:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/03 10:15:03 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/03 16:36:52 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	execute_external_command(char *cmd_path, t_cmd *cmd, char **envp)
+int	get_exit_status(int status)
 {
-	pid_t	pid;
-	int		status;
-
-	pid = fork();
-	if (pid == -1)
-	{
-		free(cmd_path);
-		return (1);
-	}
-	if (pid == 0)
-	{
-		execve(cmd_path, cmd->argv, envp);
-		perror("minishell");
-		free(cmd_path);
-		exit(126);
-	}
-	free(cmd_path);
-	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
+	if (WIFSIGNALED(status))
+		return (128 + WTERMSIG(status));
 	return (1);
 }
-
-int	multiple_command_helper(t_ast_node *node, t_env *env, char **envp)
+static void	close_pipe_pair(int fds[2])
 {
-	int			pid;
-	int			new_pipe[2];
-	int			prev_read;
-	char		*main_path;
+	if (fds[0] != -1)
+		close(fds[0]);
+	if (fds[1] != -1)
+		close(fds[1]);
+}
 
-	prev_read = -1;
-	pid = fork();
-	if (pid == 0)
+void	close_all_pipes(t_exec_ctx *ctx)
+{
+	int	i;
+
+	i = 0;
+	while (i < ctx->pipe_count)
 	{
-		main_path = path(env, node->left->cmd->argv[0]);
-		if (!main_path)
-			printf("%s: command not found", node->left->cmd->argv[0]);
-		pipe(new_pipe);
-		if (prev_read != -1)
-			dup2(new_pipe[0], STDIN_FILENO);
-		dup2(new_pipe[1], STDOUT_FILENO);
-		execve(main_path, node->left->cmd->argv, envp);
+		close_pipe_pair(ctx->pipes[i]);
+		i++;
 	}
-	return (0);
+}
+
+int	create_all_pipes(t_exec_ctx *ctx)
+{
+	int	i;
+
+	i = 0;
+	while (i < ctx->pipe_count)
+	{
+		ctx->pipes[i][0] = -1;
+		ctx->pipes[i][1] = -1;
+		if (pipe(ctx->pipes[i]) == -1)
+			return (0);
+		i++;
+	}
+	return (1);
 }
