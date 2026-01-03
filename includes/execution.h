@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/02 15:28:08 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/03 10:14:48 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,14 @@ void		create_old_pwd(t_env *env, char *og_pwd);
 void		execute_cd(t_cmd *cmd, int i, t_env **env);
 void		destroy_and_copy(char **dest, const char *src);
 int			execute_builtin(t_cmd *cmd, int i, t_env **env);
+int			execute_builtin(t_cmd *cmd, int i, t_env **env);
 int			execute(t_ast_node *ast, t_env **env, char **envp);
 char		*join_key_value(const char *key, const char *value);
 void		move_back(t_env **env, char *old_pwd, char *new_dir);
 void		set_value(t_env **env, const char *key, const char *value);
 void		move_to_previous_dir(t_env **env, char *old_pwd, char *new_dir);
 void		move_to_relative_path(t_env **env, char *old_pwd, char *new_dir);
+int			execute_external_command(char *cmd_path, t_cmd *cmd, char **envp);
+int			multiple_command_helper(t_ast_node *node, t_env *env, char **envp);
 
 #endif
