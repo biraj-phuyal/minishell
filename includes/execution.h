@@ -6,15 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2026/01/03 10:14:48 by biphuyal         ###   ########.fr       */
-=======
-/*   Updated: 2026/01/02 15:28:08 by biphuyal         ###   ########.fr       */
->>>>>>> 0688264 (path joining for execve is working)
-=======
-/*   Updated: 2026/01/03 17:22:25 by biphuyal         ###   ########.fr       */
->>>>>>> 7def5be (Some refactor is neccessary but otherwise pipes are  working)
+/*   Updated: 2026/01/03 19:29:59 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +87,6 @@ void		close_all_pipes(t_exec_ctx *ctx);
 int			execute_pipeline(t_ast_node *ast, t_env **env, char **envp);
 void		child_exec_cmd(t_exec_ctx *ctx, t_cmd *cmd, int in_fd, int out_fd);
 void	get_fds(t_exec_ctx *ctx, int i, int count, int fd[2]);
-
 
 
 #endif

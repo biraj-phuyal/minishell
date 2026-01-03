@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 13:59:56 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/01 14:00:06 by gude-and         ###   ########.fr       */
+/*   Updated: 2026/01/03 19:30:32 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*process_heredoc_line(char *line, char *content, t_heredoc *hd)
 	char	*expanded;
 
 	if (hd->expand)
-		expanded = expand_heredoc_line(line, &hd->ctx);
+		expanded = expand_heredoc_line(line, hd->exit_status, hd->env);
 	else
 		expanded = ft_strdup(line);
 	free(line);
@@ -79,7 +79,7 @@ static bool	process_cmd_heredocs(t_cmd *cmd, t_heredoc *hd)
 		if (redir->type == REDIR_HEREDOC)
 		{
 			hd->delim = redir->file;
-			hd->expand = ! redir->quoted;
+			hd->expand = !redir->quoted;
 			redir->heredoc_content = read_heredoc(hd);
 			if (!redir->heredoc_content)
 				return (false);

@@ -6,11 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 16:23:33 by biphuyal          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/01/03 18:09:50 by biphuyal         ###   ########.fr       */
-=======
-/*   Updated: 2026/01/02 15:27:17 by biphuyal         ###   ########.fr       */
->>>>>>> 0688264 (path joining for execve is working)
+/*   Updated: 2026/01/03 19:21:11 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +28,10 @@ static int	process_input(char *input, int last_status, t_env **env)
 		return (last_status);
 	}
 	status = execute(ast, env, envp);
-<<<<<<< HEAD
 	ast_free(ast);
 	free_double_pointer(envp);
 	if (status == 1)
 		exit_program(*env);
-=======
-	if (status == 1)
-	{
-		ast_free(ast);
-		free_double_pointer(envp);
-		exit_program(*env);
-	}
-	ast_free(ast);
-	free_double_pointer(envp);
->>>>>>> 0688264 (path joining for execve is working)
 	return (status);
 }
 

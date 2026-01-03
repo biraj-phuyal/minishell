@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/01 14:06:24 by gude-and         ###   ########.fr       */
+/*   Updated: 2026/01/03 19:30:32 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ typedef struct s_heredoc
 {
 	const char	*delim;
 	bool		expand;
-	t_expander	ctx;
+	int			exit_status;
+	char		**env;
 }	t_heredoc;
 
 t_cmd		*cmd_create(void);
@@ -101,8 +102,8 @@ t_redir		*redir_create(t_redir_type type, char *file, bool quoted);
 void		parser_init(t_parser *p, t_token *tokens, int exit, char **env);
 bool		parse_add_redir(t_cmd *cmd, t_redir_type type, char *value, bool quoted);
 t_redir_type	token_to_redir_type(t_token_type type);
-char		*read_heredoc(const char *delim, bool expand, int exit_status, char **env);
-bool		process_heredocs(t_ast_node *ast, int exit_status, char **env);
+char		*read_heredoc(t_heredoc *hd);
+bool		process_heredocs(t_ast_node *ast, t_heredoc *hd);
 char		*expand_heredoc_line(const char *line, int exit_status, char **env);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 20:47:02 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/01 14:02:32 by gude-and         ###   ########.fr       */
+/*   Updated: 2026/01/03 19:30:32 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_ast_node	*parse(const char *input, int exit_status, char **env)
 	t_token		*tokens;
 	t_parser	parser;
 	t_ast_node	*ast;
+	t_heredoc	hd;
 
 	tokens = prepare_tokens(input, exit_status, env);
 	if (!tokens)
@@ -70,7 +71,9 @@ t_ast_node	*parse(const char *input, int exit_status, char **env)
 	parser_init(&parser, tokens, exit_status, env);
 	ast = parse_pipeline(&parser);
 	token_list_free(tokens);
-	if (ast && !process_heredocs(ast, exit_status, env))
+	hd.exit_status = exit_status;
+	hd.env = env;
+	if (ast && !process_heredocs(ast, &hd))
 	{
 		ast_free(ast);
 		return (NULL);
