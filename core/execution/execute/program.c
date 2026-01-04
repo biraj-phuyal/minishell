@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 16:23:33 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/03 19:21:11 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/04 17:06:11 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	process_input(char *input, int last_status, t_env **env)
 	status = execute(ast, env, envp);
 	ast_free(ast);
 	free_double_pointer(envp);
-	if (status == 1)
+	if (status == 255)
 		exit_program(*env);
 	return (status);
 }

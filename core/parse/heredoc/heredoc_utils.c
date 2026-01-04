@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 14:00:30 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/01 14:00:37 by gude-and         ###   ########.fr       */
+/*   Updated: 2026/01/04 17:11:14 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <expander.h>
+#include <minishell.h>
 
 static void	init_expander(t_expander *exp, const char *line)
 {
@@ -40,15 +40,15 @@ static char	*process_heredoc_char(t_expander *exp, const char *line)
 	return (exp->result);
 }
 
-char	*expand_heredoc_line(const char *line, t_expander *ctx)
+char	*expand_heredoc_line(const char *line, int exit_status, char **env)
 {
 	t_expander	exp;
 
 	if (!line)
 		return (NULL);
 	init_expander(&exp, line);
-	exp.exit_status = ctx->exit_status;
-	exp.env = ctx->env;
+	exp.exit_status = exit_status;
+	exp.env = env;
 	while (line[exp.pos])
 	{
 		if (! process_heredoc_char(&exp, line))

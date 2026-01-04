@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 16:02:53 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/03 10:11:15 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/04 17:06:11 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	execute_builtin(t_cmd *cmd, int i, t_env **env)
 	else if (ft_strcmp(cmd->argv[i], "echo") == 0)
 		echo(cmd);
 	else if (ft_strcmp(cmd->argv[i], "exit") == 0)
-		return (1);
+		return (255);
 	return (0);
 }
 

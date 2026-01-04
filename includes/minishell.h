@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:47:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/23 15:40:10 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/04 18:18:55 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@
 # include <readline/history.h>
 
 void	program_loop(t_env *env);
+void	handle_sigint(int sig);
+void	handle_sigint_heredoc(int sig);
 
 #endif

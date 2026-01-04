@@ -6,11 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 13:59:56 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/03 19:30:32 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/04 18:18:55 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parser.h>
+#include <minishell.h>
+
+extern int	g_signal_received;
 
 static char	*append_line_to_content(char *content, char *expanded)
 {
@@ -49,21 +51,40 @@ char	*read_heredoc(t_heredoc *hd)
 	char	*line;
 	char	*content;
 
+	signal(SIGINT, handle_sigint_heredoc);
 	content = ft_strdup("");
 	if (!content)
 		return (NULL);
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, hd->delim) == 0)
+		if (!line)
+		{
+			if (g_signal_received == SIGINT)
+			{
+				g_signal_received = 0;
+				rl_done = 0;
+				free(content);
+				signal(SIGINT, handle_sigint);
+				return (NULL);
+			}
+			break ;
+		}
+		if (ft_strcmp(line, hd->delim) == 0)
 		{
 			free(line);
 			break ;
 		}
 		content = process_heredoc_line(line, content, hd);
 		if (!content)
+		{
+			rl_done = 0;
+			signal(SIGINT, handle_sigint);
 			return (NULL);
+		}
 	}
+	rl_done = 0;
+	signal(SIGINT, handle_sigint);
 	return (content);
 }
 
