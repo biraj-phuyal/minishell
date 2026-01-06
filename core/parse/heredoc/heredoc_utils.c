@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 14:00:30 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/04 17:11:14 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/06 19:50:37 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,48 @@ char	*expand_heredoc_line(const char *line, int exit_status, char **env)
 			return (NULL);
 	}
 	return (exp.result);
+}
+
+char	*read_heredoc(t_heredoc *hd)
+{
+	int		fd[2];
+	pid_t	pid;
+
+	if (pipe(fd) == -1)
+		return (NULL);
+	pid = fork();
+	if (pid == -1)
+	{
+		close(fd[0]);
+		close(fd[1]);
+		return (NULL);
+	}
+	if (pid == 0)
+	{
+		close(fd[0]);
+		read_heredoc_loop(hd, fd[1]);
+	}
+	return (handle_heredoc_child(fd, pid));
+}
+
+bool	process_cmd_heredocs(t_cmd *cmd, t_heredoc *hd)
+{
+	t_redir	*redir;
+
+	if (!cmd)
+		return (true);
+	redir = cmd->redirs;
+	while (redir)
+	{
+		if (redir->type == REDIR_HEREDOC)
+		{
+			hd->delim = redir->file;
+			hd->expand = !redir->quoted;
+			redir->heredoc_content = read_heredoc(hd);
+			if (!redir->heredoc_content)
+				return (false);
+		}
+		redir = redir->next;
+	}
+	return (true);
 }

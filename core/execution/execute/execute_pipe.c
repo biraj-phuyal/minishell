@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:41:09 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/03 17:51:53 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/06 19:44:07 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,21 @@ int	setup_run(t_ast_node *ast, t_exec_ctx *ctx, t_pipe_run *run)
 	run->pids = (pid_t *)malloc(sizeof(pid_t) * run->count);
 	ctx->pipes = (int (*)[2])malloc(sizeof(int [2]) * (run->count - 1));
 	if (!run->cmds || !run->pids || !ctx->pipes)
-		return (free_run(ctx, run), 0);
+	{
+		free_run(ctx, run);
+		return (0);
+	}
 	ctx->pipe_count = run->count - 1;
 	if (!pipe_fill_cmds(ast, run->cmds, run->count))
-		return (free_run(ctx, run), 0);
+	{
+		free_run(ctx, run);
+		return (0);
+	}
 	if (!create_all_pipes(ctx))
-		return (free_run(ctx, run), 0);
+	{
+		free_run(ctx, run);
+		return (0);
+	}
 	return (1);
 }
 

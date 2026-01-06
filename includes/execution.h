@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/03 19:29:59 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/06 19:59:19 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,30 @@ void		print_all_env(t_env *env);
 char		*get_key(const char *envp);
 void		update_new_pwd(t_env *env);
 void		create_new_pwd(t_env *env);
+char		*read_pipe_content(int fd);
 t_env		*free_head_node(t_env *env);
+int			get_exit_status(int status);
 char		*path(t_env *env, char *cmd);
 char		*get_value(const char *envp);
 bool		is_builtin(t_cmd *cmd, int i);
 t_env		*unset(t_env *env, char *key);
+void		handle_heredoc_sigint(int sig);
 void		export(t_env *env, char *args);
 void		free_list_and_exit(t_env *env);
 bool		repeated(t_env *env, char *key);
+int			pipe_cmd_count(t_ast_node *ast);
 size_t		strlen_double_array(char **env);
 void		free_double_pointer(char **envp);
+void		close_all_pipes(t_exec_ctx *ctx);
+int			create_all_pipes(t_exec_ctx *ctx);
 char		**list_to_array(const t_env *env);
+int			handle_output_redir(t_redir *curr);
 void		new_pwd(t_env **env, char *old_pwd);
 void		old_pwd(t_env **env, char *old_pwd);
 void		push_back(t_env **head, t_env *new);
+int			setup_redirections(t_redir *redirs);
 char		*return_value(t_env *env, char *key);
+int			handle_heredoc_redir(t_redir *redir);
 int			full_length_of_list(const t_env *env);
 void		change_dir(t_env **env, char *new_dir);
 void		update_old_pwd(t_env *env, char *og_pwd);
@@ -76,17 +85,12 @@ int			execute_builtin(t_cmd *cmd, int i, t_env **env);
 int			execute(t_ast_node *ast, t_env **env, char **envp);
 char		*join_key_value(const char *key, const char *value);
 void		move_back(t_env **env, char *old_pwd, char *new_dir);
+void		get_fds(t_exec_ctx *ctx, int i, int count, int fd[2]);
+int			pipe_fill_cmds(t_ast_node *ast, t_cmd **cmds, int count);
 void		set_value(t_env **env, const char *key, const char *value);
+int			execute_pipeline(t_ast_node *ast, t_env **env, char **envp);
 void		move_to_previous_dir(t_env **env, char *old_pwd, char *new_dir);
 void		move_to_relative_path(t_env **env, char *old_pwd, char *new_dir);
-int			get_exit_status(int status);
-int			pipe_cmd_count(t_ast_node *ast);
-int			pipe_fill_cmds(t_ast_node *ast, t_cmd **cmds, int count);
-int			create_all_pipes(t_exec_ctx *ctx);
-void		close_all_pipes(t_exec_ctx *ctx);
-int			execute_pipeline(t_ast_node *ast, t_env **env, char **envp);
 void		child_exec_cmd(t_exec_ctx *ctx, t_cmd *cmd, int in_fd, int out_fd);
-void	get_fds(t_exec_ctx *ctx, int i, int count, int fd[2]);
-
 
 #endif

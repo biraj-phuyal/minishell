@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 21:04:26 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/02 16:48:19 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/06 19:44:52 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	free_env(t_env *env)
 
 	if (!env)
 		return ;
-
 	while (env != NULL)
 	{
 		next = env->next;

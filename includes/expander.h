@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/01 14:03:49 by gude-and         ###   ########.fr       */
+/*   Updated: 2026/01/06 19:56:03 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ char	*append_char(char *str, char c);
 char	*expand_variable(t_expander *exp);
 char	*process_expansion(t_expander *exp);
 bool	process_char(t_expander *exp, char c);
-void	handle_quote_toggle(t_expander *exp, char c);
 char	*remove_outer_quotes(const char *str);
 char	*append_str(char *s1, const char *s2);
 void	update_quote_state(t_expander *exp, char c);
+void	handle_quote_toggle(t_expander *exp, char c);
 char	*get_env_value(const char *name, char **env);
 char	*extract_var_name(const char *str, size_t *len);
 char	*expand_token(const char *token, int exit_status, char **env);

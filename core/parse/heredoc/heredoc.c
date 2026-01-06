@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 13:59:56 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/04 18:18:55 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/06 19:58:40 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,20 @@ static char	*process_heredoc_line(char *line, char *content, t_heredoc *hd)
 	return (append_line_to_content(content, expanded));
 }
 
-char	*read_heredoc(t_heredoc *hd)
+void	read_heredoc_loop(t_heredoc *hd, int pipe_fd)
 {
 	char	*line;
 	char	*content;
 
-	signal(SIGINT, handle_sigint_heredoc);
+	signal(SIGINT, handle_heredoc_sigint);
 	content = ft_strdup("");
 	if (!content)
-		return (NULL);
+		exit(1);
 	while (1)
 	{
 		line = readline("> ");
 		if (!line)
-		{
-			if (g_signal_received == SIGINT)
-			{
-				g_signal_received = 0;
-				rl_done = 0;
-				free(content);
-				signal(SIGINT, handle_sigint);
-				return (NULL);
-			}
 			break ;
-		}
 		if (ft_strcmp(line, hd->delim) == 0)
 		{
 			free(line);
@@ -77,37 +67,31 @@ char	*read_heredoc(t_heredoc *hd)
 		}
 		content = process_heredoc_line(line, content, hd);
 		if (!content)
-		{
-			rl_done = 0;
-			signal(SIGINT, handle_sigint);
-			return (NULL);
-		}
+			exit(1);
 	}
-	rl_done = 0;
-	signal(SIGINT, handle_sigint);
-	return (content);
+	write(pipe_fd, content, ft_strlen(content));
+	free(content);
+	exit(0);
 }
 
-static bool	process_cmd_heredocs(t_cmd *cmd, t_heredoc *hd)
+char	*handle_heredoc_child(int *fd, pid_t pid)
 {
-	t_redir	*redir;
+	int		status;
+	char	*content;
 
-	if (!cmd)
-		return (true);
-	redir = cmd->redirs;
-	while (redir)
+	close(fd[1]);
+	signal(SIGINT, SIG_IGN);
+	waitpid(pid, &status, 0);
+	signal(SIGINT, handle_sigint);
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
 	{
-		if (redir->type == REDIR_HEREDOC)
-		{
-			hd->delim = redir->file;
-			hd->expand = !redir->quoted;
-			redir->heredoc_content = read_heredoc(hd);
-			if (!redir->heredoc_content)
-				return (false);
-		}
-		redir = redir->next;
+		g_signal_received = SIG_INTERRUPT_HEREDOC;
+		close(fd[0]);
+		return (NULL);
 	}
-	return (true);
+	content = read_pipe_content(fd[0]);
+	close(fd[0]);
+	return (content);
 }
 
 bool	process_heredocs(t_ast_node *ast, t_heredoc *hd)

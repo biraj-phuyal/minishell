@@ -6,11 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 16:23:33 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/04 17:06:11 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/06 20:12:26 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+extern int	g_signal_received;
 
 static int	process_input(char *input, int last_status, t_env **env)
 {
@@ -25,6 +27,12 @@ static int	process_input(char *input, int last_status, t_env **env)
 	if (!ast)
 	{
 		free_double_pointer(envp);
+		if (g_signal_received == SIG_INTERRUPT_HEREDOC)
+		{
+			g_signal_received = SIG_NORMAL;
+			rl_on_new_line();
+			return (130);
+		}
 		return (last_status);
 	}
 	status = execute(ast, env, envp);

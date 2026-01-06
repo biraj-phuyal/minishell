@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-and <gude-and@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:52:55 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/01 16:07:44 by gude-and         ###   ########.fr       */
+/*   Updated: 2026/01/06 19:54:58 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ bool		lexer_tokenize(t_lexer *lex);
 t_token		*token_last(t_token *tokens);
 void		skip_whitespace(t_lexer *lex);
 bool		tokenize_operator(t_lexer *lex);
+char		*remove_quotes(const char *str);
 void		token_list_free(t_token *tokens);
 int			token_list_size(t_token *tokens);
 bool		advance_to_word_end(t_lexer *lex);
-bool	advance_quote(t_lexer *lex, char quote);
+bool		advance_quote(t_lexer *lex, char quote);
 bool		token_add(t_lexer *lex, t_token *new_token);
 void		lexer_init(t_lexer *lex, const char *input);
 const char	*token_type_to_printable(t_token_type type);
 ssize_t		skip_quoted_section(const char *str, size_t pos);
 char		*extract_quoted_content(const char *str, size_t *pos);
 t_token		*token_create(t_token_type type, const char *value, bool owned);
-char		*remove_quotes(const char *str);
 
 #endif
