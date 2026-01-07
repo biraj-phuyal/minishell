@@ -6,13 +6,14 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:52:55 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/06 19:54:58 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 15:44:49 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
+# include <stdbool.h>
 # include <utils.h>
 
 typedef enum e_token_type

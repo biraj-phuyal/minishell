@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 14:00:30 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/06 19:50:37 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 14:55:37 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*read_heredoc(t_heredoc *hd)
 {
 	int		fd[2];
 	pid_t	pid;
+	char	*content;
 
 	if (pipe(fd) == -1)
 		return (NULL);
@@ -76,7 +77,10 @@ char	*read_heredoc(t_heredoc *hd)
 		close(fd[0]);
 		read_heredoc_loop(hd, fd[1]);
 	}
-	return (handle_heredoc_child(fd, pid));
+	close(fd[1]);
+	content = handle_heredoc_child(fd, pid);
+	close(fd[0]);
+	return (content);
 }
 
 bool	process_cmd_heredocs(t_cmd *cmd, t_heredoc *hd)

@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:41:09 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/06 19:44:07 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 19:21:07 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,9 @@ int	execute_pipeline(t_ast_node *ast, t_env **env, char **envp)
 	if (!spawn_all(&ctx, &run))
 		return (close_all_pipes(&ctx), free_run(&ctx, &run), 1);
 	close_all_pipes(&ctx);
+	ignore_signals();
 	status = wait_last(run.pids, run.count);
+	restore_signals();
 	free_run(&ctx, &run);
 	return (status);
 }

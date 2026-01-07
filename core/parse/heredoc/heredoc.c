@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 13:59:56 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/06 19:58:40 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 18:01:17 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ void	read_heredoc_loop(t_heredoc *hd, int pipe_fd)
 	while (1)
 	{
 		line = readline("> ");
+		if (g_signal_received == SIG_INTERRUPT_HEREDOC)
+		{
+			if (line)
+				free(line);
+			break ;
+		}
 		if (!line)
 			break ;
 		if (ft_strcmp(line, hd->delim) == 0)
@@ -69,8 +75,27 @@ void	read_heredoc_loop(t_heredoc *hd, int pipe_fd)
 		if (!content)
 			exit(1);
 	}
+	if (g_signal_received == SIG_INTERRUPT_HEREDOC)
+	{
+		free(content);
+		close(pipe_fd);
+		if (hd->ast_root)
+			ast_free(hd->ast_root);
+		if (hd->env)
+			free_double_pointer(hd->env);
+		if (hd->env_list)
+			free_env(hd->env_list);
+		exit(130);
+	}
 	write(pipe_fd, content, ft_strlen(content));
 	free(content);
+	close(pipe_fd);
+	if (hd->ast_root)
+		ast_free(hd->ast_root);
+	if (hd->env)
+		free_double_pointer(hd->env);
+	if (hd->env_list)
+		free_env(hd->env_list);
 	exit(0);
 }
 
@@ -79,18 +104,15 @@ char	*handle_heredoc_child(int *fd, pid_t pid)
 	int		status;
 	char	*content;
 
-	close(fd[1]);
 	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
 	signal(SIGINT, handle_sigint);
 	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
 	{
 		g_signal_received = SIG_INTERRUPT_HEREDOC;
-		close(fd[0]);
 		return (NULL);
 	}
 	content = read_pipe_content(fd[0]);
-	close(fd[0]);
 	return (content);
 }
 

@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:47:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/06 19:02:03 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 19:21:07 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@
 # include <sys/types.h>
 # include <execution.h>
 
+
 # define SIG_NORMAL 0
 # define SIG_INTERRUPT_HEREDOC 2
 # include <readline/readline.h>
 # include <readline/history.h>
 
 void	setup_signals(void);
+void	ignore_signals(void);
+void	restore_signals(void);
 void	program_loop(t_env *env);
 void	handle_sigint(int sig);
 

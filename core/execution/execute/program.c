@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 16:23:33 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/06 20:12:26 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 15:34:43 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	process_input(char *input, int last_status, t_env **env)
 	if (!input || !*input)
 		return (last_status);
 	envp = list_to_array(*env);
-	ast = parse(input, last_status, envp);
+	ast = parse(input, last_status, envp, *env);
 	if (!ast)
 	{
 		free_double_pointer(envp);

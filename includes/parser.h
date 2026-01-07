@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/06 19:56:49 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 15:44:45 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+typedef struct s_env	t_env;
 
 typedef enum e_node_type
 {
@@ -72,6 +74,8 @@ typedef struct s_heredoc
 	bool		expand;
 	int			exit_status;
 	char		**env;
+	t_env		*env_list;
+	struct s_ast_node	*ast_root;
 }	t_heredoc;
 
 t_cmd			*cmd_create(void);
@@ -91,7 +95,6 @@ bool			check_redir_syntax(t_token *tokens);
 bool			redir_add(t_cmd *cmd, t_redir *redir);
 t_redir_type	token_to_redir_type(t_token_type type);
 bool			parse_redir_one(t_parser *p, t_cmd *cmd);
-bool			parse_redir_one(t_parser *p, t_cmd *cmd);
 char			*handle_heredoc_child(int *fd, pid_t pid);
 void			parser_error(t_parser *p, const char *msg);
 bool			parse_command_loop(t_parser *p, t_cmd *cmd);
@@ -101,12 +104,13 @@ bool			parser_expect(t_parser *p, t_token_type type);
 bool			parse_add_redir(t_cmd *cmd, t_redir_type type,
 					char *value, bool quoted);
 bool			process_cmd_heredocs(t_cmd *cmd, t_heredoc *hd);
-bool			process_heredocs(t_ast_node *ast, t_heredoc *hd);
 bool			strip_quotes_if_any(const char *str, char **out);
+bool			process_heredocs(t_ast_node *ast, t_heredoc *hd);
 t_ast_node		*ast_new_pipe(t_ast_node *left, t_ast_node *right);
 char			*expand_heredoc_line(const char *line, int exit_status,
 					char **env);
-t_ast_node		*parse(const char *input, int exit_status, char **env);
+t_ast_node		*parse(const char *input, int exit_status, char **env,
+					t_env *env_list);
 t_redir			*redir_create(t_redir_type type, char *file, bool quoted);
 void			parser_init(t_parser *p, t_token *tokens, int exit, char **env);
 

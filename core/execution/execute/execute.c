@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 14:09:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/06 19:54:32 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 19:21:07 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ int	execute_external_command(char *cmd_path, t_cmd *cmd, char **envp)
 		exit(126);
 	}
 	free(cmd_path);
+	ignore_signals();
 	waitpid(pid, &status, 0);
+	restore_signals();
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	return (1);
@@ -86,6 +88,7 @@ int	execute_one_command(t_cmd *cmd, t_env **env, char **envp)
 {
 	int		saved_stdin;
 	int		saved_stdout;
+	int		status;
 
 	if (!cmd || !cmd->argv || !cmd->argv[0])
 		return (0);
@@ -101,11 +104,12 @@ int	execute_one_command(t_cmd *cmd, t_env **env, char **envp)
 			close(saved_stdout);
 			return (1);
 		}
+		status = execute_builtin(cmd, 0, env);
 		dup2(saved_stdin, STDIN_FILENO);
 		dup2(saved_stdout, STDOUT_FILENO);
 		close(saved_stdin);
 		close(saved_stdout);
-		return (execute_builtin(cmd, 0, env));
+		return (status);
 	}
 	return (execute_one_external_command(cmd, env, envp));
 }

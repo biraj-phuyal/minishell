@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/06 19:56:03 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 19:29:55 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define EXPANDER_H
 
 # include <lexer.h>
+# include <parser.h>
+# include <stdbool.h>
 
 typedef struct s_quote_state
 {
