@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 15:02:41 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/26 19:41:49 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/06 18:22:38 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	export_with_no_arguments(const t_env *env)
 	i = 0;
 	while (array_env[i])
 	{
+		ft_putstr_fd("declare -x ", 1);
 		ft_putstr(array_env[i]);
 		i++;
 	}

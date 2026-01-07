@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:36:23 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/03 17:51:42 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 16:56:14 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void	child_exec_cmd(t_exec_ctx *ctx, t_cmd *cmd, int in_fd, int out_fd)
 	if (!cmd || !cmd->argv || !cmd->argv[0])
 		exit(0);
 	if (is_builtin(cmd, 0))
-		exit(execute_builtin(cmd, 0, ctx->env));
+	{
+		execute_builtin(cmd, 0, ctx->env);
+		return ;
+	}
 	cmd_path = path(*ctx->env, cmd->argv[0]);
 	if (!cmd_path)
 	{

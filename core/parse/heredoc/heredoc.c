@@ -6,11 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 13:59:56 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/03 19:30:32 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 18:01:17 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parser.h>
+#include <minishell.h>
+
+extern int	g_signal_received;
 
 static char	*append_line_to_content(char *content, char *expanded)
 {
@@ -44,49 +46,74 @@ static char	*process_heredoc_line(char *line, char *content, t_heredoc *hd)
 	return (append_line_to_content(content, expanded));
 }
 
-char	*read_heredoc(t_heredoc *hd)
+void	read_heredoc_loop(t_heredoc *hd, int pipe_fd)
 {
 	char	*line;
 	char	*content;
 
+	signal(SIGINT, handle_heredoc_sigint);
 	content = ft_strdup("");
 	if (!content)
-		return (NULL);
+		exit(1);
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, hd->delim) == 0)
+		if (g_signal_received == SIG_INTERRUPT_HEREDOC)
+		{
+			if (line)
+				free(line);
+			break ;
+		}
+		if (!line)
+			break ;
+		if (ft_strcmp(line, hd->delim) == 0)
 		{
 			free(line);
 			break ;
 		}
 		content = process_heredoc_line(line, content, hd);
 		if (!content)
-			return (NULL);
+			exit(1);
 	}
-	return (content);
+	if (g_signal_received == SIG_INTERRUPT_HEREDOC)
+	{
+		free(content);
+		close(pipe_fd);
+		if (hd->ast_root)
+			ast_free(hd->ast_root);
+		if (hd->env)
+			free_double_pointer(hd->env);
+		if (hd->env_list)
+			free_env(hd->env_list);
+		exit(130);
+	}
+	write(pipe_fd, content, ft_strlen(content));
+	free(content);
+	close(pipe_fd);
+	if (hd->ast_root)
+		ast_free(hd->ast_root);
+	if (hd->env)
+		free_double_pointer(hd->env);
+	if (hd->env_list)
+		free_env(hd->env_list);
+	exit(0);
 }
 
-static bool	process_cmd_heredocs(t_cmd *cmd, t_heredoc *hd)
+char	*handle_heredoc_child(int *fd, pid_t pid)
 {
-	t_redir	*redir;
+	int		status;
+	char	*content;
 
-	if (!cmd)
-		return (true);
-	redir = cmd->redirs;
-	while (redir)
+	signal(SIGINT, SIG_IGN);
+	waitpid(pid, &status, 0);
+	signal(SIGINT, handle_sigint);
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
 	{
-		if (redir->type == REDIR_HEREDOC)
-		{
-			hd->delim = redir->file;
-			hd->expand = !redir->quoted;
-			redir->heredoc_content = read_heredoc(hd);
-			if (!redir->heredoc_content)
-				return (false);
-		}
-		redir = redir->next;
+		g_signal_received = SIG_INTERRUPT_HEREDOC;
+		return (NULL);
 	}
-	return (true);
+	content = read_pipe_content(fd[0]);
+	return (content);
 }
 
 bool	process_heredocs(t_ast_node *ast, t_heredoc *hd)

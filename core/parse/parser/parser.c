@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 20:47:02 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/03 19:30:32 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 15:35:53 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ bool	parser_expect(t_parser *p, t_token_type type)
 	return (p->current->type == type);
 }
 
-t_ast_node	*parse(const char *input, int exit_status, char **env)
+t_ast_node	*parse(const char *input, int exit_status, char **env,
+	t_env *env_list)
 {
 	t_token		*tokens;
 	t_parser	parser;
@@ -73,6 +74,8 @@ t_ast_node	*parse(const char *input, int exit_status, char **env)
 	token_list_free(tokens);
 	hd.exit_status = exit_status;
 	hd.env = env;
+	hd.env_list = env_list;
+	hd.ast_root = ast;
 	if (ast && !process_heredocs(ast, &hd))
 	{
 		ast_free(ast);

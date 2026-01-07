@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 10:13:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/03 16:36:52 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/06 19:44:20 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	get_exit_status(int status)
 		return (128 + WTERMSIG(status));
 	return (1);
 }
+
 static void	close_pipe_pair(int fds[2])
 {
 	if (fds[0] != -1)

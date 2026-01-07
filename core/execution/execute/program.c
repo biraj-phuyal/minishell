@@ -6,11 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 16:23:33 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/03 19:21:11 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/07 15:34:43 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+extern int	g_signal_received;
 
 static int	process_input(char *input, int last_status, t_env **env)
 {
@@ -21,16 +23,22 @@ static int	process_input(char *input, int last_status, t_env **env)
 	if (!input || !*input)
 		return (last_status);
 	envp = list_to_array(*env);
-	ast = parse(input, last_status, envp);
+	ast = parse(input, last_status, envp, *env);
 	if (!ast)
 	{
 		free_double_pointer(envp);
+		if (g_signal_received == SIG_INTERRUPT_HEREDOC)
+		{
+			g_signal_received = SIG_NORMAL;
+			rl_on_new_line();
+			return (130);
+		}
 		return (last_status);
 	}
 	status = execute(ast, env, envp);
 	ast_free(ast);
 	free_double_pointer(envp);
-	if (status == 1)
+	if (status == 255)
 		exit_program(*env);
 	return (status);
 }
