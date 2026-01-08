@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 14:09:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/07 19:21:07 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/08 19:33:35 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ int	execute_external_command(char *cmd_path, t_cmd *cmd, char **envp)
 	}
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGPIPE, SIG_DFL);
 		if (setup_redirections(cmd->redirs) == -1)
 			exit(1);
 		execve(cmd_path, cmd->argv, envp);
@@ -98,17 +101,11 @@ int	execute_one_command(t_cmd *cmd, t_env **env, char **envp)
 		saved_stdout = dup(STDOUT_FILENO);
 		if (setup_redirections(cmd->redirs) == -1)
 		{
-			dup2(saved_stdin, STDIN_FILENO);
-			dup2(saved_stdout, STDOUT_FILENO);
-			close(saved_stdin);
-			close(saved_stdout);
+			close_cmd_fds(saved_stdin, saved_stdout);
 			return (1);
 		}
 		status = execute_builtin(cmd, 0, env);
-		dup2(saved_stdin, STDIN_FILENO);
-		dup2(saved_stdout, STDOUT_FILENO);
-		close(saved_stdin);
-		close(saved_stdout);
+		close_cmd_fds(saved_stdin, saved_stdout);
 		return (status);
 	}
 	return (execute_one_external_command(cmd, env, envp));

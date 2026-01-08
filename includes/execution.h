@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/06 19:59:19 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/08 17:13:32 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		echo(t_cmd *cmd);
 void		free_env(t_env *env);
 void		order_env(char **env);
 void		print_pwd(t_env *env);
+void		free_hd(t_heredoc *hd);
 t_env		*init_env(char **envp);
 char		*get_new_dir(t_cmd *cmd);
 void		exit_program(t_env *env);
@@ -82,10 +83,12 @@ void		execute_cd(t_cmd *cmd, int i, t_env **env);
 void		destroy_and_copy(char **dest, const char *src);
 int			execute_builtin(t_cmd *cmd, int i, t_env **env);
 int			execute_builtin(t_cmd *cmd, int i, t_env **env);
+void		close_cmd_fds(int saved_stdin, int saved_stdout);
 int			execute(t_ast_node *ast, t_env **env, char **envp);
 char		*join_key_value(const char *key, const char *value);
 void		move_back(t_env **env, char *old_pwd, char *new_dir);
 void		get_fds(t_exec_ctx *ctx, int i, int count, int fd[2]);
+int			handle_errors(char *line, t_heredoc *hd, int pipe_fd);
 int			pipe_fill_cmds(t_ast_node *ast, t_cmd **cmds, int count);
 void		set_value(t_env **env, const char *key, const char *value);
 int			execute_pipeline(t_ast_node *ast, t_env **env, char **envp);

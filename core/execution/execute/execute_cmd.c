@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:36:23 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/07 16:56:14 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/08 17:28:32 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,19 @@ void	child_exec_cmd(t_exec_ctx *ctx, t_cmd *cmd, int in_fd, int out_fd)
 {
 	char	*cmd_path;
 
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGPIPE, SIG_DFL);
 	child_dup(in_fd, out_fd);
 	close_all_pipes(ctx);
+	if (setup_redirections(cmd->redirs) == -1)
+		exit(1);
 	if (!cmd || !cmd->argv || !cmd->argv[0])
 		exit(0);
 	if (is_builtin(cmd, 0))
 	{
 		execute_builtin(cmd, 0, ctx->env);
-		return ;
+		exit(0);
 	}
 	cmd_path = path(*ctx->env, cmd->argv[0]);
 	if (!cmd_path)
@@ -55,16 +60,6 @@ void	child_exec_cmd(t_exec_ctx *ctx, t_cmd *cmd, int in_fd, int out_fd)
 	execve(cmd_path, cmd->argv, ctx->envp);
 	free(cmd_path);
 	exit(126);
-}
-
-pid_t	spawn_one(t_exec_ctx *ctx, t_cmd *cmd, int in_fd, int out_fd)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-		child_exec_cmd(ctx, cmd, in_fd, out_fd);
-	return (pid);
 }
 
 void	get_fds(t_exec_ctx *ctx, int i, int count, int fd[2])
