@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:47:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/07 19:21:07 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/09 20:20:59 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <lexer.h>
 # include <utils.h>
+# include <errno.h>
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>

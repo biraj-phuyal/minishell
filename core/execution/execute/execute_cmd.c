@@ -6,20 +6,13 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:36:23 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/08 17:28:32 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/09 20:30:08 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	print_not_found(char *name)
-{
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(name, 2);
-	ft_putendl_fd(": command not found", 2);
-}
-
-static void	child_dup(int in_fd, int out_fd)
+void	child_dup(int in_fd, int out_fd)
 {
 	if (in_fd != -1)
 	{
@@ -32,32 +25,40 @@ static void	child_dup(int in_fd, int out_fd)
 		close(out_fd);
 	}
 }
+static void	print_exec_error(char *cmd)
+{
+	write(2, "minishell: ", 11);
+	if (cmd)
+		write(2, cmd, ft_strlen(cmd));
+	write(2, ": ", 2);
+	write(2, strerror(errno), ft_strlen(strerror(errno)));
+	write(2, "\n", 1);
+}
 
-void	child_exec_cmd(t_exec_ctx *ctx, t_cmd *cmd, int in_fd, int out_fd)
+void	child_exec_cmd(t_cmd *cmd, t_exec_ctx *ctx)
 {
 	char	*cmd_path;
+	int		status;
 
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGPIPE, SIG_DFL);
-	child_dup(in_fd, out_fd);
-	close_all_pipes(ctx);
-	if (setup_redirections(cmd->redirs) == -1)
-		exit(1);
-	if (!cmd || !cmd->argv || !cmd->argv[0])
+	if (!cmd || !cmd->argv || !cmd->argv[0] || cmd->argv[0][0] == '\0')
 		exit(0);
+	if (ctx && setup_redirections(cmd->redirs) != 0)
+		exit(1);
 	if (is_builtin(cmd, 0))
 	{
-		execute_builtin(cmd, 0, ctx->env);
-		exit(0);
+		status = execute_builtin(cmd, 0, ctx->env);
+		exit(status);
 	}
 	cmd_path = path(*ctx->env, cmd->argv[0]);
 	if (!cmd_path)
 	{
-		print_not_found(cmd->argv[0]);
+		write(2, "minishell: ", 11);
+		write(2, cmd->argv[0], ft_strlen(cmd->argv[0]));
+		write(2, ": command not found\n", 20);
 		exit(127);
 	}
 	execve(cmd_path, cmd->argv, ctx->envp);
+	print_exec_error(cmd->argv[0]);
 	free(cmd_path);
 	exit(126);
 }

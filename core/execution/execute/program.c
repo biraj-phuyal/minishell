@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 16:23:33 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/07 15:34:43 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/09 20:26:15 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ static int	process_input(char *input, int last_status, t_env **env)
 	char		**envp;
 	int			status;
 
+	if (g_signal_received == SIGINT)
+	{
+		g_signal_received = 0;
+		if (!input || !*input)
+			return (130);
+	}
 	if (!input || !*input)
 		return (last_status);
 	envp = list_to_array(*env);
@@ -27,10 +33,9 @@ static int	process_input(char *input, int last_status, t_env **env)
 	if (!ast)
 	{
 		free_double_pointer(envp);
-		if (g_signal_received == SIG_INTERRUPT_HEREDOC)
+		if (g_signal_received == SIGINT)
 		{
-			g_signal_received = SIG_NORMAL;
-			rl_on_new_line();
+			g_signal_received = 0;
 			return (130);
 		}
 		return (last_status);
@@ -42,6 +47,7 @@ static int	process_input(char *input, int last_status, t_env **env)
 		exit_program(*env);
 	return (status);
 }
+
 
 void	program_loop(t_env *env)
 {

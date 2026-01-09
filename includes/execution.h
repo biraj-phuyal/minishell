@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/08 17:13:32 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/09 20:24:37 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,6 @@ void		set_value(t_env **env, const char *key, const char *value);
 int			execute_pipeline(t_ast_node *ast, t_env **env, char **envp);
 void		move_to_previous_dir(t_env **env, char *old_pwd, char *new_dir);
 void		move_to_relative_path(t_env **env, char *old_pwd, char *new_dir);
-void		child_exec_cmd(t_exec_ctx *ctx, t_cmd *cmd, int in_fd, int out_fd);
+void		child_exec_cmd(t_cmd *cmd, t_exec_ctx *ctx);
 
 #endif

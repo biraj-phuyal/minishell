@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:41:09 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/07 19:21:07 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/09 20:26:56 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	spawn_all(t_exec_ctx *ctx, t_pipe_run *run)
 		if (pid < 0)
 			return (0);
 		if (pid == 0)
-			child_exec_cmd(ctx, run->cmds[i], fd[0], fd[1]);
+			child_exec_cmd(run->cmds[i], ctx);
 		run->pids[i] = pid;
 		if (fd[0] != -1)
 			close(fd[0]);

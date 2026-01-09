@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:01:26 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/07 19:21:07 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/09 20:25:17 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ extern int	g_signal_received;
 void	handle_sigint(int sig)
 {
 	(void)sig;
+	g_signal_received = SIGINT;
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
