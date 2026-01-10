@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:47:34 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/09 20:20:59 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/10 19:35:26 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 void	setup_signals(void);
 void	ignore_signals(void);
 void	restore_signals(void);
+void	default_signals(void);
 void	program_loop(t_env *env);
 void	handle_sigint(int sig);
 

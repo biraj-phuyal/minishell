@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/09 20:24:37 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/10 19:01:41 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ typedef struct s_exec_ctx
 	char	**envp;
 	int		(*pipes)[2];
 	int		pipe_count;
+	t_cmd	**cmds;
+	pid_t	*pids;
+	int		cmd_count;
+	void	*ast;
 }	t_exec_ctx;
 
 typedef struct s_pipe_run
@@ -57,6 +61,7 @@ int			get_exit_status(int status);
 char		*path(t_env *env, char *cmd);
 char		*get_value(const char *envp);
 bool		is_builtin(t_cmd *cmd, int i);
+int			apply_dup2_close(int fd, int target);
 t_env		*unset(t_env *env, char *key);
 void		handle_heredoc_sigint(int sig);
 void		export(t_env *env, char *args);
@@ -95,5 +100,7 @@ int			execute_pipeline(t_ast_node *ast, t_env **env, char **envp);
 void		move_to_previous_dir(t_env **env, char *old_pwd, char *new_dir);
 void		move_to_relative_path(t_env **env, char *old_pwd, char *new_dir);
 void		child_exec_cmd(t_cmd *cmd, t_exec_ctx *ctx);
+void		child_dup(int in_fd, int out_fd);
+void		child_cleanup(t_exec_ctx *ctx);
 
 #endif

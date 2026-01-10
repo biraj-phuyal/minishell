@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:21:51 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/26 20:13:27 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/10 19:01:41 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	exit_program(t_env *env)
 {
 	free_env(env);
+	rl_clear_history();
 	printf("exit\n");
 	exit(EXIT_SUCCESS);
 }

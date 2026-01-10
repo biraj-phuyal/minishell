@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 14:09:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/08 19:33:35 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/10 18:07:51 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@ int	setup_redirections(t_redir *redirs)
 	{
 		if (curr->type == REDIR_IN)
 		{
-			fd = open(curr->file, O_RDONLY);
-			if (fd == -1)
-				return (perror(curr->file), -1);
-			dup2(fd, STDIN_FILENO);
-			close(fd);
+			fd = open(redirs->file, O_RDONLY);
+			if (fd < 0)
+				return (1);
+			return (apply_dup2_close(fd, STDIN_FILENO));
 		}
 		else if (curr->type == REDIR_OUT || curr->type == REDIR_APPEND)
 		{
-			if (handle_output_redir(curr) == -1)
+			if (handle_output_redir(curr))
 				return (-1);
 		}
 		else if (curr->type == REDIR_HEREDOC)
