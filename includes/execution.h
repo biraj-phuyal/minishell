@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/10 19:01:41 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/10 23:06:14 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void		free_hd(t_heredoc *hd);
 t_env		*init_env(char **envp);
 char		*get_new_dir(t_cmd *cmd);
 void		exit_program(t_env *env);
+int			exit_builtin(t_cmd *cmd, t_env *env);
 void		print_all_env(t_env *env);
 char		*get_key(const char *envp);
 void		update_new_pwd(t_env *env);
@@ -64,7 +65,7 @@ bool		is_builtin(t_cmd *cmd, int i);
 int			apply_dup2_close(int fd, int target);
 t_env		*unset(t_env *env, char *key);
 void		handle_heredoc_sigint(int sig);
-void		export(t_env *env, char *args);
+int			export(t_env *env, char *args);
 void		free_list_and_exit(t_env *env);
 bool		repeated(t_env *env, char *key);
 int			pipe_cmd_count(t_ast_node *ast);
@@ -81,10 +82,10 @@ int			setup_redirections(t_redir *redirs);
 char		*return_value(t_env *env, char *key);
 int			handle_heredoc_redir(t_redir *redir);
 int			full_length_of_list(const t_env *env);
-void		change_dir(t_env **env, char *new_dir);
+int			change_dir(t_env **env, char *new_dir);
 void		update_old_pwd(t_env *env, char *og_pwd);
 void		create_old_pwd(t_env *env, char *og_pwd);
-void		execute_cd(t_cmd *cmd, int i, t_env **env);
+int			execute_cd(t_cmd *cmd, int i, t_env **env);
 void		destroy_and_copy(char **dest, const char *src);
 int			execute_builtin(t_cmd *cmd, int i, t_env **env);
 int			execute_builtin(t_cmd *cmd, int i, t_env **env);

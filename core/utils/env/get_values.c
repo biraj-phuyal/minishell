@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 21:32:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2025/12/26 17:43:56 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/10 23:06:14 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ char	*get_new_dir(t_cmd *cmd)
 
 	i = 0;
 	if (cmd->argc > 2)
+	{
+		ft_putendl_fd("minishell: cd: too many arguments", 2);
 		return (NULL);
+	}
 	if (cmd->argv[1] == NULL)
 	{
 		new_dir = malloc(1);

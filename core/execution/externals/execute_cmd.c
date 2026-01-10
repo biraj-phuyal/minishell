@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:36:23 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/10 20:16:15 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/10 23:06:14 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ static void	print_exec_error(char *cmd)
 
 void	child_exec_cmd(t_cmd *cmd, t_exec_ctx *ctx)
 {
-	char	*cmd_path;
-	int		status;
+	char		*cmd_path;
+	int			status;
+	struct stat	st;
 
 	default_signals();
 	if (!cmd || !cmd->argv || !cmd->argv[0] || cmd->argv[0][0] == '\0')
@@ -77,6 +78,30 @@ void	child_exec_cmd(t_cmd *cmd, t_exec_ctx *ctx)
 	cmd_path = path(*ctx->env, cmd->argv[0]);
 	if (!cmd_path)
 	{
+		if (ft_strchr(cmd->argv[0], '/'))
+		{
+			if (stat(cmd->argv[0], &st) == 0)
+			{
+				if (S_ISDIR(st.st_mode))
+				{
+					write(2, "minishell: ", 11);
+					write(2, cmd->argv[0], ft_strlen(cmd->argv[0]));
+					write(2, ": Is a directory\n", 17);
+					child_cleanup(ctx);
+					exit(126);
+				}
+				write(2, "minishell: ", 11);
+				write(2, cmd->argv[0], ft_strlen(cmd->argv[0]));
+				write(2, ": Permission denied\n", 21);
+				child_cleanup(ctx);
+				exit(126);
+			}
+			write(2, "minishell: ", 11);
+			write(2, cmd->argv[0], ft_strlen(cmd->argv[0]));
+			write(2, ": No such file or directory\n", 29);
+			child_cleanup(ctx);
+			exit(127);
+		}
 		write(2, "minishell: ", 11);
 		write(2, cmd->argv[0], ft_strlen(cmd->argv[0]));
 		write(2, ": command not found\n", 20);
@@ -87,7 +112,7 @@ void	child_exec_cmd(t_cmd *cmd, t_exec_ctx *ctx)
 	print_exec_error(cmd->argv[0]);
 	free(cmd_path);
 	child_cleanup(ctx);
-	exit(126);
+	exit(127);
 }
 
 void	get_fds(t_exec_ctx *ctx, int i, int count, int fd[2])
