@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:52:55 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/07 15:44:49 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/11 20:07:56 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_token
 {
 	t_token_type	type;
 	char			*value;
+	bool			has_quotes;
 	struct s_token	*next;
 }	t_token;
 

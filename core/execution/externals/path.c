@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/27 16:42:40 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/10 23:06:14 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/11 20:04:23 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ char	*join_with_slash(char const *s1, char const *s2)
 
 static char	*check_absolute_path(char *cmd)
 {
+	struct stat	st;
+
 	if (!cmd || !cmd[0])
 		return (NULL);
 	if (ft_strchr(cmd, '/'))
 	{
-		if (access(cmd, F_OK) == 0)
-		{
-			if (access(cmd, X_OK) == 0)
-				return (ft_strdup(cmd));
+		if (stat(cmd, &st) == 0 && S_ISDIR(st.st_mode))
 			return (NULL);
-		}
+		if (access(cmd, X_OK) == 0)
+			return (ft_strdup(cmd));
 		return (NULL);
 	}
 	return (NULL);

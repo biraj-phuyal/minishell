@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:41:09 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/10 19:35:02 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/11 20:16:59 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	spawn_all(t_exec_ctx *ctx, t_pipe_run *run)
 int	wait_last(pid_t *pids, int count)
 {
 	int	status;
+	int	tmp_status;
 	int	i;
 
 	status = 0;
@@ -86,7 +87,12 @@ int	wait_last(pid_t *pids, int count)
 	i = 0;
 	while (i < count)
 	{
-		waitpid(pids[i], &status, 0);
+		waitpid(pids[i], &tmp_status, 0);
+		if (i < count - 1 && WIFSIGNALED(tmp_status)
+			&& WTERMSIG(tmp_status) == SIGPIPE)
+			write(2, " Broken pipe\n", 13);
+		if (i == count - 1)
+			status = tmp_status;
 		i++;
 	}
 	return (get_exit_status(status));

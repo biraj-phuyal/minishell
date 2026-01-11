@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 00:00:00 by                   #+#    #+#             */
-/*   Updated: 2025/12/23 15:14:13 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/11 20:08:45 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_token	*token_create(t_token_type type, const char *value, bool owned)
 		return (NULL);
 	token->type = type;
 	token->value = NULL;
+	token->has_quotes = false;
 	token->next = NULL;
 	if (value)
 	{
@@ -37,22 +38,6 @@ t_token	*token_create(t_token_type type, const char *value, bool owned)
 		}
 	}
 	return (token);
-}
-
-bool	token_add(t_lexer *lex, t_token *new_token)
-{
-	t_token	*last;
-
-	if (!new_token)
-		return (false);
-	if (!lex->tokens)
-	{
-		lex->tokens = new_token;
-		return (true);
-	}
-	last = token_last(lex->tokens);
-	last->next = new_token;
-	return (true);
 }
 
 bool	tokenize_operator(t_lexer *lex)
@@ -83,6 +68,20 @@ bool	tokenize_operator(t_lexer *lex)
 	return (token_add(lex, token));
 }
 
+static bool	word_has_quotes(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '"')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 static char	*extract_word(t_lexer *lex)
 {
 	size_t	start;
@@ -110,5 +109,6 @@ bool	tokenize_word(t_lexer *lex)
 	token = token_create(TOKEN_WORD, word, true);
 	if (!token)
 		return (false);
+	token->has_quotes = word_has_quotes(word);
 	return (token_add(lex, token));
 }

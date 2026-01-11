@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:14:14 by gude-and          #+#    #+#             */
-/*   Updated: 2025/12/23 14:51:51 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/11 20:08:56 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,12 @@ bool	parse_command_loop(t_parser *p, t_cmd *cmd)
 	{
 		if (p->current->type == TOKEN_WORD)
 		{
-			if (!cmd_add_arg(cmd, p->current->value))
-				return (false);
+			if (p->current->value && (p->current->value[0] != '\0'
+					|| p->current->has_quotes))
+			{
+				if (!cmd_add_arg(cmd, p->current->value))
+					return (false);
+			}
 			parser_advance(p);
 		}
 		else if (!parse_redirections(p, cmd))
