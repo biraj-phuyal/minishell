@@ -12,56 +12,20 @@
 
 #include <expander.h>
 
-static void	init_quote_state(t_quote_state *qs)
-{
-	qs->in_quote = '\0';
-	qs->i = 0;
-	qs->result = NULL;
-}
-
-static bool	handle_quote_char(t_quote_state *qs, char c)
-{
-	if (qs->in_quote == '\0')
-	{
-		if (c == '\'' || c == '"')
-		{
-			qs->in_quote = c;
-			return (true);
-		}
-	}
-	else if (c == qs->in_quote)
-	{
-		qs->in_quote = '\0';
-		return (true);
-	}
-	return (false);
-}
-
-static char	*process_quotes(const char *str)
-{
-	t_quote_state	qs;
-	char			*tmp;
-
-	init_quote_state(&qs);
-	while (str[qs.i])
-	{
-		if (!handle_quote_char(&qs, str[qs.i]))
-		{
-			tmp = append_char(qs.result, str[qs.i]);
-			if (!tmp)
-				return (free(qs.result), NULL);
-			qs.result = tmp;
-		}
-		qs.i++;
-	}
-	if (!qs.result)
-		return (ft_strdup(""));
-	return (qs.result);
-}
-
 char	*remove_outer_quotes(const char *str)
 {
+	char	*result;
+	size_t	len;
+
 	if (!str)
 		return (NULL);
-	return (process_quotes(str));
+	len = ft_strlen(str);
+	if (len >= 2 && (str[0] == '\'' || str[0] == '"') && str[0] == str[len - 1])
+	{
+		result = ft_substr(str, 1, len - 2);
+		if (!result)
+			return (NULL);
+		return (result);
+	}
+	return (ft_strdup(str));
 }

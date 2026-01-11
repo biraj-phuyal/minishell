@@ -92,20 +92,13 @@ t_ast_node	*parse_command(t_parser *p)
 
 bool	parse_command_loop(t_parser *p, t_cmd *cmd)
 {
-	char	*unquoted;
-
 	while (p->current && p->current->type != TOKEN_PIPE
 		&& p->current->type != TOKEN_EOF)
 	{
 		if (p->current->type == TOKEN_WORD)
 		{
-			unquoted = remove_outer_quotes(p->current->value);
-			if (!unquoted || !cmd_add_arg(cmd, unquoted))
-			{
-				free(unquoted);
+			if (!cmd_add_arg(cmd, p->current->value))
 				return (false);
-			}
-			free(unquoted);
 			parser_advance(p);
 		}
 		else if (!parse_redirections(p, cmd))
