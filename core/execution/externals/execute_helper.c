@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 10:13:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/06 19:44:20 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/10 19:07:44 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ int	get_exit_status(int status)
 	return (1);
 }
 
-static void	close_pipe_pair(int fds[2])
+void	close_one(int fd)
 {
-	if (fds[0] != -1)
-		close(fds[0]);
-	if (fds[1] != -1)
-		close(fds[1]);
+	if (fd != -1)
+		close(fd);
 }
 
 void	close_all_pipes(t_exec_ctx *ctx)
@@ -36,9 +34,18 @@ void	close_all_pipes(t_exec_ctx *ctx)
 	i = 0;
 	while (i < ctx->pipe_count)
 	{
-		close_pipe_pair(ctx->pipes[i]);
+		close_one(ctx->pipes[i][0]);
+		close_one(ctx->pipes[i][1]);
 		i++;
 	}
+}
+
+void	close_cmd_fds(int saved_stdin, int saved_stdout)
+{
+	dup2(saved_stdin, STDIN_FILENO);
+	dup2(saved_stdout, STDOUT_FILENO);
+	close(saved_stdin);
+	close(saved_stdout);
 }
 
 int	create_all_pipes(t_exec_ctx *ctx)

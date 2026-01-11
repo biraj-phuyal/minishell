@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 21:30:00 by gude-and          #+#    #+#             */
-/*   Updated: 2026/01/07 15:44:45 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/11 18:04:19 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ typedef struct s_parser
 
 typedef struct s_heredoc
 {
-	const char	*delim;
-	bool		expand;
-	int			exit_status;
-	char		**env;
-	t_env		*env_list;
+	const char			*delim;
+	bool				expand;
+	int					exit_status;
+	char				**env;
+	t_env				*env_list;
 	struct s_ast_node	*ast_root;
 }	t_heredoc;
 

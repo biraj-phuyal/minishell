@@ -6,20 +6,30 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:36:23 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/07 16:56:14 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/11 17:56:02 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	print_not_found(char *name)
+void	child_cleanup(t_exec_ctx *ctx)
 {
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(name, 2);
-	ft_putendl_fd(": command not found", 2);
+	if (ctx->ast)
+		ast_free((t_ast_node *)ctx->ast);
+	if (ctx->envp)
+		free_double_pointer(ctx->envp);
+	if (ctx->cmds)
+		free(ctx->cmds);
+	if (ctx->pids)
+		free(ctx->pids);
+	if (ctx->pipes)
+		free(ctx->pipes);
+	if (ctx->env && *ctx->env)
+		free_env(*ctx->env);
+	rl_clear_history();
 }
 
-static void	child_dup(int in_fd, int out_fd)
+void	child_dup(int in_fd, int out_fd)
 {
 	if (in_fd != -1)
 	{
@@ -33,38 +43,32 @@ static void	child_dup(int in_fd, int out_fd)
 	}
 }
 
-void	child_exec_cmd(t_exec_ctx *ctx, t_cmd *cmd, int in_fd, int out_fd)
+void	child_exec_cmd(t_cmd *cmd, t_exec_ctx *ctx)
 {
 	char	*cmd_path;
+	int		status;
 
-	child_dup(in_fd, out_fd);
-	close_all_pipes(ctx);
-	if (!cmd || !cmd->argv || !cmd->argv[0])
+	default_signals();
+	if (!cmd || !cmd->argv || !cmd->argv[0] || cmd->argv[0][0] == '\0')
+	{
+		child_cleanup(ctx);
 		exit(0);
+	}
+	if (ctx && setup_redirections(cmd->redirs) != 0)
+	{
+		child_cleanup(ctx);
+		exit(1);
+	}
 	if (is_builtin(cmd, 0))
 	{
-		execute_builtin(cmd, 0, ctx->env);
-		return ;
+		status = execute_builtin(cmd, 0, ctx->env);
+		child_cleanup(ctx);
+		exit(status);
 	}
 	cmd_path = path(*ctx->env, cmd->argv[0]);
 	if (!cmd_path)
-	{
-		print_not_found(cmd->argv[0]);
-		exit(127);
-	}
-	execve(cmd_path, cmd->argv, ctx->envp);
-	free(cmd_path);
-	exit(126);
-}
-
-pid_t	spawn_one(t_exec_ctx *ctx, t_cmd *cmd, int in_fd, int out_fd)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-		child_exec_cmd(ctx, cmd, in_fd, out_fd);
-	return (pid);
+		handle_path_error(cmd->argv[0], ctx);
+	exec_with_path(cmd_path, cmd, ctx);
 }
 
 void	get_fds(t_exec_ctx *ctx, int i, int count, int fd[2])

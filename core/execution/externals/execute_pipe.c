@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:41:09 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/07 19:21:07 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/10 19:35:02 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ int	setup_run(t_ast_node *ast, t_exec_ctx *ctx, t_pipe_run *run)
 		return (0);
 	}
 	ctx->pipe_count = run->count - 1;
+	ctx->cmds = run->cmds;
+	ctx->pids = run->pids;
+	ctx->cmd_count = run->count;
 	if (!pipe_fill_cmds(ast, run->cmds, run->count))
 	{
 		free_run(ctx, run);
@@ -61,12 +64,12 @@ int	spawn_all(t_exec_ctx *ctx, t_pipe_run *run)
 		if (pid < 0)
 			return (0);
 		if (pid == 0)
-			child_exec_cmd(ctx, run->cmds[i], fd[0], fd[1]);
+		{
+			child_dup(fd[0], fd[1]);
+			close_all_pipes(ctx);
+			child_exec_cmd(run->cmds[i], ctx);
+		}
 		run->pids[i] = pid;
-		if (fd[0] != -1)
-			close(fd[0]);
-		if (fd[1] != -1)
-			close(fd[1]);
 		i++;
 	}
 	return (1);
@@ -80,11 +83,10 @@ int	wait_last(pid_t *pids, int count)
 	status = 0;
 	if (count <= 0)
 		return (0);
-	waitpid(pids[count - 1], &status, 0);
 	i = 0;
-	while (i < count - 1)
+	while (i < count)
 	{
-		waitpid(pids[i], NULL, 0);
+		waitpid(pids[i], &status, 0);
 		i++;
 	}
 	return (get_exit_status(status));
@@ -100,6 +102,10 @@ int	execute_pipeline(t_ast_node *ast, t_env **env, char **envp)
 	run.pids = NULL;
 	ctx.env = env;
 	ctx.envp = envp;
+	ctx.cmds = NULL;
+	ctx.pids = NULL;
+	ctx.pipes = NULL;
+	ctx.ast = (void *)ast;
 	if (!setup_run(ast, &ctx, &run))
 		return (1);
 	if (!spawn_all(&ctx, &run))
