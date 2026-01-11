@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 21:32:13 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/10 23:06:14 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/11 18:11:09 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,17 @@ char	*get_value(const char *envp)
 	return (string);
 }
 
+static char	*allocate_empty_dir(void)
+{
+	char	*new_dir;
+
+	new_dir = malloc(1);
+	if (!new_dir)
+		return (NULL);
+	new_dir[0] = '\0';
+	return (new_dir);
+}
+
 char	*get_new_dir(t_cmd *cmd)
 {
 	char	*new_dir;
@@ -54,13 +65,7 @@ char	*get_new_dir(t_cmd *cmd)
 		return (NULL);
 	}
 	if (cmd->argv[1] == NULL)
-	{
-		new_dir = malloc(1);
-		if (!new_dir)
-			return (NULL);
-		new_dir[0] = '\0';
-		return (new_dir);
-	}
+		return (allocate_empty_dir());
 	new_dir = malloc(ft_strlen(cmd->argv[1]) + 1);
 	if (!new_dir)
 		return (NULL);

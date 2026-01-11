@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/10 23:06:14 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/11 18:01:50 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void		free_double_pointer(char **envp);
 void		close_all_pipes(t_exec_ctx *ctx);
 int			create_all_pipes(t_exec_ctx *ctx);
 char		**list_to_array(const t_env *env);
-int			handle_output_redir(t_redir *curr);
+int			check_output_redir(t_redir *curr);
+int			apply_input_redir(t_redir *curr);
 void		new_pwd(t_env **env, char *old_pwd);
 void		old_pwd(t_env **env, char *old_pwd);
 void		push_back(t_env **head, t_env *new);
@@ -84,6 +85,7 @@ int			handle_heredoc_redir(t_redir *redir);
 int			full_length_of_list(const t_env *env);
 int			change_dir(t_env **env, char *new_dir);
 void		update_old_pwd(t_env *env, char *og_pwd);
+int			check_redir_errors(t_redir *redirs);
 void		create_old_pwd(t_env *env, char *og_pwd);
 int			execute_cd(t_cmd *cmd, int i, t_env **env);
 void		destroy_and_copy(char **dest, const char *src);
@@ -103,5 +105,20 @@ void		move_to_relative_path(t_env **env, char *old_pwd, char *new_dir);
 void		child_exec_cmd(t_cmd *cmd, t_exec_ctx *ctx);
 void		child_dup(int in_fd, int out_fd);
 void		child_cleanup(t_exec_ctx *ctx);
+void		print_redir_error(char *file);
+int			check_input_redir(t_redir *curr);
+int			handle_path_command_error(char *cmd_name, struct stat *st);
+int			handle_no_path(char *cmd_name);
+int			wait_for_child(pid_t pid);
+void		execute_child_process(char *cmd_path, t_cmd *cmd, char **envp);
+void		print_exec_error(char *cmd);
+void		handle_dir_error(char *cmd_name, t_exec_ctx *ctx);
+void		handle_stat_error(char *cmd_name, struct stat *st, t_exec_ctx *ctx);
+void		handle_path_error(char *cmd_name, t_exec_ctx *ctx);
+void		exec_with_path(char *cmd_path, t_cmd *cmd, t_exec_ctx *ctx);
+int			handle_output_redir(t_redir *curr);
+int			execute_one_command(t_cmd *cmd, t_env **env, char **envp);
+int			execute_one_external_command(t_cmd *cmd, t_env **env, char **envp);
+int			execute_external_command(char *cmd_path, t_cmd *cmd, char **envp);
 
 #endif
