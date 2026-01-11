@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 14:09:11 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/11 18:02:21 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:23:19 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	setup_redirections(t_redir *redirs)
 {
 	t_redir	*curr;
 
+	if (!redirs)
+		return (0);
 	if (check_redir_errors(redirs))
 		return (1);
 	curr = redirs;
@@ -60,8 +62,10 @@ int	execute_one_command(t_cmd *cmd, t_env **env, char **envp)
 	int		saved_stdout;
 	int		status;
 
-	if (!cmd || !cmd->argv || !cmd->argv[0])
+	if (!cmd)
 		return (0);
+	if (!cmd->argv || !cmd->argv[0])
+		return (no_command_redir(cmd));
 	if (is_builtin(cmd, 0))
 	{
 		saved_stdin = dup(STDIN_FILENO);

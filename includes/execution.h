@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:32:47 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/11 18:01:50 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:23:23 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,6 @@ int			handle_output_redir(t_redir *curr);
 int			execute_one_command(t_cmd *cmd, t_env **env, char **envp);
 int			execute_one_external_command(t_cmd *cmd, t_env **env, char **envp);
 int			execute_external_command(char *cmd_path, t_cmd *cmd, char **envp);
+int			no_command_redir(t_cmd *cmd);
 
 #endif
