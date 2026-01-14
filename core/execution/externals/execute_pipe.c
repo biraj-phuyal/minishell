@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:41:09 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/14 00:35:59 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/01/14 00:36:51 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	wait_last(pid_t *pids, int count)
 	i = 0;
 	while (i < count)
 	{
-		waitpid(pids[i], &tmp_status, 0);
+		waitpid(pids[i], &status, 0);
 		if (i == count - 1)
 			status = tmp_status;
 		i++;
