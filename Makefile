@@ -99,11 +99,11 @@ fclean: clean
 re: fclean all
 
 val: re
-	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all --trace-children=no --suppressions=$(PWD)/readline.supp 		/minishell
+	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all --trace-children=no --suppressions=$(PWD)/readline.supp ./minishell
 
 test: re
 	@git clone https://github.com/LucasKuhn/minishell_tester
-	@cd minishell_tester && (		/tester || true) && cd ..
+	@cd minishell_tester && (./tester || true) && cd ..
 	@rm -rf minishell_tester
 
 .PHONY: all re clean fclean val readline.supp
