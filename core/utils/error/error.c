@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 21:04:26 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/10 19:01:41 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/02/03 23:00:21 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	free_list_and_exit(t_env *env)
 			head = next;
 		}
 	}
-	rl_clear_history();
+	clear_history();
 	printf("exit\n");
 	exit(EXIT_SUCCESS);
 }
