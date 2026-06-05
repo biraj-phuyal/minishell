@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:36:23 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/01/11 17:56:02 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/02/03 23:00:21 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	child_cleanup(t_exec_ctx *ctx)
 		free(ctx->pipes);
 	if (ctx->env && *ctx->env)
 		free_env(*ctx->env);
-	rl_clear_history();
+	clear_history();
 }
 
 void	child_dup(int in_fd, int out_fd)
