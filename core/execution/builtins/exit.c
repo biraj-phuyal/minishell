@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 17:21:51 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/02/03 23:00:21 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/06/05 16:11:43 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	parse_exit_code(const char *str)
 void	exit_program(t_env *env)
 {
 	free_env(env);
-	clear_history();
+	rl_clear_history();
 	printf("exit\n");
 	exit(EXIT_SUCCESS);
 }
@@ -65,7 +65,7 @@ void	exit_program(t_env *env)
 static void	cleanup_and_exit(t_env *env, int exit_code)
 {
 	free_env(env);
-	clear_history();
+	rl_clear_history();
 	exit(exit_code);
 }
 
